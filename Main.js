@@ -13,6 +13,9 @@ function main()
   gameNs.game = game;
   game.initWorld();
   game.update();
+  game.draw();
+
+  //document.addEventListener("click", clickHandler.bind(null, sceneManager));
 
 }
 
@@ -37,3 +40,9 @@ function main()
  	//Adds the canvas element to the document.
  	document.body.appendChild(canvas);
  }
+function draw(game)
+{
+  game.draw();
+
+
+}

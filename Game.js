@@ -7,32 +7,30 @@ class Game
   */
   constructor()
   {
-    this.img=new Image();
-    this.img.src = "Images/PlayerSS.png";
-    var canvas = document.getElementById('mycanvas');
-    var ctx = canvas.getContext('2d');
-    gameNs.mySpriteObject;
-    gameNs.mySpriteObject = new Sprite(ctx, {
-    width: 100,
-    height: 222,
-    image: this.img
-    }, 100, 100);
-
-  gameNs.mySpriteObject1 = new Sprite(ctx, {
-    width: 100,
-    height: 222,
-    image: this.img
-    }, 25, 300);
-
+    console.log("game constructed");
   }
   /**
   *helper funtion that records the time when the application is loaded
   */
   initWorld() //prints out “Initialising game world”
   {
-    console.log("Initialising game world");
-      gameNs.previousTime = Date.now();	// previousTime is initially 0
+    this.sceneManager = new SceneManager();
+    this.scene = new Scene('Scene');
+    this.menuScene = new MenuScene('Menu');
+    this.playScene = new PlayScene('Play');
+    this.optionsScene = new OptionsScene('Options');
+    //this.endScene = new EndScene('End');
+    //this.highScoreScene = new HighScoreScene('HighScore');
 
+    this.sceneManager.addScene(this.menuScene);
+    this.sceneManager.addScene(this.playScene);
+    this.sceneManager.addScene(this.optionsScene);
+  //  sceneManager.addScene(endScene);
+  //  sceneManager.addScene(highScoreScene);
+    this.sceneManager.goToScene(this.menuScene.title);
+
+    document.addEventListener("click", this.clickHandler.bind(null, this.sceneManager));
+    //draw(sceneManager);
   }
   /**
   *Update function called every frame. sets the current time when the function is called
@@ -40,24 +38,16 @@ class Game
   */
   update()
   {
-    var now = Date.now();
-    var deltaTime = (now - gameNs.previousTime);
-    gameNs.previousTime = now;	// previousTime is initially 0
-    var canvas = document.getElementById('mycanvas');
-    var ctx = canvas.getContext('2d');
-    ctx.clearRect(0,0, canvas.width, canvas.height);
-    gameNs.mySpriteObject.update(deltaTime);
-    gameNs.mySpriteObject1.update(deltaTime);
 
-    window.requestAnimationFrame(gameNs.game.update);
   }
-
+  clickHandler(sceneManager)
+  {
+    sceneManager.goToNextScene();
+    sceneManager.render();
+  }
   draw()
   {
-
-    var canvas = document.getElementById('mycanvas');
-    var ctx = canvas.getContext('2d');
-    ctx.clearRect(0,0, canvas.width, canvas.height);
+    this.sceneManager.render();
 
   }
 
