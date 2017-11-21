@@ -63,5 +63,6 @@ class SceneManager
   render()
   {
     this.currentScene.render();
+    console.log(this.currentScene);
   }
 }

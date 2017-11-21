@@ -14,22 +14,22 @@ class Game
   */
   initWorld() //prints out “Initialising game world”
   {
-    this.sceneManager = new SceneManager();
+    gameNs.sceneManager = new SceneManager();
     this.scene = new Scene('Scene');
-    this.menuScene = new MenuScene('Menu');
-    this.playScene = new PlayScene('Play');
-    this.optionsScene = new OptionsScene('Options');
+    gameNs.menuScene = new MenuScene('Menu');
+    gameNs.playScene = new PlayScene('Play');
+    gameNs.optionsScene = new OptionsScene('Options');
     //this.endScene = new EndScene('End');
     //this.highScoreScene = new HighScoreScene('HighScore');
 
-    this.sceneManager.addScene(this.menuScene);
-    this.sceneManager.addScene(this.playScene);
-    this.sceneManager.addScene(this.optionsScene);
+    gameNs.sceneManager.addScene(gameNs.menuScene);
+    gameNs.sceneManager.addScene(gameNs.playScene);
+    gameNs.sceneManager.addScene(gameNs.optionsScene);
   //  sceneManager.addScene(endScene);
   //  sceneManager.addScene(highScoreScene);
-    this.sceneManager.goToScene(this.menuScene.title);
+    gameNs.sceneManager.goToScene(gameNs.menuScene.title);
 
-    document.addEventListener("click", this.clickHandler.bind(null, this.sceneManager));
+    document.addEventListener("click", this.clickHandler.bind(null, gameNs.sceneManager));
     //draw(sceneManager);
   }
   /**
@@ -42,12 +42,13 @@ class Game
   }
   clickHandler(sceneManager)
   {
-    sceneManager.goToNextScene();
-    sceneManager.render();
+    //gameNs.sceneManager.goToNextScene();
+    gameNs.sceneManager.render();
   }
   draw()
   {
-    this.sceneManager.render();
+    gameNs.sceneManager.render();
+
 
   }
 
