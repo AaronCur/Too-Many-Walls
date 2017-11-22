@@ -11,7 +11,9 @@ class MenuScene
   constructor(title)
   {
     this.title = title;
-    this.createDiv("Test");
+    this.createDiv("Play");
+    this.createDiv("Options");
+    this.createDiv("Exit");
 
   }
    createDiv(divId)
@@ -21,9 +23,23 @@ class MenuScene
 
     var div = document.createElement("div");
     div.id = divId;
-    if(div.id === "Test")
+    if(div.id === "Play")
     {
-      div.innerHTML = "<img src=\'Assets/Shaq.jpg\'>";
+      div.innerHTML = "<img src=\'Assets/Button.jpg\'>";
+      this.div = div;
+      //var d = document.getElementById('yourDivId');
+      div.style.position = "absolute";
+      div.style.left = 100 +'px';
+      div.style.top = 20 +'px';
+    }
+    else if(div.id === "Options")
+    {
+      div.innerHTML = "<img src=\'Assets/Button.jpg\'>";
+      this.div = div;
+    }
+    else if(div.id === "Exit")
+    {
+      div.innerHTML = "<img src=\'Assets/Button.jpg\'>";
       this.div = div;
     }
     div.addEventListener("touchstart", this.onTouchStart,{passive:false});
@@ -32,10 +48,18 @@ class MenuScene
   }
   onTouchStart(e)
   {
-  //  gameNs.sceneManager.goToScene(gameNs.optionsScene.title);
+
+    gameNs.sceneManager.goToScene(gameNs.optionsScene.title);
+    var el = document.getElementById( 'Play' );
+    el.parentNode.removeChild( el );
+    var el = document.getElementById( 'Options' );
+    el.parentNode.removeChild( el );
+    var el = document.getElementById( 'Exit' );
+    el.parentNode.removeChild( el );
+
     e.preventDefault();
     var currentElement = e.target;
-  	var parentDiv = currentElement.parentNode;
+    var parentDiv = currentElement.parentNode;
     console.log("Div id = " + parentDiv.id);
     console.log("Image URL = " + currentElement.src);
 
@@ -43,28 +67,48 @@ class MenuScene
     var fullPath = currentElement.src;
     console.log("Current element" + fullPath);
 
-    //if (fullPath !== undefined)
-    //{
-    //  console.log(gameNs.count);
-    	var index = fullPath.lastIndexOf("/");
-    	var filename = fullPath;
-    //	if(index !== -1)
-    	//{
-      //  gameNs.count += 1;
+    if (fullPath !== undefined)
+    {
+      console.log(gameNs.count);
+      var index = fullPath.lastIndexOf("/");
+      var filename = fullPath;
+      if(index !== -1)
+      {
+        gameNs.count += 1;
 
-    	   filename = fullPath.substring(index+1,fullPath.length);
-    	   if(filename === "Shaq.jpg" && gameNs.count <2)
+         filename = fullPath.substring(index+1,fullPath.length);
+         if(filename === "Concentr.jpg" && gameNs.count <2)
          {
-          // gameNs.soundManager.playSound("Concentrate", false, 1);
-          // gameNs.sceneManager.goToScene(this.optionsScene.title);
-          console.log("clicked");
+           gameNs.soundManager.playSound("Concentrate", false, 1);
+           gameNs.sceneManager.goToScene(gameNs.optionsScene.title);
+
+
+         }
+         else if (filename === "Concentrate.jpg" && gameNs.count == 2)
+         {
+           gameNs.soundManager.playSound("Concentrate", true, 0.2);
+           gameNs.sceneManager.goToScene(gameNs.optionsScene.title);
+
+           div.style.background = "Red";
+         }
+         else if (filename === "Concentrate.jpg" && gameNs.count == 3)
+         {
+           div.style.background = "Teal";
+           gameNs.soundManager.Stop();
+           gameNs.count = 0;
+           gameNs.sceneManager.goToScene(gameNs.optionsScene.title);
 
          }
 
-
-
-
-  }
+        // var el = document.getElementById( 'Play' );
+      //   el.parentNode.removeChild( el );
+        // var el = document.getElementById( 'Options' );
+        // el.parentNode.removeChild( el );
+        /// var el = document.getElementById( 'Exit' );
+        //el.parentNode.removeChild( el );
+      }
+    }
+ }
 
   render()
   {

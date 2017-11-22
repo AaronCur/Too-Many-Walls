@@ -29,7 +29,7 @@ class Game
   //  sceneManager.addScene(highScoreScene);
     gameNs.sceneManager.goToScene(gameNs.menuScene.title);
 
-    document.addEventListener("click", this.clickHandler.bind(null, gameNs.sceneManager));
+  //  document.addEventListener("click", this.clickHandler.bind(null, gameNs.sceneManager));
     //draw(sceneManager);
   }
   /**
@@ -38,15 +38,16 @@ class Game
   */
   update()
   {
-
+    //window.requestAnimationFrame(gameNs.game.update);
   }
-  clickHandler(sceneManager)
-  {
+//  clickHandler(sceneManager)
+  //{
     //gameNs.sceneManager.goToNextScene();
-    gameNs.sceneManager.render();
-  }
+  //  gameNs.sceneManager.render();
+//  }
   draw()
   {
+    window.requestAnimationFrame(gameNs.game.draw);
     gameNs.sceneManager.render();
 
 
