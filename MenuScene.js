@@ -11,6 +11,7 @@ class MenuScene
   constructor(title)
   {
     this.title = title;
+
     this.createDiv("Play");
     this.createDiv("Options");
     this.createDiv("Exit");
@@ -18,6 +19,8 @@ class MenuScene
   }
    createDiv(divId)
   {
+    var width = window.innerWidth;
+    var height = window.innerHeight;
     var timer;
     var Counter = 0;
 
@@ -25,22 +28,30 @@ class MenuScene
     div.id = divId;
     if(div.id === "Play")
     {
-      div.innerHTML = "<img src=\'Assets/Button.jpg\'>";
+      div.innerHTML = "<img src=\'Assets/PlayButton.png\'>";
       this.div = div;
       //var d = document.getElementById('yourDivId');
       div.style.position = "absolute";
-      div.style.left = 100 +'px';
-      div.style.top = 20 +'px';
+      div.style.left = (width/ 2) - 135 +"px";
+      div.style.top = (height/ 8) + 40 +'px';
     }
     else if(div.id === "Options")
     {
-      div.innerHTML = "<img src=\'Assets/Button.jpg\'>";
+      div.innerHTML = "<img src=\'Assets/OptionsButton.png\'>";
       this.div = div;
+
+      div.style.position = "absolute";
+      div.style.left = (width/ 2) - 135 +"px";
+      div.style.top = (height/ 8) * 3 + 40 +'px';
     }
     else if(div.id === "Exit")
     {
-      div.innerHTML = "<img src=\'Assets/Button.jpg\'>";
+      div.innerHTML = "<img src=\'Assets/ExitButton.png\'>";
       this.div = div;
+
+      div.style.position = "absolute";
+      div.style.left = (width/ 2) - 135 +"px";
+      div.style.top = (height/8) * 5 + 40 +'px';
     }
     div.addEventListener("touchstart", this.onTouchStart,{passive:false});
     document.body.appendChild(div);
@@ -49,13 +60,7 @@ class MenuScene
   onTouchStart(e)
   {
 
-    gameNs.sceneManager.goToScene(gameNs.optionsScene.title);
-    var el = document.getElementById( 'Play' );
-    el.parentNode.removeChild( el );
-    var el = document.getElementById( 'Options' );
-    el.parentNode.removeChild( el );
-    var el = document.getElementById( 'Exit' );
-    el.parentNode.removeChild( el );
+    //gameNs.sceneManager.goToScene(gameNs.optionsScene.title);
 
     e.preventDefault();
     var currentElement = e.target;
@@ -77,35 +82,35 @@ class MenuScene
         gameNs.count += 1;
 
          filename = fullPath.substring(index+1,fullPath.length);
-         if(filename === "Concentr.jpg" && gameNs.count <2)
+         console.log(filename);
+         if(filename === "PlayButton.png")
          {
-           gameNs.soundManager.playSound("Concentrate", false, 1);
-           gameNs.sceneManager.goToScene(gameNs.optionsScene.title);
+          // gameNs.soundManager.playSound("Concentrate", false, 1);
+           gameNs.sceneManager.goToScene(gameNs.playScene.title);
 
 
          }
-         else if (filename === "Concentrate.jpg" && gameNs.count == 2)
+         else if (filename === "OptionsButton.png" )
          {
-           gameNs.soundManager.playSound("Concentrate", true, 0.2);
+          // gameNs.soundManager.playSound("Concentrate", true, 0.2);
            gameNs.sceneManager.goToScene(gameNs.optionsScene.title);
-
-           div.style.background = "Red";
          }
-         else if (filename === "Concentrate.jpg" && gameNs.count == 3)
+         else if (filename === "ExitButton.png" )
          {
-           div.style.background = "Teal";
-           gameNs.soundManager.Stop();
-           gameNs.count = 0;
-           gameNs.sceneManager.goToScene(gameNs.optionsScene.title);
+           //throw new Error("Something went badly wrong!");
+          // div.style.background = "Teal";
+           //gameNs.soundManager.Stop();
+           //gameNs.count = 0;
+      //   gameNs.sceneManager.goToScene(gameNs.optionsScene.title);
 
          }
 
-        // var el = document.getElementById( 'Play' );
-      //   el.parentNode.removeChild( el );
-        // var el = document.getElementById( 'Options' );
-        // el.parentNode.removeChild( el );
-        /// var el = document.getElementById( 'Exit' );
-        //el.parentNode.removeChild( el );
+         var el = document.getElementById( 'Play' );
+         el.parentNode.removeChild( el );
+         var el = document.getElementById( 'Options' );
+         el.parentNode.removeChild( el );
+         var el = document.getElementById( 'Exit' );
+         el.parentNode.removeChild( el );
       }
     }
  }
@@ -116,9 +121,9 @@ class MenuScene
     var canvas = document.createElement("mycanvas");
     var ctx = mycanvas.getContext("2d");
     ctx.clearRect(0, 0, mycanvas.width, mycanvas.height);
-    document.body.style.background = "#ff0000";
-    ctx.font = '55px Bell MT';
-    ctx.fillText(this.title, 10, 50);
+    document.body.style.background = "#89dfff";
+    ctx.font = '55px Adventure Regular';
+    ctx.fillText(this.title, 300, 70);
 
   }
 }

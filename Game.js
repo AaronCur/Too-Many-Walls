@@ -16,7 +16,7 @@ class Game
   {
     gameNs.sceneManager = new SceneManager();
     this.scene = new Scene('Scene');
-    gameNs.menuScene = new MenuScene('Menu');
+    gameNs.menuScene = new MenuScene('Too Many Walls');
     gameNs.playScene = new PlayScene('Play');
     gameNs.optionsScene = new OptionsScene('Options');
     //this.endScene = new EndScene('End');
