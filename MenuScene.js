@@ -11,6 +11,8 @@ class MenuScene
   constructor(title)
   {
     this.title = title;
+    this.width = window.innerWidth;
+    this.height = window.innerHeight;
 
     this.createDiv("Play");
     this.createDiv("Options");
@@ -19,8 +21,7 @@ class MenuScene
   }
    createDiv(divId)
   {
-    var width = window.innerWidth;
-    var height = window.innerHeight;
+
     var timer;
     var Counter = 0;
 
@@ -32,8 +33,8 @@ class MenuScene
       this.div = div;
       //var d = document.getElementById('yourDivId');
       div.style.position = "absolute";
-      div.style.left = (width/ 2) - 135 +"px";
-      div.style.top = (height/ 8) + 40 +'px';
+      div.style.left = (this.width/ 2) - 135 +"px";
+      div.style.top = (this.height/ 8) + 40 +'px';
     }
     else if(div.id === "Options")
     {
@@ -41,8 +42,8 @@ class MenuScene
       this.div = div;
 
       div.style.position = "absolute";
-      div.style.left = (width/ 2) - 135 +"px";
-      div.style.top = (height/ 8) * 3 + 40 +'px';
+      div.style.left = (this.width/ 2) - 135 +"px";
+      div.style.top = (this.height/ 8) * 3 + 40 +'px';
     }
     else if(div.id === "Exit")
     {
@@ -50,8 +51,8 @@ class MenuScene
       this.div = div;
 
       div.style.position = "absolute";
-      div.style.left = (width/ 2) - 135 +"px";
-      div.style.top = (height/8) * 5 + 40 +'px';
+      div.style.left = (this.width/ 2) - 135 +"px";
+      div.style.top = (this.height/8) * 5 + 40 +'px';
     }
     div.addEventListener("touchstart", this.onTouchStart,{passive:false});
     document.body.appendChild(div);
@@ -123,7 +124,7 @@ class MenuScene
     ctx.clearRect(0, 0, mycanvas.width, mycanvas.height);
     document.body.style.background = "#89dfff";
     ctx.font = '55px Adventure Regular';
-    ctx.fillText(this.title, 300, 70);
+    ctx.fillText(this.title, this.width/2 - 170, 70);
 
   }
 }
