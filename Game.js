@@ -14,6 +14,7 @@ class Game
   */
   initWorld() //prints out “Initialising game world”
   {
+    this.touchTest = new TouchTest();
     gameNs.sceneManager = new SceneManager();
     this.scene = new Scene('Scene');
     gameNs.menuScene = new MenuScene('Too Many Walls');

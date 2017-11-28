@@ -24,7 +24,7 @@ function keyDownHandler(e)
 	if(e.keyCode === 37)
 	{
 		gameNs.playScene.player.moveX = false;
-    console.log("Left");
+
 	}
   else if(e.keyCode === 39)
 	{
@@ -72,6 +72,9 @@ function keyDownHandler(e)
  	var ctx = canvas.getContext("2D");
  	//Adds the canvas element to the document.
  	document.body.appendChild(canvas);
+  document.addEventListener("touchstart", onTouchStart.bind(null,canvas));
+  document.addEventListener("touchmove", onTouchMove, {passive:false});
+  document.addEventListener("touchend", onTouchEnd);
  }
  window.addEventListener("keydown", function(e) {
      // Space and arrow keys
@@ -79,7 +82,114 @@ function keyDownHandler(e)
          e.preventDefault();
      }
  }, false);
+ function onTouchStart(canvas, e)
+ {
+    touches = e.touches;
+    // Print out (x,y) co-ords of touch: touches[0].clientX contains
+    //  the x position.
+    startX = touches[0].clientX;
+    startY = touches[0].clientY;
 
+    startPosX = startX;
+    startPosY = startY;
+
+    gameNs.time1 = new Date().getTime();
+    var ctx = canvas.getContext("2d");
+ }
+ function onTouchMove(e)
+ {
+  e.preventDefault();
+  var canvas = document.getElementById("mycanvas");
+  var ctx = canvas.getContext("2d");
+  //var touches = e.changedTouches;
+  //var touches = e.touches;
+  var change = e.changedTouches;
+  endX = change[0].clientX;
+  endY = change[0].clientY;
+
+  ctx.beginPath();
+  ctx.moveTo(startX,startY);    //the previous touch
+  ctx.lineTo(endX,endY);    //the current touch
+  ctx.stroke();
+
+  startX = change[0].clientX;
+  startY = change[0].clientY;
+
+  endPosX = endX;
+  endPosY = endY;
+ }
+ /**
+  * function that calculates how long the line is between the first startpoint
+  * and the last enpoint.
+  * Then calculates if a line was a swipe or a drawing depending on the duration
+  * of the tocuh and the length of the line
+  * the two as the touch position moves
+  * @param {Param} e - passes in touch end handler
+  */
+ function onTouchEnd(e)
+ {
+   var canvas = document.getElementById("mycanvas");
+   var ctx = canvas.getContext("2d");
+
+   var time2 = new Date().getTime();
+   var elapsedTime = time2 - gameNs.time1;
+
+   var a = startPosX - endPosX;
+   var b = startPosY - endPosY;
+
+   var distBetween = Math.sqrt(a *a + b * b);
+   console.log(distBetween);
+ //console.log(angle(a,b) );
+
+   if(elapsedTime  > 0 && elapsedTime <= 500 && distBetween > 150)
+   {
+     if(angle(a,b) > (180 - 45) || angle(a,b) < (-180 + 45))
+     {
+       console.log("AngleRight");
+       gameNs.playScene.player.moveX = true;
+
+     }
+     else if (angle(a,b) < 45 && angle(a,b) > -45)
+     {
+       console.log("AngleLeft");
+       gameNs.playScene.player.moveX = false;
+     }
+     else
+     {
+       gameNs.playScene.player.moveX = null;
+     }
+      if(angle(a,b) < (90 + 45) && angle(a,b) > 45)
+     {
+       console.log("AngleUp");
+       gameNs.playScene.player.moveY = false;
+     }
+     else if (angle(a,b) > ( -90 - 45) && angle(a,b) < ( -90 + 45) )
+     {
+       console.log("AngleDown");
+       gameNs.playScene.player.moveY = true;
+     }
+     else
+     {
+        gameNs.playScene.player.moveY = null;
+     }
+
+   }
+   //If player taps stop all movement
+   else if (distBetween < 100)
+    {
+      gameNs.playScene.player.moveY = null;
+      gameNs.playScene.player.moveX = null;
+      console.log("Tap")
+
+    }
+
+ }
+ function angle(a,b) {
+  var theta = Math.atan2(b, a); // range (-PI, PI]
+  theta *= 180 / Math.PI; // rads to degs, range (-180, 180]
+  //if (theta < 0) theta = 360 + theta; // range [0, 360)
+  return theta;
+}
  /**
   * Helper function that clamps value between min and max and returns value.
   * Example: clamp(10, 1, 3) will return 3
