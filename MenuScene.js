@@ -25,35 +25,36 @@ class MenuScene
     var timer;
     var Counter = 0;
 
-    var div = document.createElement("div");
-    div.id = divId;
-    if(div.id === "Play")
-    {
-      div.innerHTML = "<img src=\'Assets/PlayButton.png\'>";
-      this.div = div;
-      //var d = document.getElementById('yourDivId');
-      div.style.position = "absolute";
-      div.style.left = (this.width/ 2) - 135 +"px";
-      div.style.top = (this.height/ 8) + 40 +'px';
-    }
-    else if(div.id === "Options")
-    {
-      div.innerHTML = "<img src=\'Assets/OptionsButton.png\'>";
-      this.div = div;
+      var div = document.createElement("div");
+      div.id = divId;
+      if(div.id === "Play")
+      {
+        div.innerHTML = "<img src=\'Assets/PlayButton.png\'>";
+        this.div = div;
+        //var d = document.getElementById('yourDivId');
+        div.style.position = "absolute";
+        div.style.left = (this.width/ 2) - 135 +"px";
+        div.style.top = (this.height/ 8) + 40 +'px';
+      }
+      else if(div.id === "Options")
+      {
+        div.innerHTML = "<img src=\'Assets/OptionsButton.png\'>";
+        this.div = div;
 
-      div.style.position = "absolute";
-      div.style.left = (this.width/ 2) - 135 +"px";
-      div.style.top = (this.height/ 8) * 3 + 40 +'px';
-    }
-    else if(div.id === "Exit")
-    {
-      div.innerHTML = "<img src=\'Assets/ExitButton.png\'>";
-      this.div = div;
+        div.style.position = "absolute";
+        div.style.left = (this.width/ 2) - 135 +"px";
+        div.style.top = (this.height/ 8) * 3 + 40 +'px';
+      }
+      else if(div.id === "Exit")
+      {
+        div.innerHTML = "<img src=\'Assets/ExitButton.png\'>";
+        this.div = div;
 
-      div.style.position = "absolute";
-      div.style.left = (this.width/ 2) - 135 +"px";
-      div.style.top = (this.height/8) * 5 + 40 +'px';
-    }
+        div.style.position = "absolute";
+        div.style.left = (this.width/ 2) - 135 +"px";
+        div.style.top = (this.height/8) * 5 + 40 +'px';
+      }
+
     div.addEventListener("touchstart", this.onTouchStart,{passive:false});
     document.body.appendChild(div);
 
@@ -95,6 +96,7 @@ class MenuScene
          {
           // gameNs.soundManager.playSound("Concentrate", true, 0.2);
            gameNs.sceneManager.goToScene(gameNs.optionsScene.title);
+
          }
          else if (filename === "ExitButton.png" )
          {
@@ -106,12 +108,7 @@ class MenuScene
 
          }
 
-         var el = document.getElementById( 'Play' );
-         el.parentNode.removeChild( el );
-         var el = document.getElementById( 'Options' );
-         el.parentNode.removeChild( el );
-         var el = document.getElementById( 'Exit' );
-         el.parentNode.removeChild( el );
+
       }
     }
  }

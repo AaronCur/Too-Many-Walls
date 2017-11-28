@@ -39,6 +39,7 @@ class Game
   update()
   {
     //window.requestAnimationFrame(gameNs.game.update);
+
   }
 //  clickHandler(sceneManager)
   //{
