@@ -122,7 +122,7 @@ class MenuScene
     var canvas = document.createElement("mycanvas");
     var ctx = mycanvas.getContext("2d");
     ctx.clearRect(0, 0, mycanvas.width, mycanvas.height);
-    document.body.style.background = "#89dfff";
+    document.body.style.background = "#bbcfed";
     ctx.font = '55px Adventure Regular';
     ctx.fillText(this.title, this.width/2 - 170, 70);
 
