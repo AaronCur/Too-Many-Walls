@@ -7,6 +7,12 @@ class PlayScene
   constructor(title)
   {
     this.title = title;
+    this.player = new Player(100,100,200,200);
+  }
+  update()
+  {
+    this.player.update();
+
   }
   /**
    * render function which will overwrite the one inherited by scene
@@ -22,6 +28,8 @@ class PlayScene
     ctx.font = '50px Arial';
     ctx.fillText(this.title, 10, 50);
 
+    this.player.draw();
+  
   }
 
 

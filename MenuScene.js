@@ -115,7 +115,10 @@ class MenuScene
       }
     }
  }
-
+ update()
+ {
+   
+ }
   render()
   {
 

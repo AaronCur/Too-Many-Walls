@@ -56,7 +56,10 @@ class SceneManager
     this.currentScene = this.scenes[this.i];
   }
 
-
+  update()
+  {
+    this.currentScene.update();
+  }
   /**
   *helper function that renders background colour, font and font size
   */
