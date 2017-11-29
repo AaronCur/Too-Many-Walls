@@ -11,8 +11,10 @@ function main()
   initCanvas();
   var game = new Game();
   gameNs.game = game;
+   gameNs.touchStart = false;
   game.initWorld();
   game.update();
+  console.log(gameNs.onTouchStart)
   game.draw();
 
   //document.addEventListener("click", clickHandler.bind(null, sceneManager));
@@ -99,6 +101,7 @@ function keyDownHandler(e)
  }
  function onTouchMove(e)
  {
+   gameNs.touchStart = true;
   e.preventDefault();
   var canvas = document.getElementById("mycanvas");
   var ctx = canvas.getContext("2d");
@@ -131,6 +134,7 @@ function keyDownHandler(e)
  {
    var canvas = document.getElementById("mycanvas");
    var ctx = canvas.getContext("2d");
+   console.log(gameNs.touchStart);
 
    var time2 = new Date().getTime();
    var elapsedTime = time2 - gameNs.time1;
@@ -142,7 +146,7 @@ function keyDownHandler(e)
    console.log(distBetween);
  //console.log(angle(a,b) );
 
-   if(elapsedTime  > 0 && elapsedTime <= 500 && distBetween > 250)
+   if(elapsedTime  > 0 && elapsedTime <= 300 && distBetween > 250 && gameNs.touchStart == true)
    {
      if(angle(a,b) > (180 - 45) || angle(a,b) < (-180 + 45))
      {
@@ -176,13 +180,14 @@ function keyDownHandler(e)
 
    }
    //If player taps stop all movement
-   else if (distBetween <250)
+    if (gameNs.touchStart == false)
     {
       gameNs.playScene.player.moveY = null;
       gameNs.playScene.player.moveX = null;
       console.log("Tap")
 
     }
+    gameNs.touchStart = false;
 
  }
  function angle(a,b) {
