@@ -9,35 +9,108 @@ class Player
   @param {number}height assigns height of square
   @param {number}colour assigns colour of square
   */
-  constructor(x,y,width,height)
+  constructor(context, imageOptions, fps, y)
   {
-  this.x=x;
-  this.y=y;
-  this.width=width;
-  this.height=height;
+//  this.x=x;
   this.moveX = null;
   this.moveY = null;
+  this.direction = 0;
+
+  this.img= imageOptions.image;
+  this.fps = fps;
+  this.x = 0;
+  this.y = y;
+  this.index = 0;
+  this.width = imageOptions.width;
+  this.height = imageOptions.height;
+  this.time = 0;
+  this.ticksPerFrame = 1000/this.fps;
   }
- update()
+
+ update(deltaTime)
  {
    if(this.moveX == false)
+    {
+      this.x -= 10;
+      this.direction = 4;
+    }
+    else if (this.moveX == true)
+    {
+      this.x +=10;
+      this.direction = 2;
+    }
+    else if (this.moveY == false)
+    {
+       this.y-=10;
+       this.direction = 1;
+    }
+    else if (this.moveY == true)
+    {
+     this.y+=10;
+     this.direction = 3;
+    }
+
+
+   if(deltaTime != null)
    {
-     this.x -= 10;
+     this.time = this.time + deltaTime;
+   }
+
+   var canvas = document.getElementById('mycanvas');
+   var ctx = canvas.getContext('2d');
+
+   var image = this.img;
+   //if(moveX == true)
+
+  if (this.moveX == false)
+   {
+     ctx.drawImage(image, this.index* 78 , 108,78, 108 ,this.x,this.y, this.width,this.height);
    }
    else if (this.moveX == true)
    {
-     this.x +=10;
-   }
-   else if (this.moveY == false)
-   {
-      this.y-=10;
+     ctx.drawImage(image, this.index* 78 , 216,78, 108 ,this.x,this.y, this.width,this.height);
    }
    else if (this.moveY == true)
    {
-    this.y+=10;
+     ctx.drawImage(image, this.index* 78, 0,78, 108 ,this.x,this.y, this.width,this.height);
+   }
+   else if (this.moveY == false)
+   {
+     ctx.drawImage(image, this.index* 78 , 324,78, 108 ,this.x,this.y, this.width,this.height);
+   }
+
+   if(this.moveX== null && this.moveY ==null)
+   {
+     if(this.direction == 1)
+     {
+       ctx.drawImage(image, 78 , 324,78, 108 ,this.x,this.y, this.width,this.height);
+     }
+     else if(this.direction == 2)
+     {
+       ctx.drawImage(image, 78 , 216,78, 108 ,this.x,this.y, this.width,this.height);
+     }
+     else if(this.direction == 3)
+     {
+       ctx.drawImage(image, 78, 0,78, 108 ,this.x,this.y, this.width,this.height);
+     }
+     else
+     {
+        ctx.drawImage(image, 78 , 108,78, 108 ,this.x,this.y, this.width,this.height);
+     }
+
+   }
+   if(this.ticksPerFrame < this.time)
+   {
+     this.index = this.index +1;
+     if(this.index > 2)
+     {
+       this.index = 0;
+     }
+       this.time =0;
    }
 
  }
+
   /**
    * function of Square which gives the r g b varialbles an
    * initial value and thrn fills the sqare  colour initially

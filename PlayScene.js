@@ -6,12 +6,31 @@ class PlayScene
    */
   constructor(title)
   {
+    gameNs.previousTime = Date.now();	// previousTime is initially 0
     this.title = title;
-    this.player = new Player(100,100,200,200);
+    this.img=new Image();
+    this.img.src = "assets/Player.png";
+    var canvas = document.getElementById('mycanvas');
+    var ctx = canvas.getContext('2d');
+    this.player;
+    this.player = new Player(ctx, {
+    width: 78,
+    height: 108,
+    image: this.img
+  }, 10, 100);
+
+    //gameNs.previousTime = Date.now();	// previousTime is initially 0
   }
   update()
   {
-    this.player.update();
+    var now = Date.now();
+    var deltaTime = (now - gameNs.previousTime);
+    gameNs.previousTime = now;	// previousTime is initially 0
+    var canvas = document.getElementById('mycanvas');
+    var ctx = canvas.getContext('2d');
+    ctx.clearRect(0,0, canvas.width, canvas.height);
+    this.player.update(deltaTime);
+
 
   }
   /**
@@ -21,15 +40,15 @@ class PlayScene
   render()
   {
 
-    var canvas = document.createElement("mycanvas");
-    var ctx = mycanvas.getContext("2d");
-    ctx.clearRect(0, 0, mycanvas.width, mycanvas.height);
-    document.body.style.background = "#ffffff";
+   var canvas = document.createElement("mycanvas");
+   var ctx = mycanvas.getContext("2d");
+    //ctx.clearRect(0, 0, mycanvas.width, mycanvas.height);
+   document.body.style.background = "#ffffff";
     ctx.font = '50px Arial';
     ctx.fillText(this.title, 10, 50);
 
-    this.player.draw();
-  
+  //  this.player.draw();
+
   }
 
 

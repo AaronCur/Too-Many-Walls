@@ -142,7 +142,7 @@ function keyDownHandler(e)
    console.log(distBetween);
  //console.log(angle(a,b) );
 
-   if(elapsedTime  > 0 && elapsedTime <= 500 && distBetween > 150)
+   if(elapsedTime  > 0 && elapsedTime <= 500 && distBetween > 250)
    {
      if(angle(a,b) > (180 - 45) || angle(a,b) < (-180 + 45))
      {
@@ -176,7 +176,7 @@ function keyDownHandler(e)
 
    }
    //If player taps stop all movement
-   else if (distBetween < 100)
+   else if (distBetween <250)
     {
       gameNs.playScene.player.moveY = null;
       gameNs.playScene.player.moveX = null;
