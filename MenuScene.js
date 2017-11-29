@@ -96,6 +96,11 @@ class MenuScene
          {
           // gameNs.soundManager.playSound("Concentrate", true, 0.2);
            gameNs.sceneManager.goToScene(gameNs.optionsScene.title);
+           gameNs.optionsScene.createDiv("Mute");
+           gameNs.optionsScene.createDiv("VolumeUp");
+           gameNs.optionsScene.createDiv("VolumeDown");
+           gameNs.optionsScene.createDiv("Back");
+
 
          }
          else if (filename === "ExitButton.png" )
@@ -107,6 +112,16 @@ class MenuScene
       //   gameNs.sceneManager.goToScene(gameNs.optionsScene.title);
 
          }
+         if(gameNs.sceneManager.currentScene != gameNs.menuScene.title)
+
+      {
+         var el = document.getElementById( 'Play' );
+         el.parentNode.removeChild( el );
+         var el = document.getElementById( 'Options' );
+         el.parentNode.removeChild( el );
+         var el = document.getElementById( 'Exit' );
+         el.parentNode.removeChild( el );
+       }
 
 
       }
@@ -114,7 +129,7 @@ class MenuScene
  }
  update()
  {
-   
+
  }
   render()
   {

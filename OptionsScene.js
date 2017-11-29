@@ -10,10 +10,10 @@ class OptionsScene
     this.width = window.innerWidth;
     this.height = window.innerHeight;
 
-    var div1 =this.createDiv("Mute");
-    this.createDiv("VolumeDown");
-    this.createDiv("VolumeUp");
-    this.createDiv("Back")
+    //var div1 =this.createDiv("Mute");
+    //this.createDiv("VolumeDown");
+    //this.createDiv("VolumeUp");
+    //this.createDiv("Back")
 
   }
   update()
@@ -27,18 +27,18 @@ class OptionsScene
    var timer;
    var Counter = 0;
 
-   var div1 = document.createElement("div");
+   var div = document.createElement("div");
    div.id = divId;
    if(div.id ==="Mute")
    {
      console.log("Mute button created");
-     div1.innerHTML = "<img src=\'Assets/Mute.png\'>";
+     div.innerHTML = "<img src=\'Assets/Mute.png\'>";
      this.div = div;
      //var d = document.getElementById('yourDivId');
-     div1.style.visibility = "hidden";
-     div1.style.position = "absolute";
-     div1.style.left = (this.width/ 2) - 100 +"px";
-     div1.style.top = (this.height/ 8) + 80 +'px';
+     div.style.visibility = "visible";
+     div.style.position = "absolute";
+     div.style.left = (this.width/ 2) - 100 +"px";
+     div.style.top = (this.height/ 8) + 80 +'px';
    }
    else if(div.id ==="VolumeDown")
    {
@@ -46,6 +46,7 @@ class OptionsScene
      div.innerHTML = "<img src=\'Assets/VolumeDown.png\'>";
      this.div = div;
 
+     div.style.visibility = "visible";
      div.style.position = "absolute";
      div.style.left = (this.width/ 2) - 300 +"px";
      div.style.top = (this.height/ 8) * 3.5 + 80 +'px';
@@ -56,6 +57,7 @@ class OptionsScene
      div.innerHTML = "<img src=\'Assets/VolumeUp.png\'>";
      this.div = div;
 
+     div.style.visibility = "visible";
      div.style.position = "absolute";
      div.style.left = (this.width/ 2) + 300 +"px";
      div.style.top = (this.height/8) * 3 + 80 +'px';
@@ -66,6 +68,7 @@ class OptionsScene
      div.innerHTML = "<img src=\'Assets/Back.png\'>";
      this.div = div;
 
+     div.style.visibility = "visible";
      div.style.position = "absolute";
      div.style.left = (this.width/ 2) - 500 +"px";
      div.style.top = (this.height/8) - 200 +'px';
@@ -128,6 +131,16 @@ class OptionsScene
           gameNs.sceneManager.goToScene(gameNs.menuScene.title);
           var el = document.getElementById( 'Back' );
           el.parentNode.removeChild( el );
+          var el = document.getElementById( 'VolumeUp' );
+          el.parentNode.removeChild( el );
+          var el = document.getElementById( 'VolumeDown' );
+          el.parentNode.removeChild( el );
+          var el = document.getElementById( 'Mute' );
+          el.parentNode.removeChild( el );
+          gameNs.menuScene.createDiv("Play");
+          gameNs.menuScene.createDiv("Options");
+          gameNs.menuScene.createDiv("Exit");
+
         }
 
 
