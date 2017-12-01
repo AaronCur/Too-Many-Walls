@@ -9,15 +9,24 @@ class OptionsScene
     this.title = title;
     this.width = window.innerWidth;
     this.height = window.innerHeight;
-
-    //var div1 =this.createDiv("Mute");
-    //this.createDiv("VolumeDown");
-    //this.createDiv("VolumeUp");
-    //this.createDiv("Back")
+    this.pressed =false;
+    this.count = 0;
+    this.widthVol = 699;
+    this.heightVol = 200;
+    this.x = 300;
+    this.y=600;
+    this.img=new Image();
+    this.img.src="assets/music.png";
 
   }
   update()
  {
+   var canvas = document.getElementById('mycanvas');
+   var ctx = canvas.getContext('2d');
+
+
+
+
 
  }
 
@@ -48,8 +57,8 @@ class OptionsScene
 
      div.style.visibility = "visible";
      div.style.position = "absolute";
-     div.style.left = (this.width/ 2) - 300 +"px";
-     div.style.top = (this.height/ 8) * 3.5 + 80 +'px';
+     div.style.left = (this.width/ 2) - 400 +"px";
+     div.style.top = (this.height/ 8) * 3.25 + 80 +'px';
    }
    else if(div.id ==="VolumeUp")
    {
@@ -73,7 +82,7 @@ class OptionsScene
      div.style.left = (this.width/ 2) - 500 +"px";
      div.style.top = (this.height/8) - 200 +'px';
    }
-
+  // ctx.drawImage(image, 0 , this.height,100, this.heightVol ,this.x,this.y, this.widthVol,this.heightVol);
    div.addEventListener("touchstart", this.onTouchStart,{passive:false});
    document.body.appendChild(div);
 
@@ -83,6 +92,8 @@ class OptionsScene
  {
 
    e.preventDefault();
+   var counter = 0;
+
    var currentElement = e.target;
    var parentDiv = currentElement.parentNode;
    console.log("Div id = " + parentDiv.id);
@@ -94,35 +105,37 @@ class OptionsScene
 
    if (fullPath !== undefined)
    {
-     console.log(gameNs.count);
+
      var index = fullPath.lastIndexOf("/");
      var filename = fullPath;
      if(index !== -1)
      {
-       gameNs.count += 1;
+       //this.count+=1;
+
 
         filename = fullPath.substring(index+1,fullPath.length);
         console.log(filename);
         if(filename === "Mute.png")
         {
-         // gameNs.soundManager.playSound("Concentrate", false, 1);
-        //  gameNs.sceneManager.goToScene(gameNs.playScene.title);
+              var div = document.getElementById("Mute");
+              div.innerHTML = "<img src=\'Assets/Muted.png\'>";
+          }
+          if(filename === "Muted.png")
+          {
+            var div = document.getElementById("Mute");
+            div.innerHTML = "<img src=\'Assets/Mute.png\'>";
+          }
 
-
-        }
         else if (filename === "VolumeDown.png" )
         {
-         // gameNs.soundManager.playSound("Concentrate", true, 0.2);
-          //gameNs.sceneManager.goToScene(gameNs.optionsScene.title);
+           this.width-=69;
+           console.log("width: ", this.width);
+
         }
         else if (filename === "VolumeUp.png" )
         {
-          //throw new Error("Something went badly wrong!");
-         // div.style.background = "Teal";
-          //gameNs.soundManager.Stop();
-          //gameNs.count = 0;
-     //   gameNs.sceneManager.goToScene(gameNs.optionsScene.title);
-
+            this.width+=69;
+            console.log("width: ", this.width);
         }
 
         else if (filename === "Back.png" )
@@ -157,10 +170,15 @@ class OptionsScene
 
     var canvas = document.createElement("mycanvas");
     var ctx = mycanvas.getContext("2d");
+
     ctx.clearRect(0, 0, mycanvas.width, mycanvas.height);
     document.body.style.background = "#FFFACD";
     ctx.font = '55px Adventure Regular';
     ctx.fillText(this.title, this.width/2 - 170, 70);
+
+    var image = this.img;
+    this.widthVol = 699;
+    ctx.drawImage(image,0, 0,this.widthVol, this.heightVol ,this.x,this.y, 400,100);
 
   }
 
