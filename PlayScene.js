@@ -31,7 +31,7 @@ class PlayScene
     var ctx = canvas.getContext('2d');
     ctx.clearRect(0,0, canvas.width, canvas.height);
     this.player.update(deltaTime);
-    this.level.initWorld();
+    this.level.update();
 
 
   }

@@ -36,7 +36,7 @@ class WorldSquare
     }
 
   }
-  void draw()
+  draw()
   {
 
 

@@ -6,11 +6,15 @@ class LevelLoader
   */
   constructor()
   {
+    this.x =0;
+    this.y = 0;
+    this.col = 0;
+    this.row = 0;
     this.squareSize = 50;
     this.MaxRows = 12;
     this.MaxCols = 12;
      this.map = [[],[]];
-     gameNs.mazeSquares = [[],[]];
+     gameNs.mazeSquares = [];
      this.request = new XMLHttpRequest();
      this.request.addEventListener("load", function requestListener(){
     //TADA! Now I have the class data.
@@ -18,26 +22,27 @@ class LevelLoader
      this.map= this.levelloader.Map1;
      console.log("MapData :" +this.map );
 
-     for (var row = 0; row < this.MaxRows; row++)
+     for (this.row = 0; this.row < 12; this.row++)
      {
-         for (var col = 0; col < this.MaxCols; col++)
+       gameNs.mazeSquares = [];
+         for (this.col = 0; this.col < 12; this.col++)
          {
-             gameNs.mazeSquares[row][col] = new WorldSquare(x, y);
-             x = x + this.squareSize;
+             gameNs.mazeSquares[this.row][this.col] = new WorldSquare(this.x, this.y);
+              this.x = this.x + this.squareSize;
          }
-         x = 0;
-         y = y + this.squareSize;
+           this.x = 0;
+         this.y = this.y + this.squareSize;
 
      }
 
 
-     for (var col = 0; col < this.MaxCols; col++)
+     for (this.col = 0; this.col < 12; this.col++)
      {
-         for (var row = 0; row < this.MaxRows; row++)
+         for (this.row = 0; this.row < 12; this.row++)
          {
-             if (this.map[row][col] == 1)
+             if (this.map[this.row][this.col] === 1)
              {
-                 gameNs.mazeSquares[row][col].containsWall = true;
+                 gameNs.mazeSquares[this.row][this.col].containsWall = true;
              }
          }
      }
@@ -46,8 +51,17 @@ class LevelLoader
 this.request.open("GET", "http://127.0.0.1:8000/Level.json");
 this.request.send();
   }
-  initLevelLoader()
+  update()
   {
+    for (this.row = 0; this.row < 12; this.row++)
+    {
+        for (this.col= 0; this.col< 12; this.col++)
+        {
+
+            gameNs.mazeSquares[this.row][this.col].update();
+
+        }
+    }
     /*
     this.request = new XMLHttpRequest();
    request.addEventListener("load", function requestListener(){
