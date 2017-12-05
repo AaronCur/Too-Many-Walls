@@ -30,8 +30,9 @@ class PlayScene
     var canvas = document.getElementById('mycanvas');
     var ctx = canvas.getContext('2d');
     ctx.clearRect(0,0, canvas.width, canvas.height);
-    this.player.update(deltaTime);
     this.level.update();
+    this.player.update(deltaTime);
+
 
 
   }

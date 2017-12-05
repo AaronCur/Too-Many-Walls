@@ -13,7 +13,7 @@ class WorldSquare
     this.containsWall = false;
     this.row = row;
     this.col = col;
-    this.squareSize = 50;
+    this.squareSize = 75;
 
 
   }
@@ -24,7 +24,9 @@ class WorldSquare
   }
   update()
   {
-    if(this.containsSquare == true)
+    var canvas = document.getElementById('mycanvas');
+    var ctx = canvas.getContext('2d');
+    if(this.containsWall == true)
     {
       var image = this.imgWall;
       ctx.drawImage(image, 0 , 0,this.squareSize, this.squareSize ,this.row,this.col, this.squareSize,this.squareSize);

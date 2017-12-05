@@ -10,41 +10,43 @@ class LevelLoader
     this.y = 0;
     this.col = 0;
     this.row = 0;
-    this.squareSize = 50;
+    this.squareSize = 75;
     this.MaxRows = 12;
     this.MaxCols = 12;
-     this.map = [[],[]];
-     gameNs.mazeSquares = [];
+    this.map = [];
+     this.mazeSquares = [];
      this.request = new XMLHttpRequest();
+
+     var that = this;
      this.request.addEventListener("load", function requestListener(){
     //TADA! Now I have the class data.
      this.levelloader = JSON.parse(this.responseText);
      this.map= this.levelloader.Map1;
-     console.log("MapData :" +this.map );
+     console.log("MapData :" +that.map[10] );
 
-     for (this.row = 0; this.row < 12; this.row++)
+     for (this.row = 0; this.row < 14; this.row++)
      {
-       gameNs.mazeSquares = [];
-         for (this.col = 0; this.col < 12; this.col++)
+       //that.mazeSquares = [];
+         for (this.col = 0; this.col < 24; this.col++)
          {
-             gameNs.mazeSquares[this.row][this.col] = new WorldSquare(this.x, this.y);
-              this.x = this.x + this.squareSize;
+              that.mazeSquares.push(new WorldSquare(that.x, that.y));
+              //that.mazeSquares[this.row][this.col] = new WorldSquare(that.x, that.y);
+              that.x = that.x + that.squareSize;
          }
-           this.x = 0;
-         this.y = this.y + this.squareSize;
+           that.x = 0;
+         that.y = that.y + that.squareSize;
 
      }
 
-
-     for (this.col = 0; this.col < 12; this.col++)
+    //console.log(that.map[10]);
+     for (this.i = 0; this.i< 336; this.i++)
      {
-         for (this.row = 0; this.row < 12; this.row++)
+
+         if (this.map[this.i] === 1)
          {
-             if (this.map[this.row][this.col] === 1)
-             {
-                 gameNs.mazeSquares[this.row][this.col].containsWall = true;
-             }
+             that.mazeSquares[this.i].containsWall = true;
          }
+
      }
 
 });
@@ -53,14 +55,10 @@ this.request.send();
   }
   update()
   {
-    for (this.row = 0; this.row < 12; this.row++)
+
+    for (this.i = 0; this.i < 336; this.i++)
     {
-        for (this.col= 0; this.col< 12; this.col++)
-        {
-
-            gameNs.mazeSquares[this.row][this.col].update();
-
-        }
+            this.mazeSquares[this.i].update();
     }
     /*
     this.request = new XMLHttpRequest();
