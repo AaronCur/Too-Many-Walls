@@ -15,6 +15,12 @@ class Flag
 
   }
 
+  respawn()
+  {
+    this.x = (Math.random()*window.innerWidth)-100;
+    this.y = (Math.random()*window.innerHeight)-100;
+  }
+
   update(deltaTime)
   {
 

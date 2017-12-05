@@ -5,20 +5,39 @@ class Goal
   {
     this.x= (Math.random()*window.innerWidth)-100;
     this.y= (Math.random()*window.innerHeight)-100;
-    this.width=150;
-    this.height=150;
     var alive = true;
     this.alive=alive;
+    this.img = new Image();
+    this.img.src = "assets/goal.png";
+    this.squareSize = 75;
   }
 
-  draw()
+  checkCollision(e)
+  {
+    var collides = false;
+
+    if((this.x< e.x + e.width)&&
+      (this.x+this.squareSize>e.x)&&
+      (this.y+this.squareSize>e.y)&&
+      (this.y<e.y+e.height) )
+      {
+        e.x= (Math.random()*window.innerWidth)-100;
+        e.y = (Math.random()*window.innerHeight)-100;
+        console.log("Collided");
+      }
+      return collides;
+    }
+
+
+  update()
   {
     if(this.alive === true)
     {
       var canvas = document.getElementById('mycanvas');
       var ctx = canvas.getContext('2d');
 
-      ctx.strokeRect(this.x,this.y,this.width,this.height);
+        var image = this.img;
+        ctx.drawImage(image, 0 , 0,this.squareSize, this.squareSize ,this.x,this.y, this.squareSize,this.squareSize);
 
     }
 

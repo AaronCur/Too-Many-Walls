@@ -6,6 +6,7 @@ class PlayScene
    */
   constructor(title)
   {
+    this.goal=new Goal();
     gameNs.previousTime = Date.now();	// previousTime is initially 0
     this.title = title;
     this.img=new Image();
@@ -44,6 +45,8 @@ class PlayScene
     this.flag.update(deltaTime);
     this.player.update(deltaTime);
     this.player.checkCollision(this.flag);
+    this.goal.checkCollision(this.flag);
+    this.goal.update();
 
 
 
