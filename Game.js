@@ -41,6 +41,7 @@ class Game
   {
     window.requestAnimationFrame(gameNs.game.update);
     gameNs.sceneManager.update();
+    gameNs.sceneManager.render();
   }
 //  clickHandler(sceneManager)
   //{

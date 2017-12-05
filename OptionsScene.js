@@ -11,21 +11,19 @@ class OptionsScene
     this.height = window.innerHeight;
     this.pressed =false;
     this.count = 0;
-    this.widthVol = 699;
+    gameNs.widthVol = 0;
     this.heightVol = 200;
     this.x = 300;
     this.y=600;
     this.img=new Image();
     this.img.src="assets/music.png";
+    this.imgSize = 400;
 
   }
   update()
  {
    var canvas = document.getElementById('mycanvas');
    var ctx = canvas.getContext('2d');
-
-
-
 
 
  }
@@ -92,7 +90,7 @@ class OptionsScene
  {
 
    e.preventDefault();
-   var counter = 0;
+   gameNs.counter = 0;
 
    var currentElement = e.target;
    var parentDiv = currentElement.parentNode;
@@ -128,14 +126,53 @@ class OptionsScene
 
         else if (filename === "VolumeDown.png" )
         {
-           this.width-=69;
-           console.log("width: ", this.width);
+          if(gameNs.widthVol == 233)
+          {
+            gameNs.widthVol = 0;
+            gameNs.imgSize = 0;
+          }
+          else if(gameNs.widthVol == 466)
+          {
+            gameNs.widthVol = 233;
+            gameNs.imgSize = 133;
+          }
+          else if(gameNs.widthVol == 699)
+          {
+            gameNs.widthVol = 466;
+            gameNs.imgSize = 266;
+          }
+           console.log("width: ", gameNs.widthVol);
+
+           var canvas = document.createElement("mycanvas");
+           var ctx = mycanvas.getContext("2d");
+           ctx.clearRect(0, 0, mycanvas.width, mycanvas.height);
+
 
         }
         else if (filename === "VolumeUp.png" )
         {
-            this.width+=69;
-            console.log("width: ", this.width);
+          if(gameNs.widthVol==0)
+          {
+            gameNs.widthVol = 233;
+            gameNs.imgSize = 133;
+          }
+          else if(gameNs.widthVol == 233)
+          {
+            gameNs.widthVol = 466;
+            gameNs.imgSize = 266;
+          }
+          else if(gameNs.widthVol == 466)
+          {
+            gameNs.widthVol = 699;
+            gameNs.imgSize = 400;
+          }
+
+            console.log("width: ", gameNs.widthVol);
+
+            var canvas = document.createElement("mycanvas");
+            var ctx = mycanvas.getContext("2d");
+            ctx.clearRect(0, 0, mycanvas.width, mycanvas.height);
+
         }
 
         else if (filename === "Back.png" )
@@ -170,15 +207,15 @@ class OptionsScene
 
     var canvas = document.createElement("mycanvas");
     var ctx = mycanvas.getContext("2d");
-
     ctx.clearRect(0, 0, mycanvas.width, mycanvas.height);
+
     document.body.style.background = "#FFFACD";
     ctx.font = '55px Adventure Regular';
     ctx.fillText(this.title, this.width/2 - 170, 70);
 
     var image = this.img;
-    this.widthVol = 699;
-    ctx.drawImage(image,0, 0,this.widthVol, this.heightVol ,this.x,this.y, 400,100);
+
+    ctx.drawImage(image,0, 0,gameNs.widthVol, this.heightVol ,this.x,this.y, gameNs.imgSize,100);
 
   }
 
