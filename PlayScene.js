@@ -19,6 +19,7 @@ class PlayScene
     image: this.img
   }, 10, 100);
 
+    this.level = new LevelLoader();
     //gameNs.previousTime = Date.now();	// previousTime is initially 0
   }
   update()
@@ -30,6 +31,7 @@ class PlayScene
     var ctx = canvas.getContext('2d');
     ctx.clearRect(0,0, canvas.width, canvas.height);
     this.player.update(deltaTime);
+    this.level.initWorld();
 
 
   }
