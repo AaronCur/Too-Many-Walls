@@ -119,23 +119,6 @@ class Player
    * @type {Integer} g -given value of 10
   *fills the rectanglewith this rgb value at the positon this.x, this.y
    */
-   draw()
-  {
-    var canvas = document.getElementById('mycanvas');
-    var ctx = canvas.getContext('2d');
-    ctx.clearRect(0,0,canvas.width, canvas.height);
-    //var r = Math.floor(Math.random() * 255);
-    //var g = Math.floor(Math.random() * 255);
-    //var b = Math.floor(Math.random() * 255);
-    var r = 10;
-    var g = 10;
-    var b = 255;
-
-    ctx.fillStyle = rgb(r,g,b);
-    // args are x,y,width,height
-    ctx.fillRect(this.x, this.y, this.width, this.height);
-
-  }
 
   moveLeft()
   {
@@ -166,6 +149,9 @@ class Player
       (this.y<e.y+e.height) )
       {
         collides = true;
+        e.x=this.x+20;
+        e.y=this.y-70;
+        console.log("Collided");
       }
       return collides;
 

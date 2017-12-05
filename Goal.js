@@ -1,12 +1,12 @@
 class Goal
 {
 
-  constructor(x,y,width,height)
+  constructor()
   {
-    this.x=x;
-    this.y=y;
-    this.width=width;
-    this.height=height;
+    this.x= (Math.random()*window.innerWidth)-100;
+    this.y= (Math.random()*window.innerHeight)-100;
+    this.width=150;
+    this.height=150;
     var alive = true;
     this.alive=alive;
   }

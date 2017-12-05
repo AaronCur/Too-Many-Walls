@@ -22,9 +22,6 @@ class MenuScene
    createDiv(divId)
   {
 
-    var timer;
-    var Counter = 0;
-
       var div = document.createElement("div");
       div.id = divId;
       if(div.id === "Play")
@@ -112,8 +109,8 @@ class MenuScene
       //   gameNs.sceneManager.goToScene(gameNs.optionsScene.title);
 
          }
-         if(gameNs.sceneManager.currentScene != gameNs.menuScene.title)
 
+         if(gameNs.sceneManager.currentScene != gameNs.menuScene.title)
       {
          var el = document.getElementById( 'Play' );
          el.parentNode.removeChild( el );
