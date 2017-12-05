@@ -75,6 +75,7 @@ class MenuScene
     {
       console.log(gameNs.count);
       var index = fullPath.lastIndexOf("/");
+      console.log("Path: " + index);
       var filename = fullPath;
       if(index !== -1)
       {

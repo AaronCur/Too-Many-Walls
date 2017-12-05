@@ -29,6 +29,7 @@ class PlayScene
 
 
 
+    this.level = new LevelLoader();
     //gameNs.previousTime = Date.now();	// previousTime is initially 0
   }
   update()
@@ -39,10 +40,11 @@ class PlayScene
     var canvas = document.getElementById('mycanvas');
     var ctx = canvas.getContext('2d');
     ctx.clearRect(0,0, canvas.width, canvas.height);
-
+    this.level.update();
     this.flag.update(deltaTime);
     this.player.update(deltaTime);
     this.player.checkCollision(this.flag);
+
 
 
   }

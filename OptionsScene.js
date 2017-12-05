@@ -66,7 +66,7 @@ class OptionsScene
 
      div.style.visibility = "visible";
      div.style.position = "absolute";
-     div.style.left = (this.width/ 2) + 300 +"px";
+     div.style.left = (this.width/ 2) + 200 +"px";
      div.style.top = (this.height/8) * 3 + 80 +'px';
    }
    else if(div.id==="Back")
