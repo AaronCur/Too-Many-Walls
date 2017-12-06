@@ -5,8 +5,8 @@ class Flag
 
     this.img = imageOptions.image;
     this.fps = fps;
-    this.x = (Math.random()*window.innerWidth)-100;
-    this.y = (Math.random()*window.innerHeight)-100;
+    this.x= (Math.floor(Math.random()*24)*75);
+    this.y= (Math.floor(Math.random()*12)*75);
     this.index =0;
     this.time = 0;
     this.width = imageOptions.width;

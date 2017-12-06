@@ -3,8 +3,8 @@ class Goal
 
   constructor()
   {
-    this.x= (Math.random()*window.innerWidth)-100;
-    this.y= (Math.random()*window.innerHeight)-100;
+    this.x= (Math.floor(Math.random()*24)*75);
+    this.y= (Math.floor(Math.random()*12)*75);
     var alive = true;
     this.alive=alive;
     this.img = new Image();
@@ -21,10 +21,10 @@ class Goal
       (this.y+this.squareSize>e.y)&&
       (this.y<e.y+e.collisionHeight) )
       {
-        e.x= (Math.random()*window.innerWidth)-100;
-        e.y = (Math.random()*window.innerHeight)-100;
-        this.x= (Math.random()*window.innerWidth)-100;
-        this.y = (Math.random()*window.innerHeight)-100;
+        e.x= ((Math.random()*24)*75);
+        e.y= ((Math.random()*12)*75);
+        this.x= (Math.floor(Math.random()*24)*75);
+        this.y= (Math.floor(Math.random()*12)*75);
         console.log("Collided");
       }
       return collides;
