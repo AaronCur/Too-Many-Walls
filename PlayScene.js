@@ -43,6 +43,8 @@ class PlayScene
     ctx.clearRect(0,0, canvas.width, canvas.height);
     this.level.update();
     this.goal.update();
+    this.player.breakWall(this.level);
+    this.player.moveWall(this.level);
     if(this.player.direction === 1)
     {
       this.player.update(deltaTime);

@@ -46,6 +46,15 @@ class LevelLoader
          {
              that.mazeSquares[this.i].containsWall = true;
          }
+         else if(this.map[this.i] === 2)
+         {
+           that.mazeSquares[this.i].breakWall = true;
+         }
+         else if(this.map[this.i] === 3)
+         {
+           that.mazeSquares[this.i].moveWall = true;
+         }
+
 
      }
 

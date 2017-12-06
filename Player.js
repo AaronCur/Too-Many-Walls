@@ -19,32 +19,40 @@ class Player
   this.img= imageOptions.image;
   this.fps = fps;
   this.x = 0;
+  this.xFeet = this.x + (this.width / 2);
+  this.yFeet = this.y + (this.height/2);
   this.y = y;
   this.index = 0;
   this.width = imageOptions.width;
   this.height = imageOptions.height;
   this.time = 0;
   this.ticksPerFrame = 1000/this.fps;
+  this.col = 0;
+  this.row = 0;
+  this.i = 0;
+  this.squareSize = 75;
+  this.maxRows=14
+  this.maxCols=24
   }
 
  update(deltaTime)
  {
-   if(this.moveX == false)
+   if(this.moveX == false && this.x> 0)
     {
       this.x -= 10;
       this.direction = 4;
     }
-    else if (this.moveX == true)
+    else if (this.moveX == true && this.x < 23 * 75)
     {
       this.x +=10;
       this.direction = 2;
     }
-    else if (this.moveY == false)
+    else if (this.moveY == false && this.y > 10)
     {
        this.y-=10;
        this.direction = 1;
     }
-    else if (this.moveY == true)
+    else if (this.moveY == true && this.y < 12 * 75)
     {
      this.y+=10;
      this.direction = 3;
@@ -109,6 +117,12 @@ class Player
        this.time =0;
    }
 
+   this.yFeet = this.y + 5;
+   this.col = Math.floor(this.x / this.squareSize) + 1 ;
+   this.row = Math.floor(this.y / this.squareSize) + 1 ;
+   this.i = (this.row * this.maxCols)+this.col;
+   this.i = this.i - 1  ;
+
  }
 
   /**
@@ -122,6 +136,7 @@ class Player
 
   moveLeft()
   {
+
     this.x -= 10;
   }
 
@@ -151,10 +166,96 @@ class Player
         collides = true;
         e.x=this.x+20;
         e.y=this.y-70;
-        console.log("Collided");
+      //  console.log("Collided");
       }
       return collides;
 
 
   }
+  moveWall(level)
+  {
+    if(this.direction == 2  )
+    {
+      if(level.mazeSquares[this.i +1].moveWall == true &&level.mazeSquares[this.i +2].containsWall == false)
+      {
+         level.mazeSquares[this.i+1].moveWall = false;
+         level.mazeSquares[this.i+2].moveWall = true;
+      }
+
+    }
+    else if(this.direction == 4 )
+    {
+      if(level.mazeSquares[this.i -1].moveWall == true&&level.mazeSquares[this.i -2].containsWall == false  )
+      {
+        level.mazeSquares[this.i-1].moveWall = false;
+        level.mazeSquares[this.i-2].moveWall = true;
+      }
+
+    }
+   else if(this.direction == 1 )
+    {
+      if(level.mazeSquares[this.i - this.maxCols].moveWall== true&&level.mazeSquares[this.i - (this.maxCols * 2)].containsWall == false )
+      {
+         level.mazeSquares[this.i - this.maxCols].moveWall = false;
+         level.mazeSquares[this.i - (this.maxCols * 2)].moveWall = true;
+      }
+
+  }
+  else if(this.direction == 3)
+  {
+    if(level.mazeSquares[this.i + this.maxCols].moveWall == true&&level.mazeSquares[this.i + (this.maxCols * 2)].containsWall == false)
+    {
+      level.mazeSquares[this.i + this.maxCols].moveWall = false;
+      level.mazeSquares[this.i + (this.maxCols * 2)].moveWall = true;
+    }
+
+}
+
+
+
+  }
+  breakWall(level)
+  {
+    console.log("row : ",this.row);
+    console.log("col : ",this.col);
+    console.log("index : ",this.i);
+    if(this.direction == 2  )
+    {
+      if(level.mazeSquares[this.i +1].breakWall == true )
+      {
+         level.mazeSquares[this.i+1].breakWall = false;
+         level.mazeSquares[this.i+1].containsWall = false;
+      }
+
+    }
+    else if(this.direction == 4 )
+    {
+      if(level.mazeSquares[this.i -1].breakWall == true )
+      {
+         level.mazeSquares[this.i-1].breakWall = false;
+         level.mazeSquares[this.i-1].containsWall = false;
+      }
+
+    }
+   else if(this.direction == 1 )
+    {
+      if(level.mazeSquares[this.i - this.maxCols].breakWall == true )
+      {
+         level.mazeSquares[this.i - this.maxCols].breakWall = false;
+         level.mazeSquares[this.i - this.maxCols].containsWall = false;
+      }
+
+  }
+  else if(this.direction == 3)
+  {
+    if(level.mazeSquares[this.i + this.maxCols].breakWall == true )
+    {
+       level.mazeSquares[this.i  +  this.maxCols].breakWall = false;
+       level.mazeSquares[this.i +  this.maxCols ].containsWall = false;
+    }
+
+}
+
+  }
+
 }

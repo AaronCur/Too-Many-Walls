@@ -18,14 +18,14 @@ class Goal
 
     if((this.x< e.x + e.collisionWidth - 20)&&
       (this.x+this.squareSize>e.x)&&
-      (this.y+this.squareSize>e.y)&&
-      (this.y<e.y+e.collisionHeight) )
+      (this.y+this.squareSize>e.y + 50)&&
+      (this.y<e.y + 50+e.collisionHeight) )
       {
         e.x= ((Math.random()*24)*75);
         e.y= ((Math.random()*12)*75);
         this.x= (Math.floor(Math.random()*24)*75);
         this.y= (Math.floor(Math.random()*12)*75);
-        console.log("Collided");
+        //console.log("Collided");
       }
       return collides;
     }
