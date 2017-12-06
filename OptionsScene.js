@@ -205,8 +205,6 @@ class OptionsScene
   render()
   {
 
-    var canvas = document.createElement("mycanvas");
-    var ctx = mycanvas.getContext("2d");
     ctx.clearRect(0, 0, mycanvas.width, mycanvas.height);
 
     document.body.style.background = "#FFFACD";

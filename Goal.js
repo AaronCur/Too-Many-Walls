@@ -10,6 +10,7 @@ class Goal
     this.img = new Image();
     this.img.src = "assets/goal.png";
     this.squareSize = 75;
+    this.score = 0;
   }
 
   checkCollision(e)
@@ -25,7 +26,7 @@ class Goal
         e.y= ((Math.random()*12)*75);
         this.x= (Math.floor(Math.random()*24)*75);
         this.y= (Math.floor(Math.random()*12)*75);
-        console.log("Collided");
+        this.score +=20;
       }
       return collides;
     }
@@ -40,7 +41,8 @@ class Goal
 
         var image = this.img;
         ctx.drawImage(image, 0 , 0,this.squareSize, this.squareSize ,this.x,this.y, this.squareSize,this.squareSize);
-
+        ctx.font = '50px Arial';
+        ctx.fillText('Score: '+this.score, 1700,50);
     }
 
   }
