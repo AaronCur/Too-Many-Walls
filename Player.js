@@ -18,7 +18,7 @@ class Player
 
   this.img= imageOptions.image;
   this.fps = fps;
-  this.x = 0;
+  this.x = 100;
   this.xFeet = this.x + (this.width / 2);
   this.yFeet = this.y + (this.height/2);
   this.y = y;
@@ -35,14 +35,15 @@ class Player
   this.maxCols=24
   }
 
- update(deltaTime)
+ update(deltaTime, level)
  {
-   if(this.moveX == false && this.x> 0)
+   if(this.moveX == false && this.x> 0 /*&& this.checkCollisionMap(level.mazeSquares[this.i -1])==false*/)
     {
       this.x -= 10;
       this.direction = 4;
+
     }
-    else if (this.moveX == true && this.x < 23 * 75)
+    else if (this.moveX == true && this.x < 23 * 75 /*&& this.checkCollisionMap(level.mazeSquares[this.i +1]==false)*/)
     {
       this.x +=10;
       this.direction = 2;
@@ -91,10 +92,12 @@ class Player
    {
      if(this.direction == 1)
      {
+
        ctx.drawImage(image, 78 , 324,78, 108 ,this.x,this.y, this.width,this.height);
      }
      else if(this.direction == 2)
      {
+
        ctx.drawImage(image, 78 , 216,78, 108 ,this.x,this.y, this.width,this.height);
      }
      else if(this.direction == 3)
@@ -123,6 +126,8 @@ class Player
    this.i = (this.row * this.maxCols)+this.col;
    this.i = this.i - 1  ;
 
+
+   this.checkCollisionMap(level);
  }
 
   /**
@@ -170,6 +175,49 @@ class Player
       }
       return collides;
 
+  }
+  checkCollisionMap(level)
+  {
+    console.log(level.mazeSquares[this.i+1].x)
+    if(this.direction == 2  )
+    {
+      if(level.mazeSquares[this.i+1].containsWall != false)
+      {
+        if(level.mazeSquares[this.i+1].x <= this.x+50)
+        {
+          this.moveX = null;
+          this.moveY = null;
+          this.x = this.x - 1;
+        }
+      }
+    }
+      else if(this.direction == 4 )
+      {
+        if(level.mazeSquares[this.i].containsWall != false)
+        {
+          if(level.mazeSquares[this.i].x - 75  <= this.x )
+          {
+            this.moveX = null;
+            this.moveY = null;
+            this.x = this.x + 1;
+          }
+        }
+
+    }
+    else if(this.direction == 3 )
+    {
+      if(level.mazeSquares[this.i + this.maxCols].containsWall != false)
+      {
+        if(level.mazeSquares[this.i + this.maxCols].y  >= this.y )
+        {
+          this.moveX = null;
+          this.moveY = null;
+          this.y = this.y - 1;
+        }
+      }
+
+  }
+
 
   }
   moveWall(level)
@@ -216,9 +264,9 @@ class Player
   }
   breakWall(level)
   {
-    console.log("row : ",this.row);
-    console.log("col : ",this.col);
-    console.log("index : ",this.i);
+  //  console.log("row : ",this.row);
+    //console.log("col : ",this.col);
+    //console.log("index : ",this.i);
     if(this.direction == 2  )
     {
       if(level.mazeSquares[this.i +1].breakWall == true )
@@ -254,7 +302,7 @@ class Player
        level.mazeSquares[this.i +  this.maxCols ].containsWall = false;
     }
 
-}
+  }
 
   }
 

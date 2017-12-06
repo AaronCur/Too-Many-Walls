@@ -23,12 +23,12 @@ function main()
 function keyDownHandler(e)
 {
 	//code triggered when left arrow is pressed
-	if(e.keyCode === 37)
+	if(e.keyCode === 37 )
 	{
 		gameNs.playScene.player.moveX = false;
 
 	}
-  else if(e.keyCode === 39)
+  else if(e.keyCode === 39 )
 	{
 		gameNs.playScene.player.moveX = true;
 	}

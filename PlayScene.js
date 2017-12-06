@@ -47,13 +47,13 @@ class PlayScene
     this.player.moveWall(this.level);
     if(this.player.direction === 1)
     {
-      this.player.update(deltaTime);
+      this.player.update(deltaTime, this.level);
       this.flag.update(deltaTime);
     }
     else {
 
       this.flag.update(deltaTime);
-        this.player.update(deltaTime);
+        this.player.update(deltaTime, this.level);
 
     }
 

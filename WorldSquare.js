@@ -18,7 +18,9 @@ class WorldSquare
     this.breakWall = false;
     this.moveWall = false;
     this.row = row;
+    this.x = this.row;
     this.col = col;
+    this.y = this.col;
     this.squareSize = 75;
 
 
@@ -27,6 +29,25 @@ class WorldSquare
   {
 
 
+  }
+  checkCollisionMap(player)
+  {
+    console.log(map.x);
+    if(map.containsWall == true)
+    {
+      if((this.x< player.x + player.width)&&
+        (this.x+this.width>player.x)&&
+        (this.y+this.height>player.y)&&
+        (this.y<player.y+player.height) )
+        {
+          return true;
+          console.log("Collided");
+        }
+        else
+       {
+        return false;
+        }
+      }
   }
   update()
   {
