@@ -1,19 +1,21 @@
 class Timer
 {
 
-  startTimer()
-   {
-        this.start = Date.now();
-        this.diff;
-        this.minutes;
-        this.seconds;
-    }
+  constructor()
+  {
+    this.start = Date.now();
+    this.diff;
+    this.minutes;
+    this.seconds;
+    this.duration=60;
 
-    timer(duration)
+  }
+
+    timer()
     {
         // get the number of seconds that have elapsed since
         // startTimer() was called
-        this.diff = duration - (((Date.now() - this.start) / 1000) | 0);
+        this.diff = this.duration - (((Date.now() - this.start) / 1000) | 0);
 
         // does the same job as parseInt truncates the float
         this.minutes = (this.diff / 60) | 0;
@@ -31,16 +33,17 @@ class Timer
 
           }
             setInterval(this.timer, 1000);
+
       }
+
 
 
     update(deltaTime)
         {
           var canvas = document.createElement("mycanvas");
           var ctx = mycanvas.getContext("2d");
-        //  var fiveMinutes = 60 * 5;
-
-          this.timer(60*5);
+          this.timer();
+          ctx.fillStyle ='green';
           ctx.font = '50px Arial';
           ctx.fillText('Timer '+this.minutes+':'+this.seconds, 500,50);
         }
