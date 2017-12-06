@@ -43,7 +43,7 @@ class Timer
           var canvas = document.createElement("mycanvas");
           var ctx = mycanvas.getContext("2d");
           this.timer();
-          ctx.fillStyle ='green';
+          ctx.fillStyle ='white';
           ctx.font = '50px Arial';
           ctx.fillText('Timer '+this.minutes+':'+this.seconds, 500,50);
         }
