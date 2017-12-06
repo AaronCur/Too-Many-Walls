@@ -143,10 +143,10 @@ class Player
   {
     var collides = false;
 
-    if((this.x< e.x + e.width)&&
+    if((this.x< e.x + e.collisionWidth)&&
       (this.x+this.width>e.x)&&
       (this.y+this.height>e.y)&&
-      (this.y<e.y+e.height) )
+      (this.y<e.y+e.collisionHeight) )
       {
         collides = true;
         e.x=this.x+20;

@@ -42,11 +42,22 @@ class PlayScene
     var ctx = canvas.getContext('2d');
     ctx.clearRect(0,0, canvas.width, canvas.height);
     this.level.update();
-    this.flag.update(deltaTime);
-    this.player.update(deltaTime);
+    this.goal.update();
+    if(this.player.direction === 1)
+    {
+      this.player.update(deltaTime);
+      this.flag.update(deltaTime);
+    }
+    else {
+
+      this.flag.update(deltaTime);
+        this.player.update(deltaTime);
+
+    }
+
     this.player.checkCollision(this.flag);
     this.goal.checkCollision(this.flag);
-    this.goal.update();
+
 
 
 

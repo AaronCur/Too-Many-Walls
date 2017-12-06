@@ -16,13 +16,15 @@ class Goal
   {
     var collides = false;
 
-    if((this.x< e.x + e.width)&&
+    if((this.x< e.x + e.collisionWidth - 20)&&
       (this.x+this.squareSize>e.x)&&
       (this.y+this.squareSize>e.y)&&
-      (this.y<e.y+e.height) )
+      (this.y<e.y+e.collisionHeight) )
       {
         e.x= (Math.random()*window.innerWidth)-100;
         e.y = (Math.random()*window.innerHeight)-100;
+        this.x= (Math.random()*window.innerWidth)-100;
+        this.y = (Math.random()*window.innerHeight)-100;
         console.log("Collided");
       }
       return collides;
