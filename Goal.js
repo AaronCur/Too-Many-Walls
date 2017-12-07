@@ -42,7 +42,7 @@ class Goal
         var image = this.img;
         ctx.drawImage(image, 0 , 0,this.squareSize, this.squareSize ,this.x,this.y, this.squareSize,this.squareSize);
         ctx.font = '50px Arial';
-        ctx.fillText('Score: '+this.score, 1700,50);
+        ctx.fillText('Score: '+this.score, 1550,50);
     }
 
   }

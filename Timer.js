@@ -1,21 +1,22 @@
+gameNs = {}
 class Timer
 {
 
   constructor()
   {
-    this.start = Date.now();
-    this.diff;
+    gameNs.start;
     this.minutes;
     this.seconds;
     this.duration=60;
-
+    gameNs.timerStart = false;
   }
 
     timer()
     {
+
         // get the number of seconds that have elapsed since
         // startTimer() was called
-        this.diff = this.duration - (((Date.now() - this.start) / 1000) | 0);
+        this.diff = this.duration - (((Date.now() - gameNs.start) / 1000) | 0);
 
         // does the same job as parseInt truncates the float
         this.minutes = (this.diff / 60) | 0;
@@ -29,7 +30,7 @@ class Timer
         {
             // add one second so that the count down starts at the full duration
             // example 05:00 not 04:59
-            this.start = Date.now() + 1000;
+            gameNs.start = Date.now() + 1000;
 
           }
             setInterval(this.timer, 1000);
@@ -42,7 +43,12 @@ class Timer
         {
           var canvas = document.createElement("mycanvas");
           var ctx = mycanvas.getContext("2d");
-          this.timer();
+
+          if(gameNs.timerStart==true)
+          {
+              this.timer();
+          }
+
           ctx.fillStyle ='white';
           ctx.font = '50px Arial';
           ctx.fillText('Timer '+this.minutes+':'+this.seconds, 500,50);
