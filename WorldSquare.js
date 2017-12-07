@@ -10,10 +10,10 @@ class WorldSquare
     this.imgNotWall = new Image();
     this.imgBreakWall = new Image();
     this.imgMoveWall = new Image();
-    this.imgWall.src = "assets/Wall.png";
-    this.imgNotWall.src = "assets/NotWall.png";
-    this.imgBreakWall.src = "assets/BreakWall.png";
-    this.imgMoveWall.src = "assets/moveWall.png";
+    this.imgWall.src = "img/wall.png";
+    this.imgNotWall.src = "img/notwall.png";
+    this.imgBreakWall.src = "img/breakwall.png";
+    this.imgMoveWall.src = "img/movewall.png";
     this.containsWall = false;
     this.breakWall = false;
     this.moveWall = false;

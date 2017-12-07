@@ -16,7 +16,7 @@ class OptionsScene
     this.x = 300;
     this.y=600;
     this.img=new Image();
-    this.img.src="assets/music.png";
+    this.img.src="img/music.png";
     this.imgSize = 400;
 
   }
@@ -39,7 +39,7 @@ class OptionsScene
    if(div.id ==="Mute")
    {
      console.log("Mute button created");
-     div.innerHTML = "<img src=\'Assets/Mute.png\'>";
+     div.innerHTML = "<img src=\'img/mute.png\'>";
      this.div = div;
      //var d = document.getElementById('yourDivId');
      div.style.visibility = "visible";
@@ -50,7 +50,7 @@ class OptionsScene
    else if(div.id ==="VolumeDown")
    {
      console.log("VolumeDown button created");
-     div.innerHTML = "<img src=\'Assets/VolumeDown.png\'>";
+     div.innerHTML = "<img src=\'img/volumedown.png\'>";
      this.div = div;
 
      div.style.visibility = "visible";
@@ -61,7 +61,7 @@ class OptionsScene
    else if(div.id ==="VolumeUp")
    {
      console.log("VolumeUp button created");
-     div.innerHTML = "<img src=\'Assets/VolumeUp.png\'>";
+     div.innerHTML = "<img src=\'img/volumeup.png\'>";
      this.div = div;
 
      div.style.visibility = "visible";
@@ -72,7 +72,7 @@ class OptionsScene
    else if(div.id==="Back")
    {
      console.log("Back button created");
-     div.innerHTML = "<img src=\'Assets/Back.png\'>";
+     div.innerHTML = "<img src=\'img/back.png\'>";
      this.div = div;
 
      div.style.visibility = "visible";
@@ -113,18 +113,18 @@ class OptionsScene
 
         filename = fullPath.substring(index+1,fullPath.length);
         console.log(filename);
-        if(filename === "Mute.png")
+        if(filename === "mute.png")
         {
               var div = document.getElementById("Mute");
-              div.innerHTML = "<img src=\'Assets/Muted.png\'>";
+              div.innerHTML = "<img src=\'img/muted.png\'>";
           }
-          if(filename === "Muted.png")
+          if(filename === "muted.png")
           {
             var div = document.getElementById("Mute");
-            div.innerHTML = "<img src=\'Assets/Mute.png\'>";
+            div.innerHTML = "<img src=\'img/mute.png\'>";
           }
 
-        else if (filename === "VolumeDown.png" )
+        else if (filename === "volumedown.png" )
         {
           if(gameNs.widthVol == 233)
           {
@@ -149,7 +149,7 @@ class OptionsScene
 
 
         }
-        else if (filename === "VolumeUp.png" )
+        else if (filename === "volumeUp.png" )
         {
           if(gameNs.widthVol==0)
           {
@@ -175,7 +175,7 @@ class OptionsScene
 
         }
 
-        else if (filename === "Back.png" )
+        else if (filename === "back.png" )
         {
          // gameNs.soundManager.playSound("Concentrate", true, 0.2);
           gameNs.sceneManager.goToScene(gameNs.menuScene.title);

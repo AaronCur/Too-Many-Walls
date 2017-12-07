@@ -10,9 +10,9 @@ class PlayScene
     gameNs.previousTime = Date.now();	// previousTime is initially 0
     this.title = title;
     this.img=new Image();
-    this.img.src = "assets/Player.png";
+    this.img.src = "img/player.png";
     this.img1 = new Image();
-    this.img1.src = "assets/flag.png"
+    this.img1.src = "img/flag.png"
     var canvas = document.getElementById('mycanvas');
     var ctx = canvas.getContext('2d');
     this.player;

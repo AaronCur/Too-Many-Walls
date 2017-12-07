@@ -8,7 +8,7 @@ class Goal
     var alive = true;
     this.alive=alive;
     this.img = new Image();
-    this.img.src = "assets/goal.png";
+    this.img.src = "img/goal.png";
     this.squareSize = 75;
   }
 

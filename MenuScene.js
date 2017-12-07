@@ -26,7 +26,7 @@ class MenuScene
       div.id = divId;
       if(div.id === "Play")
       {
-        div.innerHTML = "<img src=\'Assets/PlayButton.png\'>";
+        div.innerHTML = "<img src=\'img/playbutton.png\'>";
         this.div = div;
         //var d = document.getElementById('yourDivId');
         div.style.position = "absolute";
@@ -35,7 +35,7 @@ class MenuScene
       }
       else if(div.id === "Options")
       {
-        div.innerHTML = "<img src=\'Assets/OptionsButton.png\'>";
+        div.innerHTML = "<img src=\'img/optionsbutton.png\'>";
         this.div = div;
 
         div.style.position = "absolute";
@@ -44,7 +44,7 @@ class MenuScene
       }
       else if(div.id === "Exit")
       {
-        div.innerHTML = "<img src=\'Assets/ExitButton.png\'>";
+        div.innerHTML = "<img src=\'img/exitbutton.png\'>";
         this.div = div;
 
         div.style.position = "absolute";
@@ -83,14 +83,14 @@ class MenuScene
 
          filename = fullPath.substring(index+1,fullPath.length);
          console.log(filename);
-         if(filename === "PlayButton.png")
+         if(filename === "playbutton.png")
          {
           // gameNs.soundManager.playSound("Concentrate", false, 1);
            gameNs.sceneManager.goToScene(gameNs.playScene.title);
 
 
          }
-         else if (filename === "OptionsButton.png" )
+         else if (filename === "optionsbutton.png" )
          {
           // gameNs.soundManager.playSound("Concentrate", true, 0.2);
            gameNs.sceneManager.goToScene(gameNs.optionsScene.title);
@@ -101,7 +101,7 @@ class MenuScene
 
 
          }
-         else if (filename === "ExitButton.png" )
+         else if (filename === "exitbutton.png" )
          {
            //throw new Error("Something went badly wrong!");
           // div.style.background = "Teal";
