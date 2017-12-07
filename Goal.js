@@ -11,6 +11,8 @@ class Goal
     this.img.src = "assets/goal.png";
     this.squareSize = 75;
     this.score = 0;
+    this.goalScore = 200;
+    this.Winner=false;
   }
 
   checkCollision(e)
@@ -38,7 +40,15 @@ class Goal
     {
       var canvas = document.getElementById('mycanvas');
       var ctx = canvas.getContext('2d');
-
+      if(this.score==this.goalScore)
+      {
+        this.Winner=true;
+      }
+      if(this.winner==true)
+      {
+        sceneManager.Winner.title;
+        
+      }
         var image = this.img;
         ctx.drawImage(image, 0 , 0,this.squareSize, this.squareSize ,this.x,this.y, this.squareSize,this.squareSize);
         ctx.font = '50px Arial';

@@ -2,7 +2,7 @@
  * GameOverScene class inherits Scene
  *
  */
-class GameOverScene
+class GameOver
 {
   /**
    * Constructor function , creates a scene with parameters which are passed in on construction

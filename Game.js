@@ -20,12 +20,14 @@ class Game
     gameNs.menuScene = new MenuScene('Too Many Walls');
     gameNs.playScene = new PlayScene('Play');
     gameNs.optionsScene = new OptionsScene('Options');
+    gameNs.Winner = new Winner('Winner');
     //this.endScene = new EndScene('End');
     //this.highScoreScene = new HighScoreScene('HighScore');
 
     gameNs.sceneManager.addScene(gameNs.menuScene);
     gameNs.sceneManager.addScene(gameNs.playScene);
     gameNs.sceneManager.addScene(gameNs.optionsScene);
+    gameNs.sceneManager.addScene(gameNs.Winner);
   //  sceneManager.addScene(endScene);
   //  sceneManager.addScene(highScoreScene);
     gameNs.sceneManager.goToScene(gameNs.menuScene.title);
