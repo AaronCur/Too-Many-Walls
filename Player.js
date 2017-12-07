@@ -14,6 +14,10 @@ class Player
 //  this.x=x;
   this.moveX = null;
   this.moveY = null;
+  this.enableLeft = null;
+  this.enableRight = null;
+  this.enableDown = null;
+  this.enableUp = null;
   this.direction = 0;
 
   this.img= imageOptions.image;
@@ -93,20 +97,20 @@ class Player
      if(this.direction == 1)
      {
 
-       ctx.drawImage(image, 78 , 324,78, 108 ,this.x,this.y, this.width,this.height);
+       ctx.drawImage(image, 78 , 324,78, 108 ,this.xFeet,this.y, this.width,this.height);
      }
      else if(this.direction == 2)
      {
 
-       ctx.drawImage(image, 78 , 216,78, 108 ,this.x,this.y, this.width,this.height);
+       ctx.drawImage(image, 78 , 216,78, 108 ,this.xFeet,this.y, this.width,this.height);
      }
      else if(this.direction == 3)
      {
-       ctx.drawImage(image, 78, 0,78, 108 ,this.x,this.y, this.width,this.height);
+       ctx.drawImage(image, 78, 0,78, 108 ,this.xFeet,this.y, this.width,this.height);
      }
      else
      {
-        ctx.drawImage(image, 78 , 108,78, 108 ,this.x,this.y, this.width,this.height);
+        ctx.drawImage(image, 78 , 108,78, 108 ,this.xFeet,this.y, this.width,this.height);
      }
 
    }
@@ -119,10 +123,10 @@ class Player
      }
        this.time =0;
    }
-
+   this.xFeet = this.x + (this.width/2);
    this.yFeet = this.y + 5;
-   this.col = Math.floor(this.x / this.squareSize) + 1 ;
-   this.row = Math.floor(this.y / this.squareSize) + 1 ;
+   this.col = Math.floor(this.xFeet / this.squareSize) + 1 ;
+   this.row = Math.floor(this.yFeet / this.squareSize) + 1 ;
    this.i = (this.row * this.maxCols)+this.col;
    this.i = this.i - 1  ;
 
@@ -178,7 +182,7 @@ class Player
   }
   checkCollisionMap(level)
   {
-    console.log(level.mazeSquares[this.i+1].x)
+
     if(this.direction == 2  )
     {
       if(level.mazeSquares[this.i+1].containsWall != false)
@@ -187,7 +191,7 @@ class Player
         {
           this.moveX = null;
           this.moveY = null;
-          this.x = this.x - 1;
+          this.x = this.x - 0.5;
         }
       }
     }
@@ -195,28 +199,33 @@ class Player
       {
         if(level.mazeSquares[this.i].containsWall != false)
         {
-          if(level.mazeSquares[this.i].x - 75  <= this.x )
+          if(this.x <= level.mazeSquares[this.i].x + 50 )
           {
             this.moveX = null;
             this.moveY = null;
-            this.x = this.x + 1;
+
+          //  this.x = this.x + 1;
           }
+
         }
 
     }
-    else if(this.direction == 3 )
+    else if(this.direction == 3)
     {
-      if(level.mazeSquares[this.i + this.maxCols].containsWall != false)
+      if(level.mazeSquares[this.i + this.maxCols + 1].containsWall!=false)
       {
-        if(level.mazeSquares[this.i + this.maxCols].y  >= this.y )
+        if(level.mazeSquares[this.i+this.maxCols +1].y <= this.y+50)
         {
           this.moveX = null;
           this.moveY = null;
-          this.y = this.y - 1;
+
         }
+
       }
 
   }
+
+
 
 
   }
@@ -244,7 +253,7 @@ class Player
     {
       if(level.mazeSquares[this.i - this.maxCols].moveWall== true&&level.mazeSquares[this.i - (this.maxCols * 2)].containsWall == false )
       {
-         level.mazeSquares[this.i - this.maxCols].moveWall = false;
+         level.mazeSquares[this.i - this.maxCols ].moveWall = false;
          level.mazeSquares[this.i - (this.maxCols * 2)].moveWall = true;
       }
 
@@ -253,7 +262,7 @@ class Player
   {
     if(level.mazeSquares[this.i + this.maxCols].moveWall == true&&level.mazeSquares[this.i + (this.maxCols * 2)].containsWall == false)
     {
-      level.mazeSquares[this.i + this.maxCols].moveWall = false;
+      level.mazeSquares[this.i + this.maxCols ].moveWall = false;
       level.mazeSquares[this.i + (this.maxCols * 2)].moveWall = true;
     }
 
@@ -264,9 +273,10 @@ class Player
   }
   breakWall(level)
   {
-  //  console.log("row : ",this.row);
-    //console.log("col : ",this.col);
-    //console.log("index : ",this.i);
+    console.log("X:",this.xFeet);
+    console.log("row : ",this.row);
+    console.log("col : ",this.col);
+    console.log("index : ",this.i);
     if(this.direction == 2  )
     {
       if(level.mazeSquares[this.i +1].breakWall == true )

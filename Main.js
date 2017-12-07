@@ -23,7 +23,7 @@ function main()
 function keyDownHandler(e)
 {
 	//code triggered when left arrow is pressed
-	if(e.keyCode === 37 )
+	if(e.keyCode === 37  )
 	{
 		gameNs.playScene.player.moveX = false;
 
@@ -148,10 +148,14 @@ function keyDownHandler(e)
 
    if(elapsedTime  > 0 && elapsedTime <= 300 && distBetween > 250 && gameNs.touchStart == true)
    {
-     if(angle(a,b) > (180 - 45) || angle(a,b) < (-180 + 45))
+     if(angle(a,b) > (180 - 45) || angle(a,b) < (-180 + 45) )
      {
-       console.log("AngleRight");
-       gameNs.playScene.player.moveX = true;
+
+
+         console.log("AngleRight");
+         gameNs.playScene.player.moveX = true;
+
+
 
      }
      else if (angle(a,b) < 45 && angle(a,b) > -45)
