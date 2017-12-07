@@ -19,14 +19,14 @@ class HighScoreScene
    this.highscorestable = {};
     this.leaderboard = JSON.parse(this.responseText);
     this.highscores= this.leaderboard.leaderboard;
-    this.highscores.push({"score":100,"name":"steven"});
+    //this.highscores.push({"score":100,"name":"steven"});
   //  console.log("Highscores :", that.highscores);
-    for (var i in this.highscorestable) {
-    this.highscorestable.push(i);
+    for (var i in this.highscores) {
+      this.highscorestable[i] = i;
     console.log("HighScoretable :",this.highscorestable);
 
-}
 
+}
 
 
 });
