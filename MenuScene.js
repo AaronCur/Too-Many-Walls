@@ -18,6 +18,7 @@ class MenuScene
     this.createDiv("Options");
     this.createDiv("Exit");
 
+
   }
    createDiv(divId)
   {
