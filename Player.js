@@ -97,20 +97,20 @@ class Player
      if(this.direction == 1)
      {
 
-       ctx.drawImage(image, 78 , 324,78, 108 ,this.xFeet,this.y, this.width,this.height);
+       ctx.drawImage(image, 78 , 324,78, 108 ,this.x,this.y, this.width,this.height);
      }
      else if(this.direction == 2)
      {
 
-       ctx.drawImage(image, 78 , 216,78, 108 ,this.xFeet,this.y, this.width,this.height);
+       ctx.drawImage(image, 78 , 216,78, 108 ,this.x,this.y, this.width,this.height);
      }
      else if(this.direction == 3)
      {
-       ctx.drawImage(image, 78, 0,78, 108 ,this.xFeet,this.y, this.width,this.height);
+       ctx.drawImage(image, 78, 0,78, 108 ,this.x,this.y, this.width,this.height);
      }
      else
      {
-        ctx.drawImage(image, 78 , 108,78, 108 ,this.xFeet,this.y, this.width,this.height);
+        ctx.drawImage(image, 78 , 108,78, 108 ,this.x,this.y, this.width,this.height);
      }
 
    }
@@ -185,21 +185,23 @@ class Player
 
     if(this.direction == 2  )
     {
-      if(level.mazeSquares[this.i+1].containsWall != false)
+      if(level.mazeSquares[this.i+1].containsWall === true ||level.mazeSquares[this.i+1].moveWall === true
+        || level.mazeSquares[this.i+1].breakWall === true)
       {
-        if(level.mazeSquares[this.i+1].x <= this.x+50)
+        if(level.mazeSquares[this.i+1].x <= this.x+this.width - 6)
         {
           this.moveX = null;
           this.moveY = null;
-          this.x = this.x - 0.5;
+
         }
       }
     }
       else if(this.direction == 4 )
       {
-        if(level.mazeSquares[this.i].containsWall != false)
+        if(level.mazeSquares[this.i - 1].containsWall === true || level.mazeSquares[this.i - 1].moveWall === true
+          ||level.mazeSquares[this.i - 1].breakWall === true)
         {
-          if(this.x <= level.mazeSquares[this.i].x + 50 )
+          if(this.x <= level.mazeSquares[this.i - 1].x + (this.squareSize - 6)   )
           {
             this.moveX = null;
             this.moveY = null;
@@ -210,11 +212,12 @@ class Player
         }
 
     }
-    else if(this.direction == 3)
+    else if(this.direction == 1)
     {
-      if(level.mazeSquares[this.i + this.maxCols + 1].containsWall!=false)
+      if(level.mazeSquares[this.i - this.maxCols].containsWall ===true ||level.mazeSquares[this.i - this.maxCols].moveWall ===true ||
+        level.mazeSquares[this.i - this.maxCols].breakWall ===true)
       {
-        if(level.mazeSquares[this.i+this.maxCols +1].y <= this.y+50)
+        if(this.y + (this.height / 2) + 5<= level.mazeSquares[this.i-this.maxCols].y + this.squareSize)
         {
           this.moveX = null;
           this.moveY = null;
@@ -224,6 +227,21 @@ class Player
       }
 
   }
+  else if(this.direction == 3)
+  {
+    if(level.mazeSquares[this.i + this.maxCols].containsWall===true || level.mazeSquares[this.i + this.maxCols].breakWall===true
+        || level.mazeSquares[this.i + this.maxCols].moveWall === true)
+    {
+      if(this.y + this.height >= level.mazeSquares[this.i+this.maxCols].y)
+      {
+        this.moveX = null;
+        this.moveY = null;
+
+      }
+
+    }
+
+}
 
 
 
@@ -235,8 +253,12 @@ class Player
     {
       if(level.mazeSquares[this.i +1].moveWall == true &&level.mazeSquares[this.i +2].containsWall == false)
       {
-         level.mazeSquares[this.i+1].moveWall = false;
-         level.mazeSquares[this.i+2].moveWall = true;
+        if(level.mazeSquares[this.i+1].x <= this.x+this.width - 6)
+        {
+          level.mazeSquares[this.i+1].moveWall = false;
+          level.mazeSquares[this.i+2].moveWall = true;
+        }
+
       }
 
     }
@@ -244,8 +266,12 @@ class Player
     {
       if(level.mazeSquares[this.i -1].moveWall == true&&level.mazeSquares[this.i -2].containsWall == false  )
       {
-        level.mazeSquares[this.i-1].moveWall = false;
-        level.mazeSquares[this.i-2].moveWall = true;
+        if(this.x <= level.mazeSquares[this.i - 1].x + (this.squareSize - 6) )
+        {
+          level.mazeSquares[this.i-1].moveWall = false;
+          level.mazeSquares[this.i-2].moveWall = true;
+        }
+
       }
 
     }
@@ -253,8 +279,12 @@ class Player
     {
       if(level.mazeSquares[this.i - this.maxCols].moveWall== true&&level.mazeSquares[this.i - (this.maxCols * 2)].containsWall == false )
       {
-         level.mazeSquares[this.i - this.maxCols ].moveWall = false;
-         level.mazeSquares[this.i - (this.maxCols * 2)].moveWall = true;
+        if(this.y + (this.height / 2) + 5<= level.mazeSquares[this.i-this.maxCols].y + this.squareSize)
+        {
+          level.mazeSquares[this.i - this.maxCols ].moveWall = false;
+          level.mazeSquares[this.i - (this.maxCols * 2)].moveWall = true;
+        }
+
       }
 
   }
@@ -262,8 +292,12 @@ class Player
   {
     if(level.mazeSquares[this.i + this.maxCols].moveWall == true&&level.mazeSquares[this.i + (this.maxCols * 2)].containsWall == false)
     {
-      level.mazeSquares[this.i + this.maxCols ].moveWall = false;
-      level.mazeSquares[this.i + (this.maxCols * 2)].moveWall = true;
+      if(this.y + this.height >= level.mazeSquares[this.i+this.maxCols].y)
+      {
+        level.mazeSquares[this.i + this.maxCols ].moveWall = false;
+        level.mazeSquares[this.i + (this.maxCols * 2)].moveWall = true;
+      }
+
     }
 
 }
@@ -273,16 +307,17 @@ class Player
   }
   breakWall(level)
   {
-    console.log("X:",this.xFeet);
-    console.log("row : ",this.row);
-    console.log("col : ",this.col);
-    console.log("index : ",this.i);
+    
     if(this.direction == 2  )
     {
       if(level.mazeSquares[this.i +1].breakWall == true )
       {
-         level.mazeSquares[this.i+1].breakWall = false;
-         level.mazeSquares[this.i+1].containsWall = false;
+        if(level.mazeSquares[this.i+1].x <= this.x+this.width - 6)
+        {
+          level.mazeSquares[this.i+1].breakWall = false;
+          level.mazeSquares[this.i+1].containsWall = false;
+        }
+
       }
 
     }
@@ -290,8 +325,12 @@ class Player
     {
       if(level.mazeSquares[this.i -1].breakWall == true )
       {
-         level.mazeSquares[this.i-1].breakWall = false;
-         level.mazeSquares[this.i-1].containsWall = false;
+        if(this.x <= level.mazeSquares[this.i - 1].x + (this.squareSize - 6))
+        {
+          level.mazeSquares[this.i-1].breakWall = false;
+          level.mazeSquares[this.i-1].containsWall = false;
+        }
+
       }
 
     }
@@ -299,8 +338,12 @@ class Player
     {
       if(level.mazeSquares[this.i - this.maxCols].breakWall == true )
       {
-         level.mazeSquares[this.i - this.maxCols].breakWall = false;
-         level.mazeSquares[this.i - this.maxCols].containsWall = false;
+        if(this.y + (this.height / 2) + 5<= level.mazeSquares[this.i-this.maxCols].y + this.squareSize)
+        {
+          level.mazeSquares[this.i - this.maxCols].breakWall = false;
+          level.mazeSquares[this.i - this.maxCols].containsWall = false;
+        }
+
       }
 
   }
@@ -308,8 +351,11 @@ class Player
   {
     if(level.mazeSquares[this.i + this.maxCols].breakWall == true )
     {
+      if(this.y + this.height >= level.mazeSquares[this.i+this.maxCols].y)
+      {
        level.mazeSquares[this.i  +  this.maxCols].breakWall = false;
        level.mazeSquares[this.i +  this.maxCols ].containsWall = false;
+     }
     }
 
   }
