@@ -18,8 +18,8 @@ class Goal
 
     if((this.x< e.x + e.collisionWidth - 20)&&
       (this.x+this.squareSize>e.x)&&
-      (this.y+this.squareSize>e.y + 50)&&
-      (this.y<e.y + 50+e.collisionHeight) )
+      (this.y+this.squareSize>e.y + 150)&&
+      (this.y<e.y + 170) )
       {
         e.x= ((Math.random()*24)*75);
         e.y= ((Math.random()*12)*75);
