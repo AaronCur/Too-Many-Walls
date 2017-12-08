@@ -6,7 +6,9 @@ class PlayScene
    */
   constructor(title)
   {
+    this.gameover = true;
     this.goal=new Goal();
+    this.gameoverscreen = new HighScoreScene();
     gameNs.previousTime = Date.now();	// previousTime is initially 0
     this.title = title;
     this.img=new Image();
@@ -35,6 +37,7 @@ class PlayScene
   }
   update()
   {
+
     var now = Date.now();
     var deltaTime = (now - gameNs.previousTime);
     gameNs.previousTime = now;	// previousTime is initially 0
@@ -59,6 +62,13 @@ class PlayScene
 
     this.player.checkCollision(this.flag);
     this.goal.checkCollision(this.flag);
+
+    if(this.gameover == true)
+    {
+      this.gameoverscreen.getScoreTable();
+      this.gameoverscreen.render();
+
+    }
 
 
 

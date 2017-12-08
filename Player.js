@@ -40,28 +40,35 @@ class Player
   }
 
  update(deltaTime, level)
- {
-   if(this.moveX == false && this.x> 0 /*&& this.checkCollisionMap(level.mazeSquares[this.i -1])==false*/)
-    {
-      this.x -= 10;
-      this.direction = 4;
+ { if(gameNs.playScene.gameover == false)
+   {
+     if(this.moveX == false && this.x> 0 /*&& this.checkCollisionMap(level.mazeSquares[this.i -1])==false*/)
+      {
+        this.x -= 10;
+        this.direction = 4;
 
-    }
-    else if (this.moveX == true && this.x < 23 * 75 /*&& this.checkCollisionMap(level.mazeSquares[this.i +1]==false)*/)
-    {
-      this.x +=10;
-      this.direction = 2;
-    }
-    else if (this.moveY == false && this.y > 10)
-    {
-       this.y-=10;
-       this.direction = 1;
-    }
-    else if (this.moveY == true && this.y < 12 * 75)
-    {
-     this.y+=10;
-     this.direction = 3;
-    }
+      }
+      else if (this.moveX == true && this.x < 23 * 75 /*&& this.checkCollisionMap(level.mazeSquares[this.i +1]==false)*/)
+      {
+        this.x +=10;
+        this.direction = 2;
+      }
+      else if (this.moveY == false && this.y > 10)
+      {
+         this.y-=10;
+         this.direction = 1;
+      }
+      else if (this.moveY == true && this.y < 12 * 75)
+      {
+       this.y+=10;
+       this.direction = 3;
+      }
+
+   }
+   else {
+     this.moveX = null;
+     this.moveY = null;
+   }
 
 
    if(deltaTime != null)
@@ -307,7 +314,7 @@ class Player
   }
   breakWall(level)
   {
-    
+
     if(this.direction == 2  )
     {
       if(level.mazeSquares[this.i +1].breakWall == true )
