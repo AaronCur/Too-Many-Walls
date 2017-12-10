@@ -146,7 +146,7 @@ function keyDownHandler(e)
    console.log(distBetween);
  //console.log(angle(a,b) );
 
-   if(elapsedTime  > 0 && elapsedTime <= 300 && distBetween > 250 && gameNs.touchStart == true)
+   if(elapsedTime  > 0 && elapsedTime <= 300 && distBetween > 250 * 0.8 && gameNs.touchStart == true)
    {
      if(angle(a,b) > (180 - 45) || angle(a,b) < (-180 + 45) )
      {

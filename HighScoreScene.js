@@ -123,7 +123,7 @@ this.request.send();
     var image = this.img;
   //  document.body.style.background = "#ffffff";
     //ctx.clearRect(0, 0, mycanvas.width, mycanvas.height);
-    ctx.drawImage(imagebg, 0 , 0,1920, 1080 ,0,0, 1920 ,1080);
+    ctx.drawImage(imagebg, 0 , 0,this.windowWidth, this.windowHeight ,0,0, this.windowWidth ,this.windowHeight);
     ctx.drawImage(image, 0 , 0,918, 761 ,this.windowWidth/3.7,this.windowHeight/7, 918 ,761);
 
 
@@ -156,11 +156,11 @@ this.request.send();
     var positionText = "You placed "+ this.position +" out of "+this.keyValue.length;
     var stringName = this.value[x];
     var stringScore = this.keyValue[x];
-    ctx.font = '75px Adventure Regular';
-    ctx.fillText(positionText, this.windowWidth/7*2.2, this.windowHeight/8);
-    ctx.font = '60px Adventure Regular';
-    ctx.fillText(stringName, this.windowWidth/2.9, (96 * y) + this.windowHeight/5);
-    ctx.fillText(stringScore, this.windowWidth/7 * 4.4, (96 * y) + this.windowHeight/5);
+    ctx.font = '50px Adventure Regular';
+    ctx.fillText(positionText, this.windowWidth/7*2, this.windowHeight/8);
+    ctx.font = '40px Adventure Regular';
+    ctx.fillText(stringName, this.windowWidth/2.9, (50 * y) + this.windowHeight/4.5);
+    ctx.fillText(stringScore, this.windowWidth/7 * 4.5, (50* y) + this.windowHeight/4.5);
     y=y+1;
 
   }

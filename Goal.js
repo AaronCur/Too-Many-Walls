@@ -3,13 +3,13 @@ class Goal
 
   constructor()
   {
-    this.x= (Math.floor(Math.random()*24)*75);
-    this.y= (Math.floor(Math.random()*12)*75);
+    this.x= (Math.floor(Math.random()*24)*60);
+    this.y= (Math.floor(Math.random()*12)*60);
     var alive = true;
     this.alive=alive;
     this.img = new Image();
     this.img.src = "img/goal.png";
-    this.squareSize = 75;
+    this.squareSize = 60;
   }
 
   checkCollision(e)
@@ -21,10 +21,10 @@ class Goal
       (this.y+this.squareSize>e.y + 150)&&
       (this.y<e.y + 170) )
       {
-        e.x= ((Math.random()*24)*75);
-        e.y= ((Math.random()*12)*75);
-        this.x= (Math.floor(Math.random()*24)*75);
-        this.y= (Math.floor(Math.random()*12)*75);
+        e.x= ((Math.random()*24)*60);
+        e.y= ((Math.random()*12)*60);
+        this.x= (Math.floor(Math.random()*24)*60);
+        this.y= (Math.floor(Math.random()*12)*60);
         //console.log("Collided");
       }
       return collides;

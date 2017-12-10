@@ -10,7 +10,7 @@ class LevelLoader
     this.y = 0;
     this.col = 0;
     this.row = 0;
-    this.squareSize = 75;
+    this.squareSize = 75 * 0.8;
     this.MaxRows = 12;
     this.MaxCols = 12;
     this.map = [];

@@ -34,7 +34,7 @@ class Player
   this.col = 0;
   this.row = 0;
   this.i = 0;
-  this.squareSize = 75;
+  this.squareSize = 75 * 0.8;
   this.maxRows=14
   this.maxCols=24
   }
@@ -44,23 +44,23 @@ class Player
    {
      if(this.moveX == false && this.x> 0 /*&& this.checkCollisionMap(level.mazeSquares[this.i -1])==false*/)
       {
-        this.x -= 10;
+        this.x -= 8;
         this.direction = 4;
 
       }
       else if (this.moveX == true && this.x < 23 * 75 /*&& this.checkCollisionMap(level.mazeSquares[this.i +1]==false)*/)
       {
-        this.x +=10;
+        this.x +=8;
         this.direction = 2;
       }
       else if (this.moveY == false && this.y > 10)
       {
-         this.y-=10;
+         this.y-=8;
          this.direction = 1;
       }
       else if (this.moveY == true && this.y < 12 * 75)
       {
-       this.y+=10;
+       this.y+=8;
        this.direction = 3;
       }
 
@@ -130,8 +130,8 @@ class Player
      }
        this.time =0;
    }
-   this.xFeet = this.x + (this.width/2);
-   this.yFeet = this.y + 5;
+   this.xFeet = (this.x + (this.width/2));
+   this.yFeet = (this.y + 5);
    this.col = Math.floor(this.xFeet / this.squareSize) + 1 ;
    this.row = Math.floor(this.yFeet / this.squareSize) + 1 ;
    this.i = (this.row * this.maxCols)+this.col;

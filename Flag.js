@@ -5,8 +5,8 @@ class Flag
 
     this.img = imageOptions.image;
     this.fps = fps;
-    this.x= (Math.floor(Math.random()*24)*75);
-    this.y= (Math.floor(Math.random()*12)*75);
+    this.x= (Math.floor(Math.random()*24)*60);
+    this.y= (Math.floor(Math.random()*12)*60);
     this.index =0;
     this.time = 0;
     this.width = imageOptions.width;
@@ -35,7 +35,7 @@ class Flag
 
     var image = this.img;
 
-    ctx.drawImage(image, this.index* 158 , 312 ,158, 312 ,this.x,this.y, 40,120);
+    ctx.drawImage(image, this.index* 158 , 312 ,158, 312 ,this.x,this.y, 40 * 0.8,120 * 0.8);
 
     if(this.ticksPerFrame < this.time)
     {

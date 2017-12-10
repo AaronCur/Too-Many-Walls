@@ -21,7 +21,7 @@ class WorldSquare
     this.x = this.row;
     this.col = col;
     this.y = this.col;
-    this.squareSize = 75;
+    this.squareSize = 75 * 0.8;
 
 
   }

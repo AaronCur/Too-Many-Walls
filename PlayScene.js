@@ -19,8 +19,8 @@ class PlayScene
     var ctx = canvas.getContext('2d');
     this.player;
     this.player = new Player(ctx, {
-    width: 78,
-    height: 108,
+    width: 78 * 0.8,
+    height: 108 * 0.8,
     image: this.img
       }, 10, 100);
     this.flag;
@@ -33,6 +33,9 @@ class PlayScene
 
 
     this.level = new LevelLoader();
+    this.canvas = document.getElementById('mycanvas');
+    this.ctx = canvas.getContext('2d');
+    this.ctx.scale(1,1);
     //gameNs.previousTime = Date.now();	// previousTime is initially 0
   }
   update()
@@ -41,9 +44,39 @@ class PlayScene
     var now = Date.now();
     var deltaTime = (now - gameNs.previousTime);
     gameNs.previousTime = now;	// previousTime is initially 0
+
+  //  var canvas = document.getElementById('mycanvas');
+    //var ctx = canvas.getContext('2d');
+    //ctx.scale(0.5,0.5);
     var canvas = document.getElementById('mycanvas');
     var ctx = canvas.getContext('2d');
     ctx.clearRect(0,0, canvas.width, canvas.height);
+    ctx.save();
+    console.log("Canvas",canvas.width / 2);
+    console.log("Pos",this.player.x);
+    if(this.player.x > (canvas.width / 2 ))
+    {
+      if(this.player.x  > (24*60)- (canvas.width / 2))
+      {
+        ctx.translate(-((24*60)- (canvas.width )), 0);
+      }
+      else {
+        ctx.translate(-this.player.x + (canvas.width / 2), 0);
+      }
+    }
+     if (this.player.y + 25 > (canvas.height / 2) )
+    {
+      if(this.player.y +25 > (14 * 60) - (canvas.height / 2))
+      {
+        ctx.translate(0, -((14*60)- (canvas.height)));
+      }
+      else {
+          ctx.translate(0, -(this.player.y + 25) + (canvas.height / 2));
+      }
+
+    }
+  //  if( this.player.y > canvas.height/2 &&this.player.y < (14 * 60) - canvas.height/ 2)
+
     this.level.update();
     this.goal.update();
     this.player.breakWall(this.level);
@@ -71,7 +104,7 @@ class PlayScene
     }
 
 
-
+    this.ctx.restore();
 
   }
   /**
