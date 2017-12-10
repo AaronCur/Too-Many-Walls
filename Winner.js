@@ -19,24 +19,24 @@ class Winner
    div.id = divId;
    if(div.id ==="PlayAgain")
    {
-     div.innerHTML = "<img src=\'Assets/Mute.png\'>";
+     div.innerHTML = "<img src=\'Assets/PlayAgain.png\'>";
      this.div = div;
      //var d = document.getElementById('yourDivId');
      div.style.visibility = "visible";
      div.style.position = "absolute";
-     div.style.left = (this.width/ 2) - 100 +"px";
+     div.style.left = (this.width/ 4) - 100 +"px";
      div.style.top = (this.height/ 8) + 80 +'px';
    }
 
    if(div.id ==="Quit")
    {
-     div.innerHTML = "<img src=\'Assets/Mute.png\'>";
+     div.innerHTML = "<img src=\'Assets/ExitButton.png\'>";
      this.div = div;
      //var d = document.getElementById('yourDivId');
      div.style.visibility = "visible";
      div.style.position = "absolute";
-     div.style.left = (this.width/ 2) - 100 +"px";
-     div.style.top = (this.height/ 8) + 80 +'px';
+     div.style.left = (this.width/ 4) - 100 +"px";
+     div.style.top = (this.height/ 8)*3.25+80 +'px';
    }
 
     div.addEventListener("touchstart", this.onTouchStart,{passive:false});
@@ -68,24 +68,25 @@ class Winner
         console.log(filename);
         if(filename === "PlayAgain.png")
         {
-              var div = document.getElementById("PlayAgain");
-              div.innerHTML = "<img src=\'Assets/Muted.png\'>";
+              var div = document.getElementById("PlayAgain")
               gameNs.sceneManager.goToScene(gameNs.playScene.title);
-              var el = document.getElementById( 'PlayAgain' );
-              el.parentNode.removeChild( el );
-              var el = document.getElementById( 'Quit' );
-              el.parentNode.removeChild( el );
+
           }
-          if(filename === "Quit.png")
+        else if(filename === "ExitButton.png")
           {
             var div = document.getElementById("Quit");
             div.innerHTML = "<img src=\'Assets/Mute.png\'>";
             gameNs.sceneManager.goToScene(gameNs.menuScene.title);
-            var el = document.getElementById( 'PlayAgain' );
-            el.parentNode.removeChild( el );
-            var el = document.getElementById( 'Quit' );
-            el.parentNode.removeChild( el );
+
           }
+          var el = document.getElementById( 'PlayAgain' );
+          el.parentNode.removeChild( el );
+          var el = document.getElementById( 'Quit' );
+          el.parentNode.removeChild( el );
+
+          var canvas = document.createElement("mycanvas");
+          var ctx = mycanvas.getContext("2d");
+          ctx.clearRect(0, 0, mycanvas.width, mycanvas.height);
         }
       }
     }

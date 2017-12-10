@@ -49,6 +49,8 @@ class Goal
       if(gameNs.winner===true)
       {
           gameNs.sceneManager.goToScene(gameNs.Winner.title);
+          gameNs.Winner.createDiv("Quit");
+          gameNs.Winner.createDiv("PlayAgain");
           var endTime = Date.now()
 
           gameNs.playerscore= endTime - gameNs.start
