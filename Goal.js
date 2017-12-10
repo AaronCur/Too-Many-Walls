@@ -1,3 +1,4 @@
+gameNs={}
 class Goal
 {
 
@@ -40,14 +41,19 @@ class Goal
     {
       var canvas = document.getElementById('mycanvas');
       var ctx = canvas.getContext('2d');
-      if(this.score==this.goalScore)
+
+      if(this.score === this.goalScore)
       {
-        this.Winner=true;
+        gameNs.winner=true;
       }
-      if(this.winner==true)
+      if(gameNs.winner===true)
       {
-        sceneManager.Winner.title;
-        
+          gameNs.sceneManager.goToScene(gameNs.Winner.title);
+          var endTime = Date.now()
+
+          gameNs.playerscore= endTime - gameNs.start
+
+
       }
         var image = this.img;
         ctx.drawImage(image, 0 , 0,this.squareSize, this.squareSize ,this.x,this.y, this.squareSize,this.squareSize);
