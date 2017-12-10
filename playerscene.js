@@ -7,8 +7,9 @@ class PlayScene
   constructor(title)
   {
     this.gameover = true;
-    this.goal=new Goal();
     this.gameoverscreen = new HighScoreScene();
+    this.timer = new Timer();
+    this.goal = new Goal();
     gameNs.previousTime = Date.now();	// previousTime is initially 0
     this.title = title;
     this.img=new Image();
@@ -89,12 +90,13 @@ class PlayScene
     else {
 
       this.flag.update(deltaTime);
-        this.player.update(deltaTime, this.level);
+      this.player.update(deltaTime, this.level);
 
     }
 
     this.player.checkCollision(this.flag);
     this.goal.checkCollision(this.flag);
+
 
     if(this.gameover == true)
     {
@@ -102,6 +104,9 @@ class PlayScene
       this.gameoverscreen.render();
 
     }
+
+    this.timer.update(deltaTime);
+
 
 
     this.ctx.restore();
@@ -116,12 +121,11 @@ class PlayScene
 
    var canvas = document.createElement("mycanvas");
    var ctx = mycanvas.getContext("2d");
-    //ctx.clearRect(0, 0, mycanvas.width, mycanvas.height);
    document.body.style.background = "#ffffff";
-    ctx.font = '50px Arial';
+
     ctx.fillText(this.title, 10, 50);
 
-  //  this.player.draw();
+
 
   }
 

@@ -182,7 +182,6 @@ class Player
         collides = true;
         e.x=this.x+20;
         e.y=this.y-70;
-      //  console.log("Collided");
       }
       return collides;
 

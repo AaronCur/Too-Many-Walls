@@ -88,6 +88,8 @@ class MenuScene
          {
           // gameNs.soundManager.playSound("Concentrate", false, 1);
            gameNs.sceneManager.goToScene(gameNs.playScene.title);
+           gameNs.timerStart = true;
+           gameNs.start = Date.now();
 
 
          }
