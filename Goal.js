@@ -9,16 +9,12 @@ class Goal
     var alive = true;
     this.alive=alive;
     this.img = new Image();
-<<<<<<< HEAD
     this.img.src = "img/goal.png";
     this.squareSize = 60;
-=======
-    this.img.src = "assets/goal.png";
-    this.squareSize = 75;
     this.score = 0;
     this.goalScore = 200;
     this.Winner=false;
->>>>>>> score
+
   }
 
   checkCollision(e)
