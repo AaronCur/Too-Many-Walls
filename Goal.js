@@ -14,6 +14,8 @@ class Goal
     this.score = 0;
     this.goalScore = 20;
     this.winner=false;
+    this.posX = 516 + 50;
+    this.posY = 50;
 
   }
 
@@ -62,10 +64,36 @@ class Goal
       }
         var image = this.img;
         ctx.drawImage(image, 0 , 0,this.squareSize, this.squareSize ,this.x,this.y, this.squareSize,this.squareSize);
-        ctx.font = '50px Arial';
-        ctx.fillText('Score: '+this.score, 1550,50);
+        ctx.font = '50px Adventure Regular';
+        if(gameNs.playScene.player.x > 516 )
+        {
+          if(  gameNs.playScene.player.x > 989 )
+          {
+            this.posX = 989 + 50;
+          }
+          else {
+            this.posX = gameNs.playScene.player.x  + 50;
+          }
+
+        }
+        //else {
+          //  ctx.fillText('Timer '+this.minutes+':'+this.seconds, 516 - 350 , 50);
+      //  }
+        if(gameNs.playScene.player.y > 236 )
+        {
+            if(gameNs.playScene.player.y > 572)
+            {
+                //ctx.fillText('Timer '+this.minutes+':'+this.seconds,516 - 350,572 - 186);
+                this.posY = 572 - 186
+            }
+            else {
+              this.posY = gameNs.playScene.player.y - 186
+
+            }
+        }
+
+        }
+        ctx.fillText('Score: '+this.score, this.posX,this.posY);
     }
 
   }
-
-}

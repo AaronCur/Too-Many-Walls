@@ -11,6 +11,8 @@ class PlayScene
     gameNs.winnerscreen = new Winner('Winner');
     this.timer = new Timer();
     this.goal = new Goal();
+    this.posX = 0;
+    this.posY = 0;
     gameNs.previousTime = Date.now();	// previousTime is initially 0
     this.title = title;
     this.img=new Image();
@@ -55,34 +57,40 @@ class PlayScene
     ctx.clearRect(0,0, canvas.width, canvas.height);
     ctx.save();
     console.log("Canvas",canvas.width / 2);
-    console.log("Pos",this.player.x);
-    if(this.player.x > (canvas.width / 2 ))
+    console.log("Pos",this.player.y);
+    if(this.gameover == false)
     {
-      if(this.player.x  > (24*60)- (canvas.width / 2))
+      if(this.player.x > (canvas.width / 2 ))
       {
-        ctx.translate(-((24*60)- (canvas.width )), 0);
+        if(this.player.x  > (24*60)- (canvas.width / 2))
+        {
+          ctx.translate(-((24*60)- (canvas.width )), 0);
+        }
+        else {
+          ctx.translate(-this.player.x + (canvas.width / 2), 0);
+        }
       }
-      else {
-        ctx.translate(-this.player.x + (canvas.width / 2), 0);
-      }
-    }
-     if (this.player.y + 25 > (canvas.height / 2) )
-    {
-      if(this.player.y +25 > (14 * 60) - (canvas.height / 2))
+       if (this.player.y + 25 > (canvas.height / 2) )
       {
-        ctx.translate(0, -((14*60)- (canvas.height)));
-      }
-      else {
-          ctx.translate(0, -(this.player.y + 25) + (canvas.height / 2));
-      }
+        if(this.player.y +25 > (14 * 60) - (canvas.height / 2))
+        {
+          ctx.translate(0, -((14*60)- (canvas.height)));
+        }
+        else {
+            ctx.translate(0, -(this.player.y + 25) + (canvas.height / 2));
+        }
 
+      }
+    //  if( this.player.y > canvas.height/2 &&this.player.y < (14 * 60) - canvas.height/ 2)
+
+
+      this.timer.update(deltaTime);
+      this.player.breakWall(this.level);
+      this.player.moveWall(this.level);
     }
-  //  if( this.player.y > canvas.height/2 &&this.player.y < (14 * 60) - canvas.height/ 2)
-
     this.level.update();
     this.goal.update();
-    this.player.breakWall(this.level);
-    this.player.moveWall(this.level);
+
     if(this.player.direction === 1)
     {
       this.player.update(deltaTime, this.level);
@@ -98,13 +106,15 @@ class PlayScene
     this.player.checkCollision(this.flag);
     this.goal.checkCollision(this.flag);
 
-    this.timer.update(deltaTime);
+
 
     if(this.gameover == true)
     {
+    //  ctx.translate(0, 0);
       this.gameoverscreen.getScoreTable();
       this.gameoverscreen.render();
     //  this.winnerscreen.render();
+
 
     }
 
@@ -113,6 +123,7 @@ class PlayScene
 
 
     this.ctx.restore();
+
 
   }
   /**
