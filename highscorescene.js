@@ -18,6 +18,7 @@ class HighScoreScene
     this.reverseOrdered ={};
     this.posiiton = 0;
     this.score = 0;
+    this.count = 0;
 
  /*ordered = reverse(ordered);
 
@@ -60,28 +61,34 @@ this.request.send();
   }
   getScoreTable()
   {
+
     //to reset the local storage
+    this.count = this.count + 1;
+
+
+   //localStorage.setItem('Leaderboard', JSON.stringify(this.leaderboard));
+
     //localStorage.setItem('Leaderboard', JSON.stringify(this.leaderboard));
     this.leaderboard = JSON.parse(localStorage.getItem('Leaderboard'));
     console.log(this.leaderboard)
   //  this.playername = prompt("Please enter your name","Aaron");
-
-
-    if(typeof this.playername === 'string' || this.playername instanceof String)
+  if(this.count == 1)
+  {
+    while(this.playername==null)
     {
-      //this.score = prompt("Please enter your score","0");
-    //  this.leaderboard[this.score] = this.playername;
+      this.playername = prompt("Please enter your name","Aaron");
     }
-    else {
-      //this.playername = prompt("Please enter your name","Aaron");
-    }
+
+    this.leaderboard[Math.round(gameNs.playerscore/1000)] = this.playername;
+    this.count = this.count +1;
+  }
 
     localStorage.setItem('Leaderboard', JSON.stringify(this.leaderboard));
   //  console.log(leaderboard.reverse());
-  //var that = this;
-    //Object.keys(that.leaderboard).sort().forEach(function(key){
-    //  tha.ordered[key] = that.leaderboard[key];
-    //});
+   //var that = this;
+  //  Object.keys(that.leaderboard).sort().forEach(function(key){
+    //  that.ordered[key] = that.leaderboard[key];
+  //  });
 
 
     var keyValue = [];
@@ -131,42 +138,57 @@ this.request.send();
     var i = 1;
     var j = 0;
     //Output for order lowest to highest
-    /*
-    for(var j = 0; j < 7; j++)
+
+  /*  for(var j = 0; j < 7; j++)
     {
-      for (var key in this.reverseOrdered) {
+      for (var key in this.leaderboard) {
       // check if the property/key is defined in the object itself, not in parent
 
-      if (this.reverseOrdered.hasOwnProperty(key) && j < Object.keys(this.reverseOrdered).length ) {
-        var stringName = i + ":" +" " + key;
-        var stringScore = (this.reverseOrdered)[key];
+      if (this.ordered.hasOwnProperty(key) && j < Object.keys(this.ordered).length ) {
+        var stringName = (this.ordered)[key];
+        var stringScore = key;
         i = i+1;
-        ctx.fillText(stringName, 30, 50 * y);
-        ctx.fillText(stringScore, 400, 50*y);
+          ctx.fillStyle ='black';
+        ctx.font = '40px Adventure Regular';
+        ctx.fillText(stringName, this.windowWidth/2.9, (50 * y) + this.windowHeight/4.5);
+        ctx.fillText(stringScore, this.windowWidth/7 * 4.5, (50* y) + this.windowHeight/4.5);
         y=y+1;
         j=j+1;
       }
     }
 }*/
 //output highest to lowest
-  this.position = this.keyValue.indexOf(this.score);
+
+  this.position = this.keyValue.indexOf(gameNs.score);
   this.position = this.position + 1;
   for(var x = 0; x < this.value.length && x < 7; x++)
   {
     var positionText = "You placed "+ this.position +" out of "+this.keyValue.length;
     var stringName = this.value[x];
-    var stringScore = this.keyValue[x];
+    this.diff = this.duration - (((Date.now() - gameNs.start) / 1000) | 0);
+
+    // does the same job as parseInt truncates the float
+    this.minutes = (this.keyValue[x] / 60) | 0;
+    this.seconds = (this.keyValue[x] % 60) | 0;
+
+    this.minutes = this.minutes < 10 ? "0" + this.minutes : this.minutes;
+    this.seconds = this.seconds < 10 ? "0" + this.seconds : this.seconds;
+    console.log("Minutes: "+ this.minutes);
+    console.log("Seconds: "+ this.seconds);
+    var stringScore = (this.minutes+":"+this.seconds);
+    //var stringScore = (this.keyValue[x]);
+    ctx.fillStyle ='black';
     ctx.font = '50px Adventure Regular';
     ctx.fillText(positionText, this.windowWidth/7*2, this.windowHeight/8);
     ctx.font = '40px Adventure Regular';
-    ctx.fillText(stringName, this.windowWidth/2.9, (50 * y) + this.windowHeight/4.5);
-    ctx.fillText(stringScore, this.windowWidth/7 * 4.5, (50* y) + this.windowHeight/4.5);
+    ctx.fillText(stringName, this.windowWidth/3, (50 * y) + this.windowHeight/5);
+    ctx.fillText(stringScore, this.windowWidth/7 * 3.7, (50* y) + this.windowHeight/5);
     y=y+1;
 
+  //}
   }
-  }
 
 
-
+}
 
 }

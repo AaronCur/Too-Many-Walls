@@ -9,6 +9,7 @@ class Timer
     this.seconds;
     this.duration=60;
     gameNs.timerStart = false;
+    gameNs.score = "";
   }
 
     timer()
@@ -25,6 +26,7 @@ class Timer
         this.minutes = this.minutes < 10 ? "0" + this.minutes : this.minutes;
         this.seconds = this.seconds < 10 ? "0" + this.seconds : this.seconds;
 
+        gameNs.score = (this.minutes+":"+this.seconds);
 
         if (this.diff <= 0)
         {
