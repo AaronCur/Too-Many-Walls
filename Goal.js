@@ -15,11 +15,15 @@ class Goal
     this.goalScore = 200;
     this.Winner=false;
 
+    this.soundManager = new SoundManager()
+    this.soundManager.init()
+    this.soundManager.loadSoundFile("Goal", "img/audio/Goal.mp3")
+
   }
 
   checkCollision(e)
   {
-    var collides = false;
+
 
     if((this.x< e.x + e.collisionWidth - 20)&&
       (this.x+this.squareSize>e.x)&&
@@ -30,9 +34,14 @@ class Goal
         e.y= ((Math.random()*12)*60);
         this.x= (Math.floor(Math.random()*24)*60);
         this.y= (Math.floor(Math.random()*12)*60);
-        //console.log("Collided");
+        if(gameNs.collides==true)
+        {
+          this.soundManager.playSound("Goal",false,1)
+          gameNs.collides=false
+        }
+
       }
-      return collides;
+
     }
 
 

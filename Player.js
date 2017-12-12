@@ -37,7 +37,19 @@ class Player
   this.squareSize = 75 * 0.8;
   this.maxRows=14
   this.maxCols=24
+  this.moved =false
+  gameNs.collides = false;
+
+  this.soundManager = new SoundManager()
+  this.soundManager.init()
+  this.soundManager.loadSoundFile("flagPlayer", "img/audio/swoosh.mp3")
+  this.soundManager.loadSoundFile("playerWall", "img/audio/drop.mp3")
+  this.soundManager.loadSoundFile("breakWall", "img/audio/rocks.mp3")
+
   }
+
+
+
 
  update(deltaTime, level)
  { if(gameNs.playScene.gameover == false)
@@ -154,6 +166,7 @@ class Player
   {
 
     this.x -= 10;
+
   }
 
   moveRight()
@@ -172,18 +185,23 @@ class Player
 
   checkCollision(e)
   {
-    var collides = false;
+
 
     if((this.x< e.x + e.collisionWidth)&&
       (this.x+this.width>e.x)&&
       (this.y+this.height>e.y)&&
       (this.y<e.y+e.collisionHeight) )
       {
-        collides = true;
+        if(gameNs.collides==false)
+        {
+          this.soundManager.playSound("flagPlayer",false,1)
+          gameNs.collides = true;
+        }
+
         e.x=this.x+20;
         e.y=this.y-70;
+
       }
-      return collides;
 
   }
   checkCollisionMap(level)
@@ -198,7 +216,15 @@ class Player
         {
           this.moveX = null;
           this.moveY = null;
-
+          if(this.moved==false)
+          {
+            this.soundManager.playSound("playerWall",false,1)
+            this.moved=true;
+          }
+        }
+        else
+         {
+           this.moved=false;
         }
       }
     }
@@ -211,10 +237,16 @@ class Player
           {
             this.moveX = null;
             this.moveY = null;
-
-          //  this.x = this.x + 1;
+            if(this.moved==false)
+            {
+              this.soundManager.playSound("playerWall",false,1)
+              this.moved=true;
+            }
           }
-
+          else
+           {
+             this.moved=false;
+          }
         }
 
     }
@@ -227,9 +259,21 @@ class Player
         {
           this.moveX = null;
           this.moveY = null;
-
+          if(this.moved==false)
+          {
+            this.soundManager.playSound("playerWall",false,1)
+            this.moved=true;
+          }
+          if(this.moved==false)
+          {
+            this.soundManager.playSound("playerWall",false,1)
+            this.moved=true;
+          }
         }
-
+        else
+         {
+           this.moved=false;
+        }
       }
 
   }
@@ -242,9 +286,16 @@ class Player
       {
         this.moveX = null;
         this.moveY = null;
-
+        if(this.moved==false)
+        {
+          this.soundManager.playSound("playerWall",false,1)
+          this.moved=true;
+        }
       }
-
+      else
+       {
+         this.moved=false;
+      }
     }
 
 }
@@ -263,6 +314,8 @@ class Player
         {
           level.mazeSquares[this.i+1].moveWall = false;
           level.mazeSquares[this.i+2].moveWall = true;
+          this.soundManager.playSound("playerWall",false,1)
+
         }
 
       }
@@ -276,6 +329,8 @@ class Player
         {
           level.mazeSquares[this.i-1].moveWall = false;
           level.mazeSquares[this.i-2].moveWall = true;
+          this.soundManager.playSound("playerWall",false,1)
+
         }
 
       }
@@ -289,6 +344,8 @@ class Player
         {
           level.mazeSquares[this.i - this.maxCols ].moveWall = false;
           level.mazeSquares[this.i - (this.maxCols * 2)].moveWall = true;
+          this.soundManager.playSound("playerWall",false,1)
+
         }
 
       }
@@ -302,6 +359,7 @@ class Player
       {
         level.mazeSquares[this.i + this.maxCols ].moveWall = false;
         level.mazeSquares[this.i + (this.maxCols * 2)].moveWall = true;
+        this.soundManager.playSound("playerWall",false,1)
       }
 
     }
@@ -322,6 +380,7 @@ class Player
         {
           level.mazeSquares[this.i+1].breakWall = false;
           level.mazeSquares[this.i+1].containsWall = false;
+        this.soundManager.playSound("breakWall",false,1)
         }
 
       }
@@ -335,6 +394,7 @@ class Player
         {
           level.mazeSquares[this.i-1].breakWall = false;
           level.mazeSquares[this.i-1].containsWall = false;
+          this.soundManager.playSound("breakWall",false,1)
         }
 
       }
@@ -348,6 +408,7 @@ class Player
         {
           level.mazeSquares[this.i - this.maxCols].breakWall = false;
           level.mazeSquares[this.i - this.maxCols].containsWall = false;
+          this.soundManager.playSound("breakWall",false,1)
         }
 
       }
@@ -361,6 +422,7 @@ class Player
       {
        level.mazeSquares[this.i  +  this.maxCols].breakWall = false;
        level.mazeSquares[this.i +  this.maxCols ].containsWall = false;
+       this.soundManager.playSound("breakWall",false,1)
      }
     }
 

@@ -6,7 +6,7 @@ class PlayScene
    */
   constructor(title)
   {
-    this.gameover = true;
+    this.gameover = false;
     this.gameoverscreen = new HighScoreScene();
     this.timer = new Timer();
     this.goal = new Goal();

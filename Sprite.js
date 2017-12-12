@@ -39,12 +39,12 @@ class Sprite
     var img = this.img;
 
 //draw sprite, passing all images variables
-    ctx.drawImage(this.img, this.index*110 , 14, 97, 122, 0, this.y, this.width, this.height);
+    ctx.drawImage(this.img, this.index*11 , 16, 63, 104, 0, this.y, this.width, this.height);
 
     if(this.frames<this.time)
     {
         this.index = this.index +1;
-          if(this.index > 7)
+          if(this.index > 2)
           {
             this.index = 0;
           }

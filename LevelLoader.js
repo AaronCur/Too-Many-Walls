@@ -59,7 +59,7 @@ class LevelLoader
      }
 
 });
-this.request.open("GET", "http://127.0.0.1:8000/level.json");
+this.request.open("GET", "http://149.153.106.134:8000/level.json");
 this.request.send();
   }
   update()
