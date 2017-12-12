@@ -6,7 +6,7 @@ class PlayScene
    */
   constructor(title)
   {
-    this.gameover = true;
+    gameNs.gameover = false;
     this.gameoverscreen = new HighScoreScene();
     this.timer = new Timer();
     this.goal = new Goal();
@@ -98,7 +98,7 @@ class PlayScene
     this.goal.checkCollision(this.flag);
 
 
-    if(this.gameover == true)
+    if(gameNs.gameover== true)
     {
       this.gameoverscreen.getScoreTable();
       this.gameoverscreen.render();

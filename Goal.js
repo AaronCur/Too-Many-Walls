@@ -12,7 +12,7 @@ class Goal
     this.img.src = "img/goal.png";
     this.squareSize = 60;
     this.score = 0;
-    this.goalScore = 200;
+    this.goalScore = 20;
     this.Winner=false;
 
   }
@@ -31,6 +31,7 @@ class Goal
         this.x= (Math.floor(Math.random()*24)*60);
         this.y= (Math.floor(Math.random()*12)*60);
         //console.log("Collided");
+        this.score = this.score + 20;
       }
       return collides;
     }
@@ -49,7 +50,8 @@ class Goal
       }
       if(gameNs.winner===true)
       {
-          gameNs.sceneManager.goToScene(gameNs.Winner.title);
+          //gameNs.sceneManager.goToScene(gameNs.Winner.title);
+          gameNs.gameover = true;
           gameNs.Winner.createDiv("Quit");
           gameNs.Winner.createDiv("PlayAgain");
           var endTime = Date.now()
@@ -61,7 +63,8 @@ class Goal
         var image = this.img;
         ctx.drawImage(image, 0 , 0,this.squareSize, this.squareSize ,this.x,this.y, this.squareSize,this.squareSize);
         ctx.font = '50px Arial';
-        ctx.fillText('Score: '+this.score, 1550,50);
+        ctx.fillStyle ='white';
+        ctx.fillText('Score: '+this.score, 800,50);
     }
 
   }

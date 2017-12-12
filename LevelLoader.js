@@ -15,6 +15,7 @@ class LevelLoader
     this.MaxCols = 12;
     this.map = [];
      this.mazeSquares = [];
+
      this.request = new XMLHttpRequest();
 
      var that = this;

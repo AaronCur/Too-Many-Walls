@@ -97,7 +97,7 @@ class Winner
       var ctx = canvas.getContext('2d');
       ctx.clearRect(0, 0, mycanvas.width, mycanvas.height);
 
-      document.body.style.background = "#741cb2";
+      //document.body.style.background = "#741cb2";
       ctx.font = '55px Adventure Regular';
       ctx.fillText(this.title, this.width/2 - 170, 70);
       ctx.fillText('your score was '+gameNs.playerscore/1000+' seconds', window.innerWidth/2, window.innerHeight/2)
