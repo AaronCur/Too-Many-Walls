@@ -12,8 +12,8 @@ class Goal
     this.img.src = "img/goal.png";
     this.squareSize = 60;
     this.score = 0;
-    this.goalScore = 200;
-    this.Winner=false;
+    this.goalScore = 20;
+    this.winner=false;
 
     this.soundManager = new SoundManager()
     this.soundManager.init()
@@ -34,11 +34,16 @@ class Goal
         e.y= ((Math.random()*12)*60);
         this.x= (Math.floor(Math.random()*24)*60);
         this.y= (Math.floor(Math.random()*12)*60);
+
         if(gameNs.collides==true)
         {
           this.soundManager.playSound("Goal",false,gameNs.volume)
           gameNs.collides=false
         }
+
+
+        //console.log("Collided");
+        this.score = this.score + 20;
 
       }
 
@@ -54,13 +59,14 @@ class Goal
 
       if(this.score === this.goalScore)
       {
-        gameNs.winner=true;
+        this.winner=true;
+        gameNs.playScene.gameover=true;
       }
-      if(gameNs.winner===true)
+      if(gameNs.playScene.gameover==true)
       {
-          gameNs.sceneManager.goToScene(gameNs.Winner.title);
-          gameNs.Winner.createDiv("Quit");
-          gameNs.Winner.createDiv("PlayAgain");
+          //gameNs.sceneManager.goToScene(gameNs.Winner.title);
+          //gameNs.winnerscreen.createDiv("Quit");
+        //  gameNs.winnerscreen.createDiv("PlayAgain");
           var endTime = Date.now()
 
           gameNs.playerscore= endTime - gameNs.start

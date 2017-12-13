@@ -8,6 +8,7 @@ class PlayScene
   {
     this.gameover = false;
     this.gameoverscreen = new HighScoreScene();
+    gameNs.winnerscreen = new Winner('Winner');
     this.timer = new Timer();
     this.goal = new Goal();
     gameNs.previousTime = Date.now();	// previousTime is initially 0
@@ -100,15 +101,17 @@ class PlayScene
     this.player.checkCollision(this.flag);
     this.goal.checkCollision(this.flag);
 
+    this.timer.update(deltaTime);
 
     if(this.gameover == true)
     {
       this.gameoverscreen.getScoreTable();
       this.gameoverscreen.render();
+    //  this.winnerscreen.render();
 
     }
 
-    this.timer.update(deltaTime);
+
 
 
 
