@@ -139,6 +139,8 @@ function keyDownHandler(e)
    var time2 = new Date().getTime();
    var elapsedTime = time2 - gameNs.time1;
 
+   if(gameNs.sceneManager.currentScene.title == "Play")
+   {
    var a = startPosX - endPosX;
    var b = startPosY - endPosY;
 
@@ -192,7 +194,7 @@ function keyDownHandler(e)
 
     }
     gameNs.touchStart = false;
-
+  }
  }
  function angle(a,b) {
   var theta = Math.atan2(b, a); // range (-PI, PI]

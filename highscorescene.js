@@ -16,7 +16,11 @@ class HighScoreScene
     this.leaderboard = {};
     this.ordered= {};
     this.reverseOrdered ={};
-    this.posiiton = 0;
+    this.positionArray =[];
+    this.position = 0;
+    this.posX;
+    this.posY;
+    this.findPos=0;
     this.score = 0;
     this.count = 0;
 
@@ -70,7 +74,7 @@ this.request.send();
 
     //localStorage.setItem('Leaderboard', JSON.stringify(this.leaderboard));
     this.leaderboard = JSON.parse(localStorage.getItem('Leaderboard'));
-    console.log(this.leaderboard)
+
   //  this.playername = prompt("Please enter your name","Aaron");
   if(this.count == 1)
   {
@@ -80,15 +84,27 @@ this.request.send();
     }
 
     this.leaderboard[Math.round(gameNs.playerscore/1000)] = this.playername;
-    this.count = this.count +1;
-  }
+    console.log(this.leaderboard)
+    this.findPos=Math.round(gameNs.playerscore/1000);
+
+
+
 
     localStorage.setItem('Leaderboard', JSON.stringify(this.leaderboard));
   //  console.log(leaderboard.reverse());
-   //var that = this;
-  //  Object.keys(that.leaderboard).sort().forEach(function(key){
-    //  that.ordered[key] = that.leaderboard[key];
-  //  });
+   var that = this;
+    Object.keys(that.leaderboard).sort().forEach(function(key){
+
+        that.ordered[key] = that.leaderboard[key];
+        that.positionArray.push(key.toString());
+
+
+
+    });
+    this.positionArray= this.positionArray.sort();
+    this.count = this.count +1;
+    console.log()
+  }
 
 
     var keyValue = [];
@@ -96,8 +112,9 @@ this.request.send();
     this.reverseForIn(this.leaderboard, function(key){keyValue.push(key),value.push(this[key]) });
     this.keyValue = keyValue;
     this.value = value;
+    this.keyValue = keyValue.reverse();
 
-    console.log(this.reverseOrdered);
+  //  console.log(this.reverseOrdered);
 
 
   }
@@ -130,8 +147,10 @@ this.request.send();
     var image = this.img;
   //  document.body.style.background = "#ffffff";
     //ctx.clearRect(0, 0, mycanvas.width, mycanvas.height);
+
     ctx.drawImage(imagebg, 0 , 0,this.windowWidth, this.windowHeight ,0,0, this.windowWidth ,this.windowHeight);
     ctx.drawImage(image, 0 , 0,918, 761 ,this.windowWidth/3.7,this.windowHeight/7, 918 ,761);
+
 
 
     var y = 1;
@@ -139,28 +158,54 @@ this.request.send();
     var j = 0;
     //Output for order lowest to highest
 
-  /*  for(var j = 0; j < 7; j++)
+
+
+    this.position = this.keyValue.indexOf(this.findPos.toString());
+      console.log(this.position);
+    for(var j = 0; j < 7; j++)
     {
+      if(j <= 1)
+      {
+
+
+        this.position = this.position + 1;
+      }
+
+    //  console.log("positionText"+this.positionArray);
+
       for (var key in this.leaderboard) {
       // check if the property/key is defined in the object itself, not in parent
 
-      if (this.ordered.hasOwnProperty(key) && j < Object.keys(this.ordered).length ) {
+      if (this.ordered.hasOwnProperty(key) && j < 7 ) {
+        var positionText = "You placed "+ this.position +" out of "+this.positionArray.length;
         var stringName = (this.ordered)[key];
-        var stringScore = key;
+        this.diff = this.duration - (((Date.now() - gameNs.start) / 1000) | 0);
+
+        // does the same job as parseInt truncates the float
+        this.minutes = (key/ 60) | 0;
+        this.seconds = (key % 60) | 0;
+
+        this.minutes = this.minutes < 10 ? "0" + this.minutes : this.minutes;
+        this.seconds = this.seconds < 10 ? "0" + this.seconds : this.seconds;
+        var stringScore = (this.minutes+":"+this.seconds);
+        var positionText = "You placed "+ this.position +" out of "+this.keyValue.length;
+
+
         i = i+1;
-          ctx.fillStyle ='black';
+        ctx.fillStyle ='black';
+        ctx.font = '50px Adventure Regular';
+        ctx.fillText(positionText, this.windowWidth/7*2, this.windowHeight/8);
         ctx.font = '40px Adventure Regular';
-        ctx.fillText(stringName, this.windowWidth/2.9, (50 * y) + this.windowHeight/4.5);
-        ctx.fillText(stringScore, this.windowWidth/7 * 4.5, (50* y) + this.windowHeight/4.5);
+        ctx.fillText(stringName, this.windowWidth/3, (50 * y) + this.windowHeight/5);
+        ctx.fillText(stringScore, this.windowWidth/7 * 3.7, (50* y) + this.windowHeight/5);
         y=y+1;
         j=j+1;
       }
     }
-}*/
+}
 //output highest to lowest
 
-  this.position = this.keyValue.indexOf(gameNs.score);
-  this.position = this.position + 1;
+/*
   for(var x = 0; x < this.value.length && x < 7; x++)
   {
     var positionText = "You placed "+ this.position +" out of "+this.keyValue.length;
@@ -188,7 +233,7 @@ this.request.send();
   //}
   }
 
-
+*/
 }
 
 }
