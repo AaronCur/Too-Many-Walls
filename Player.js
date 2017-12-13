@@ -196,11 +196,10 @@ class Player
   checkCollision(e)
   {
 
-
     if((this.x< e.x + e.collisionWidth)&&
       (this.x+this.width>e.x)&&
-      (this.y+this.height>e.y)&&
-      (this.y<e.y+e.collisionHeight) )
+      (this.y+this.height + 20>e.y + 60)&&
+      (this.y + 30<e.y + 60 +e.collisionHeight) )
       {
         if(gameNs.collides==false)
         {

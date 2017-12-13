@@ -10,7 +10,7 @@ class Flag
     this.time = 0;
     this.width = imageOptions.width;
     this.collisionWidth = 40;
-    this.collisionHeight = 150;
+    this.collisionHeight = 60;
     this.height = imageOptions.height;
     this.ticksPerFrame = 1000/this.fps;
 
