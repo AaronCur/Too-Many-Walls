@@ -4,15 +4,13 @@ class Goal
 
   constructor()
   {
-    this.x= (Math.floor(Math.random()*24)*60);
-    this.y= (Math.floor(Math.random()*12)*60);
     var alive = true;
     this.alive=alive;
     this.img = new Image();
     this.img.src = "img/goal.png";
     this.squareSize = 60;
     this.score = 0;
-    this.goalScore = 20;
+    this.goalScore = 120;
     this.winner=false;
     this.posX = 516 + 50;
     this.posY = 50;
@@ -20,6 +18,37 @@ class Goal
     this.soundManager = new SoundManager()
     this.soundManager.init()
     this.soundManager.loadSoundFile("Goal", "img/audio/Goal.mp3")
+    this.respawn()
+  }
+
+  respawn()
+  {
+    this.i= (Math.floor(Math.random()*5));
+    if(this.i === 0)
+    {
+      this.x = 1*60
+      this.y = 9*60
+    }
+    else if(this.i === 1)
+    {
+      this.x = 5*60
+      this.y = 12*60
+    }
+  else if(this.i === 2)
+    {
+      this.x =16*60
+      this.y = 5*60
+    }
+    else if(this.i === 3)
+    {
+      this.x = 15*60
+      this.y = 10*60
+    }
+    else if(this.i === 4)
+    {
+      this.x = 22*60
+      this.y = 7*60
+    }
 
   }
 
@@ -32,10 +61,8 @@ class Goal
       (this.y+this.squareSize>e.y + 150)&&
       (this.y<e.y + 170) )
       {
-        e.x= ((Math.random()*24)*60);
-        e.y= ((Math.random()*12)*60);
-        this.x= (Math.floor(Math.random()*24)*60);
-        this.y= (Math.floor(Math.random()*12)*60);
+        e.respawn()
+        this.respawn()
 
         if(gameNs.collides==true)
         {

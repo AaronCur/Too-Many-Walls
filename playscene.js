@@ -87,11 +87,12 @@ class PlayScene
     //  if( this.player.y > canvas.height/2 &&this.player.y < (14 * 60) - canvas.height/ 2)
 
 
-      this.timer.update(deltaTime);
+
       this.player.breakWall(this.level);
       this.player.moveWall(this.level);
     }
     this.level.update();
+    this.timer.update(deltaTime);
     this.goal.update();
 
     if(this.player.direction === 1)

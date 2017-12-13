@@ -162,6 +162,7 @@ class Player
 
    this.checkCollisionMap(level);
   //ctx.fillText('Timer '+gameNs.score, gameNs.playScene.player.x , gameNs.playScene.player.y);
+
  }
 
   /**
@@ -175,10 +176,7 @@ class Player
 
   moveLeft()
   {
-
     this.x -= 10;
-
-
   }
 
   moveRight()

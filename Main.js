@@ -16,39 +16,47 @@ function main()
   game.update();
   console.log(gameNs.onTouchStart)
   game.draw();
-
+  this.pressedLR = false;
+  this.pressedUD = false;
   //document.addEventListener("click", clickHandler.bind(null, sceneManager));
 
 }
 function keyDownHandler(e)
 {
 	//code triggered when left arrow is pressed
-	if(e.keyCode === 37  )
+	if(e.keyCode === 37 && this.pressedLR ===false )
 	{
 		gameNs.playScene.player.moveX = false;
+    this.pressedLR=true;
 
 	}
-  else if(e.keyCode === 39 )
+  else if(e.keyCode === 39 && this.pressedLR ===false )
 	{
 		gameNs.playScene.player.moveX = true;
+    this.pressedLR=true
 	}
   else
   {
     gameNs.playScene.player.moveX = null;
+    this.pressedLR=false;
   }
 
 //code triggered when UP arrow is pressed
-	if(e.keyCode === 38)
+	if(e.keyCode === 38 && this.pressedUD ===false)
 	{
 		gameNs.playScene.player.moveY = false;
+    this.pressedUD = true
+
 	}
-  else if(e.keyCode === 40)
+  else if(e.keyCode === 40 && this.pressedUD ===false)
 	{
 		gameNs.playScene.player.moveY = true;
+    this.pressedUD=true
 	}
   else
   {
     gameNs.playScene.player.moveY = null;
+    this.pressedUD=false
   }
 
 }

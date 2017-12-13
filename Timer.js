@@ -7,7 +7,7 @@ class Timer
     gameNs.start;
     this.minutes;
     this.seconds;
-    this.duration=60;
+    this.duration=60*3;
     gameNs.timerStart = false;
     gameNs.score = "";
     this.posX=516-350;
@@ -19,6 +19,8 @@ class Timer
 
         // get the number of seconds that have elapsed since
         // startTimer() was called
+        if(this.diff>0)
+      {
         this.diff = this.duration - (((Date.now() - gameNs.start) / 1000) | 0);
 
         // does the same job as parseInt truncates the float
@@ -29,14 +31,7 @@ class Timer
         this.seconds = this.seconds < 10 ? "0" + this.seconds : this.seconds;
 
         gameNs.score = (this.minutes+":"+this.seconds);
-
-        if (this.diff <= 0)
-        {
-            // add one second so that the count down starts at the full duration
-            // example 05:00 not 04:59
-            gameNs.start = Date.now() + 1000;
-
-          }
+      }
             setInterval(this.timer, 1000);
 
       }
@@ -54,29 +49,6 @@ class Timer
               this.timer();
           }
           console.log("Playerposx "+gameNs.playScene.player.x)
-          /*
-          if(this.player.x > (canvas.width / 2 ))
-          {
-            if(this.player.x  > (24*60)- (canvas.width / 2))
-            {
-              ctx.translate(-((24*60)- (canvas.width )), 0);
-            }
-            else {
-              ctx.translate(-this.player.x + (canvas.width / 2), 0);
-            }
-          }
-           if (this.player.y + 25 > (canvas.height / 2) )
-          {
-            if(this.player.y +25 > (14 * 60) - (canvas.height / 2))
-            {
-              ctx.translate(0, -((14*60)- (canvas.height)));
-            }
-            else {
-                ctx.translate(0, -(this.player.y + 25) + (canvas.height / 2));
-            }
-
-          }
-          */
 
         //ctx.fillText('Timer '+this.minutes+':'+this.seconds, gameNs.playScene.player.x  , gameNs.playScene.player.y);
         if(gameNs.playScene.player.x > 516 )
