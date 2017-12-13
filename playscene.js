@@ -33,11 +33,14 @@ class PlayScene
 
 
 
+
     this.level = new LevelLoader();
     this.canvas = document.getElementById('mycanvas');
     this.ctx = canvas.getContext('2d');
     this.ctx.scale(1,1);
     //gameNs.previousTime = Date.now();	// previousTime is initially 0
+
+  
   }
   update()
   {
@@ -110,6 +113,8 @@ class PlayScene
 
 
     this.ctx.restore();
+
+
 
   }
   /**

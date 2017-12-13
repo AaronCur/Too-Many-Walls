@@ -18,6 +18,10 @@ class MenuScene
     this.createDiv("Options");
     this.createDiv("Exit");
 
+    this.soundManager = new SoundManager()
+    this.soundManager.init()
+    this.soundManager.loadSoundFile("backGround", "img/audio/backGround.mp3")
+
 
   }
    createDiv(divId)
@@ -86,11 +90,10 @@ class MenuScene
          console.log(filename);
          if(filename === "playbutton.png")
          {
-          // gameNs.soundManager.playSound("Concentrate", false, 1);
+
            gameNs.sceneManager.goToScene(gameNs.playScene.title);
            gameNs.timerStart = true;
            gameNs.start = Date.now();
-
 
          }
          else if (filename === "optionsbutton.png" )

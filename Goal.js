@@ -36,7 +36,7 @@ class Goal
         this.y= (Math.floor(Math.random()*12)*60);
         if(gameNs.collides==true)
         {
-          this.soundManager.playSound("Goal",false,1)
+          this.soundManager.playSound("Goal",false,gameNs.volume)
           gameNs.collides=false
         }
 

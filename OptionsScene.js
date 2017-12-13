@@ -1,9 +1,13 @@
+var gameNs={}
+
 class OptionsScene
 {
   /**
    * Constructor function , creates a scene with parameters which are passed in on construction
    * @param {String} title - passes in a string whihc is set in the main
    */
+
+
   constructor(title)
   {
     this.title = title;
@@ -18,7 +22,8 @@ class OptionsScene
     this.img=new Image();
     this.img.src="img/music.png";
     this.imgSize = 400;
-
+    gameNs.volume=1.0;
+    
   }
   update()
  {
@@ -46,6 +51,7 @@ class OptionsScene
      div.style.position = "absolute";
      div.style.left = (this.width/ 2) - 100 +"px";
      div.style.top = (this.height/ 8) + 80 +'px';
+     gameNs.volume = 0
    }
    else if(div.id ==="VolumeDown")
    {
@@ -57,6 +63,8 @@ class OptionsScene
      div.style.position = "absolute";
      div.style.left = (this.width/ 2) - 400 +"px";
      div.style.top = (this.height/ 8) * 3.25 + 80 +'px';
+     if(gameNs.volume>0)
+     gameNs.volume -=0.35;
    }
    else if(div.id ==="VolumeUp")
    {
@@ -68,6 +76,8 @@ class OptionsScene
      div.style.position = "absolute";
      div.style.left = (this.width/ 2) + 200 +"px";
      div.style.top = (this.height/8) * 3 + 80 +'px';
+     if(gameNs.volume<1)
+        gameNs.volume+=0.35
    }
    else if(div.id==="Back")
    {
