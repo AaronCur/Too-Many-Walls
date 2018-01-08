@@ -7,7 +7,7 @@ class Timer
     gameNs.start;
     this.minutes;
     this.seconds;
-    this.duration=60*3;
+    this.duration=0;
     gameNs.timerStart = false;
     gameNs.score = "";
     this.posX=516-350;
@@ -17,11 +17,8 @@ class Timer
     timer()
     {
 
-        // get the number of seconds that have elapsed since
-        // startTimer() was called
-        if(this.diff>0)
-      {
-        this.diff = this.duration - (((Date.now() - gameNs.start) / 1000) | 0);
+
+        this.diff = this.duration + (((Date.now() - gameNs.start) / 1000) | 0);
 
         // does the same job as parseInt truncates the float
         this.minutes = (this.diff / 60) | 0;
@@ -31,9 +28,8 @@ class Timer
         this.seconds = this.seconds < 10 ? "0" + this.seconds : this.seconds;
 
         gameNs.score = (this.minutes+":"+this.seconds);
-      }
-            setInterval(this.timer, 1000);
 
+            setInterval(this.timer, 1000);
       }
 
 
