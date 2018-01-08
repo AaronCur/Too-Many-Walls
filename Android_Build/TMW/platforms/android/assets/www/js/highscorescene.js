@@ -73,7 +73,7 @@ this.request.send();
 //{
   //localStorage.setItem('Leaderboard', JSON.stringify(this.leaderboard));
 //}
-    //localStorage.setItem('Leaderboard', JSON.stringify(this.leaderboard));
+  //  localStorage.setItem('Leaderboard', JSON.stringify(this.leaderboard));
     this.leaderboard = JSON.parse(localStorage.getItem('Leaderboard'));
 
   //  this.playername = prompt("Please enter your name","Aaron");

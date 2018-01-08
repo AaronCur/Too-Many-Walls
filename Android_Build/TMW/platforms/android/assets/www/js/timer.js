@@ -7,7 +7,7 @@ class Timer
     gameNs.start;
     this.minutes;
     this.seconds;
-    this.duration=60*3;
+    this.duration=0;
     gameNs.timerStart = false;
     gameNs.score = "";
     this.posX=516-350;
@@ -16,7 +16,9 @@ class Timer
 
     timer()
     {
-        this.diff = this.duration - (((Date.now() - gameNs.start) / 1000) | 0);
+
+
+        this.diff = this.duration + (((Date.now() - gameNs.start) / 1000) | 0);
 
         // does the same job as parseInt truncates the float
         this.minutes = (this.diff / 60) | 0;
@@ -27,12 +29,8 @@ class Timer
 
         gameNs.score = (this.minutes+":"+this.seconds);
 
-        setInterval(this.timer, 1000);
+            setInterval(this.timer, 1000);
       }
-
-
-
-
 
 
 
@@ -40,9 +38,9 @@ class Timer
         {
           var canvas = document.createElement("mycanvas");
           var ctx = mycanvas.getContext("2d");
-            ctx.strokeStyle="black";
-          ctx.fillStyle ='blue';
-          ctx.font = '50px Adventure Regular';
+          ctx.fillStyle ='white';
+          ctx.font = '55px Adventure Regular';
+          ctx.strokeStyle = 'black';
           if(gameNs.timerStart==true)
           {
               this.timer();
@@ -76,11 +74,8 @@ class Timer
 
             }
         }
-        if(gameNs.sceneManager.currentScene.title == 'Play')
-        {
           ctx.fillText('Timer '+gameNs.score,this.posX,this.posY);
-        }
-
+          ctx.strokeText('Timer '+gameNs.score,this.posX,this.posY);
 
         }
   }

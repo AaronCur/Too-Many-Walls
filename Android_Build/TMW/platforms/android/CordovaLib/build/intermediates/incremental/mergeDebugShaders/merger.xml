@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="C:\College\TooManyWallsApp\TMW\platforms\android\CordovaLib\src\main\shaders"/></dataSet><dataSet config="debug"><source path="C:\College\TooManyWallsApp\TMW\platforms\android\CordovaLib\src\debug\shaders"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="C:\Users\gameuser\Documents\gd-project-gd_jack_aaron\Android_Build\TMW\platforms\android\CordovaLib\src\main\shaders"/></dataSet><dataSet config="debug"><source path="C:\Users\gameuser\Documents\gd-project-gd_jack_aaron\Android_Build\TMW\platforms\android\CordovaLib\src\debug\shaders"/></dataSet></merger>

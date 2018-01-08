@@ -58,8 +58,8 @@ class Goal
 
     if((this.x< e.x + e.collisionWidth - 20)&&
       (this.x+this.squareSize>e.x)&&
-      (this.y+this.squareSize>e.y + 150)&&
-      (this.y<e.y + 170) )
+      (this.y+this.squareSize>e.y + 130)&&
+      (this.y<e.y + 130) )
       {
         e.respawn()
         this.respawn()
@@ -105,9 +105,10 @@ class Goal
       }
         var image = this.img;
         ctx.drawImage(image, 0 , 0,this.squareSize, this.squareSize ,this.x,this.y, this.squareSize,this.squareSize);
-          ctx.strokeStyle="black";
-        ctx.fillStyle ='green';
-        ctx.font = '50px Adventure Regular';
+        ctx.fillStyle ='white';
+        ctx.font = '55px Adventure Regular';
+        ctx.strokeStyle = 'black';
+
         if(gameNs.sceneManager.currentScene.title == 'Play')
         {
           if(gameNs.playScene.player.x > 516 )
@@ -136,7 +137,8 @@ class Goal
 
               }
           }
-              ctx.fillText('Score: '+this.score, this.posX,this.posY);
+              ctx.fillText('Score: '+this.score+' /120', this.posX,this.posY);
+              ctx.strokeText('Score: '+this.score+' /120', this.posX,this.posY);
           }
 
 
@@ -170,7 +172,8 @@ class Goal
           }
 
 
-          ctx.fillText('Score: '+this.score, this.posX,this.posY);
+          ctx.fillText('Score: '+this.score+' /120', this.posX,this.posY);
+          ctx.strokeText('Score: '+this.score+' /120', this.posX,this.posY);
         }
 
       }
