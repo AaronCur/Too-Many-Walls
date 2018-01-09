@@ -16,48 +16,55 @@ function main()
   game.update();
   console.log(gameNs.onTouchStart)
   game.draw();
-  this.pressedLR = false;
-  this.pressedUD = false;
+
   //document.addEventListener("click", clickHandler.bind(null, sceneManager));
 
 }
 function keyDownHandler(e)
 {
 	//code triggered when left arrow is pressed
-	if(e.keyCode === 37 && this.pressedLR ===false )
+	if(e.keyCode === 37  )
 	{
 		gameNs.playScene.player.moveX = false;
-    this.pressedLR=true;
+    gameNs.tutorialScene.player.moveX = false;
+    gameNs.swipe = true;
 
 	}
-  else if(e.keyCode === 39 && this.pressedLR ===false )
+  else if(e.keyCode === 39 )
 	{
 		gameNs.playScene.player.moveX = true;
-    this.pressedLR=true
+    gameNs.tutorialScene.player.moveX = true;
+    gameNs.swipe = true;
 	}
   else
   {
     gameNs.playScene.player.moveX = null;
-    this.pressedLR=false;
+    gameNs.tutorialScene.player.moveX = null;
+    gameNs.swipe = true;
   }
 
 //code triggered when UP arrow is pressed
-	if(e.keyCode === 38 && this.pressedUD ===false)
+	if(e.keyCode === 38)
 	{
 		gameNs.playScene.player.moveY = false;
-    this.pressedUD = true
-
+    gameNs.tutorialScene.player.moveY = false;
+    gameNs.swipe = true;
 	}
-  else if(e.keyCode === 40 && this.pressedUD ===false)
+  else if(e.keyCode === 40)
 	{
 		gameNs.playScene.player.moveY = true;
-    this.pressedUD=true
+    gameNs.tutorialScene.player.moveY = true;
+    gameNs.swipe = true;
+
 	}
   else
   {
     gameNs.playScene.player.moveY = null;
-    this.pressedUD=false
+    gameNs.tutorialScene.player.moveY = null;
+    gameNs.swipe = true;
+
   }
+
 
 }
 
@@ -147,7 +154,7 @@ function keyDownHandler(e)
    var time2 = new Date().getTime();
    var elapsedTime = time2 - gameNs.time1;
 
-   if(gameNs.sceneManager.currentScene.title == "Play")
+   if( gameNs.sceneManager.currentScene.title == 'Play' || gameNs.sceneManager.currentScene.title == 'Tutorial' )
    {
    var a = startPosX - endPosX;
    var b = startPosY - endPosY;
@@ -156,7 +163,7 @@ function keyDownHandler(e)
    console.log(distBetween);
  //console.log(angle(a,b) );
 
-   if(elapsedTime  > 0 && elapsedTime <= 300 && distBetween > 250 * 0.8 && gameNs.touchStart == true)
+   if(elapsedTime  > 0 && elapsedTime <= 300 && distBetween > 70 && gameNs.touchStart == true)
    {
      if(angle(a,b) > (180 - 45) || angle(a,b) < (-180 + 45) )
      {
@@ -164,6 +171,8 @@ function keyDownHandler(e)
 
          console.log("AngleRight");
          gameNs.playScene.player.moveX = true;
+         gameNs.tutorialScene.player.moveX = true;
+         gameNs.swipe = true;
 
 
 
@@ -172,24 +181,33 @@ function keyDownHandler(e)
      {
        console.log("AngleLeft");
        gameNs.playScene.player.moveX = false;
+       gameNs.tutorialScene.player.moveX = false;
+       gameNs.swipe = true;
      }
      else
      {
        gameNs.playScene.player.moveX = null;
+       gameNs.tutorialScene.player.moveX = null;
+       gameNs.swipe = true;
      }
       if(angle(a,b) < (90 + 45) && angle(a,b) > 45)
      {
        console.log("AngleUp");
        gameNs.playScene.player.moveY = false;
+       gameNs.tutorialScene.player.moveY = false;
+       gameNs.swipe = true;
      }
      else if (angle(a,b) > ( -90 - 45) && angle(a,b) < ( -90 + 45) )
      {
        console.log("AngleDown");
        gameNs.playScene.player.moveY = true;
+       gameNs.tutorialScene.player.moveY = true;
+       gameNs.swipe = true;
      }
      else
      {
         gameNs.playScene.player.moveY = null;
+        gameNs.tutorialScene.player.moveY = null;
      }
 
    }
@@ -197,7 +215,10 @@ function keyDownHandler(e)
     if (gameNs.touchStart == false)
     {
       gameNs.playScene.player.moveY = null;
+      gameNs.tutorialScene.player.moveY = null;
       gameNs.playScene.player.moveX = null;
+      gameNs.tutorialScene.player.moveX = null;
+
       console.log("Tap")
 
     }

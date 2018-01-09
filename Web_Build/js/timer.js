@@ -26,6 +26,7 @@ class Timer
 
         this.minutes = this.minutes < 10 ? "0" + this.minutes : this.minutes;
         this.seconds = this.seconds < 10 ? "0" + this.seconds : this.seconds;
+        gameNs.seconds = this.seconds < 10 ? "0" + this.seconds : this.seconds;
 
         gameNs.score = (this.minutes+":"+this.seconds);
 
@@ -38,8 +39,9 @@ class Timer
         {
           var canvas = document.createElement("mycanvas");
           var ctx = mycanvas.getContext("2d");
-          ctx.fillStyle ='blue';
-          ctx.font = '50px Adventure Regular';
+          ctx.fillStyle ='white';
+          ctx.font = '55px Adventure Regular';
+          ctx.strokeStyle = 'black';
           if(gameNs.timerStart==true)
           {
               this.timer();
@@ -74,6 +76,7 @@ class Timer
             }
         }
           ctx.fillText('Timer '+gameNs.score,this.posX,this.posY);
+          ctx.strokeText('Timer '+gameNs.score,this.posX,this.posY);
 
         }
   }

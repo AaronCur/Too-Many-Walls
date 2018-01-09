@@ -45,7 +45,7 @@ class Player
   this.soundManager.loadSoundFile("flagPlayer", "img/audio/swoosh.mp3")
   this.soundManager.loadSoundFile("playerWall", "img/audio/drop.mp3")
   this.soundManager.loadSoundFile("breakWall", "img/audio/rocks.mp3")
-  this.soundManager.loadSoundFile("backGround", "img/audio/backGround.mp3")
+  this.soundManager.loadSoundFile("backGround", "img/audio/background.mp3")
   this.play=true;
 
   }
@@ -58,33 +58,29 @@ class Player
    {
      if(this.moveX == false && this.x> 0 /*&& this.checkCollisionMap(level.mazeSquares[this.i -1])==false*/)
       {
-        this.x -= 8;
+        this.x -= 5;
         this.direction = 4;
 
       }
       else if (this.moveX == true && this.x < 23 * 75 /*&& this.checkCollisionMap(level.mazeSquares[this.i +1]==false)*/)
       {
-        this.x +=8;
+        this.x +=5;
         this.direction = 2;
       }
       else if (this.moveY == false && this.y > 10)
       {
-         this.y-=8;
+         this.y-=5;
          this.direction = 1;
       }
       else if (this.moveY == true && this.y < 12 * 75)
       {
-       this.y+=8;
+       this.y+=5;
        this.direction = 3;
       }
 
 
 
-      if(this.play===true)
-      {
-        this.soundManager.playSound("backGround", true, gameNs.volume)
-        this.play=false
-      }
+
 
    }
    else {
@@ -159,6 +155,11 @@ class Player
    this.i = (this.row * this.maxCols)+this.col;
    this.i = this.i - 1  ;
 
+   if(this.play===true)
+   {
+     this.soundManager.playSound("backGround", true, gameNs.volume)
+     this.play=false
+   }
 
    this.checkCollisionMap(level);
   //ctx.fillText('Timer '+gameNs.score, gameNs.playScene.player.x , gameNs.playScene.player.y);
@@ -198,14 +199,14 @@ class Player
 
     if((this.x< e.x + e.collisionWidth)&&
       (this.x+this.width>e.x)&&
-      (this.y+this.height + 20
-        >e.y + 60)&&
+      (this.y+this.height + 20>e.y + 60)&&
       (this.y + 30<e.y + 60 +e.collisionHeight) )
       {
         if(gameNs.collides==false)
         {
           this.soundManager.playSound("flagPlayer",false,gameNs.volume)
           gameNs.collides = true;
+          gameNs.tutorialcount = 2;
         }
 
         e.x=this.x+20;
@@ -325,8 +326,7 @@ class Player
         {
           level.mazeSquares[this.i+1].moveWall = false;
           level.mazeSquares[this.i+2].moveWall = true;
-
-
+          gameNs.tutorialcount = 5;
         }
 
       }
@@ -340,7 +340,7 @@ class Player
         {
           level.mazeSquares[this.i-1].moveWall = false;
           level.mazeSquares[this.i-2].moveWall = true;
-
+          gameNs.tutorialcount = 5;
 
         }
 
@@ -355,7 +355,7 @@ class Player
         {
           level.mazeSquares[this.i - this.maxCols ].moveWall = false;
           level.mazeSquares[this.i - (this.maxCols * 2)].moveWall = true;
-
+          gameNs.tutorialcount = 5;
 
         }
 
@@ -370,7 +370,7 @@ class Player
       {
         level.mazeSquares[this.i + this.maxCols ].moveWall = false;
         level.mazeSquares[this.i + (this.maxCols * 2)].moveWall = true;
-
+        gameNs.tutorialcount = 5;
       }
 
     }
@@ -391,7 +391,8 @@ class Player
         {
           level.mazeSquares[this.i+1].breakWall = false;
           level.mazeSquares[this.i+1].containsWall = false;
-        this.soundManager.playSound("breakWall",false,gameNs.volume)
+          this.soundManager.playSound("breakWall",false,gameNs.volume)
+          gameNs.tutorialcount = 4;
         }
 
       }
@@ -406,6 +407,7 @@ class Player
           level.mazeSquares[this.i-1].breakWall = false;
           level.mazeSquares[this.i-1].containsWall = false;
           this.soundManager.playSound("breakWall",false,gameNs.volume)
+          gameNs.tutorialcount = 4;
         }
 
       }
@@ -420,6 +422,7 @@ class Player
           level.mazeSquares[this.i - this.maxCols].breakWall = false;
           level.mazeSquares[this.i - this.maxCols].containsWall = false;
           this.soundManager.playSound("breakWall",false,gameNs.volume)
+          gameNs.tutorialcount = 4;
         }
 
       }
@@ -434,6 +437,7 @@ class Player
        level.mazeSquares[this.i  +  this.maxCols].breakWall = false;
        level.mazeSquares[this.i +  this.maxCols ].containsWall = false;
        this.soundManager.playSound("breakWall",false,gameNs.volume)
+       gameNs.tutorialcount = 4;
      }
     }
 

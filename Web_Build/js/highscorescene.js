@@ -24,63 +24,24 @@ class HighScoreScene
     this.score = 0;
     this.count = 0;
 
- /*ordered = reverse(ordered);
 
-/*
-    this.leaderboard
-
-    this.highscorestable = {};
-
-
-
-    this.request = new XMLHttpRequest();
-
-    var that = this;
-    this.request.addEventListener("load", function requestListener(){
-   //TADA! Now I have the class data.
-   this.highscores = {};
-   this.highscorestable = {};
-    this.leaderboard = JSON.parse(this.responseText);
-    this.highscores= this.leaderboard.leaderboard;
-    //this.highscores.push({"score":100,"name":"steven"});
-  //  console.log("Highscores :", that.highscores);
-    //for (var i, var j in this.highscores) {
-      //this.highscorestable[i] = j;
-    console.log("HighScoretable :",this.highscores);
- this.playername = prompt("Please enter your name","Aaron");
-        this.highscores[this.playername] = 100;
-
-console.log("HighScoretable :",this.highscores);
-
-localStorage.setItem('Leaderboard', JSON.stringify(this.highscores));
-this.highscores2 = {};
-this.highscores2 = JSON.parse(localStorage.getItem('Leaderboard'));
-console.log('Table 2:',this.highscores2);
-
-
-});
-this.request.open("GET", "http://192.168.1.12:8000/leaderboard.json");
-this.request.send();
-*/
   }
   getScoreTable()
   {
+    //To create a leaderboard file if there isnt one already made
+    if((localStorage.getItem('Leaderboard') === null))
+  {
+    localStorage.setItem('Leaderboard', JSON.stringify(this.leaderboard));
+  }
 
-    //to reset the local storage
-    this.count = this.count + 1;
-
-
-   //localStorage.setItem('Leaderboard', JSON.stringify(this.leaderboard));
-
-    //localStorage.setItem('Leaderboard', JSON.stringify(this.leaderboard));
     this.leaderboard = JSON.parse(localStorage.getItem('Leaderboard'));
 
   //  this.playername = prompt("Please enter your name","Aaron");
-  if(this.count == 1)
+  if(this.count < 1)
   {
     while(this.playername==null)
     {
-      this.playername = prompt("Please enter your name","Aaron");
+      this.playername = prompt("Please enter your name","");
     }
 
     this.leaderboard[Math.round(gameNs.playerscore/1000)] = this.playername;
@@ -162,8 +123,6 @@ this.request.send();
 
     this.position = this.keyValue.indexOf(this.findPos.toString());
       console.log(this.position);
-    for(var j = 0; j < 7; j++)
-    {
       if(j <= 1)
       {
 
@@ -196,12 +155,13 @@ this.request.send();
         ctx.font = '50px Adventure Regular';
         ctx.fillText(positionText, this.windowWidth/7*2, this.windowHeight/8);
         ctx.font = '40px Adventure Regular';
-        ctx.fillText(stringName, this.windowWidth/3, (50 * y) + this.windowHeight/5);
-        ctx.fillText(stringScore, this.windowWidth/7 * 3.7, (50* y) + this.windowHeight/5);
+        ctx.fillText(stringName, this.windowWidth/3, (51 * y) + this.windowHeight/4.8);
+        ctx.fillText(stringScore, this.windowWidth/7 * 4.2, (51* y) + this.windowHeight/4.8);
         y=y+1;
         j=j+1;
       }
-    }
+
+      ctx.fillText("Press Back to return to the menu  <-", this.windowWidth/7 * 1.7, this.windowHeight/6 * 5.8);
 }
 //output highest to lowest
 

@@ -1,4 +1,4 @@
-class PlayScene
+class TutorialScene
 {
   /**
    * Constructor function , creates a scene with parameters which are passed in on construction
@@ -6,6 +6,14 @@ class PlayScene
    */
   constructor(title)
   {
+    this.start;
+    this.tutorialtext = "";
+    gameNs.swipe = false;
+    this.flagCapture = false;
+    this.goalTut = false;
+    this.breakwalltut = false;
+    this.movewalltut = false;
+    this.tutorialover = false;
     this.gameover = false;
     this.gameoverscreen = new HighScoreScene();
     gameNs.winnerscreen = new Winner('Winner');
@@ -35,7 +43,7 @@ class PlayScene
     },10);
 
 
-
+    gameNs.tutorialcount = 0;
 
     this.level = new LevelLoader();
     this.canvas = document.getElementById('mycanvas');
@@ -85,9 +93,6 @@ class PlayScene
 
       }
     //  if( this.player.y > canvas.height/2 &&this.player.y < (14 * 60) - canvas.height/ 2)
-
-
-
       this.player.breakWall(this.level);
       this.player.moveWall(this.level);
     }
@@ -110,17 +115,88 @@ class PlayScene
     this.player.checkCollision(this.flag);
     this.goal.checkCollision(this.flag);
 
-
-
-    if(this.gameover == true)
+    if(gameNs.tutorialScene.player.x > 516 )
     {
-    //  ctx.translate(0, 0);
-      this.gameoverscreen.getScoreTable();
-      this.gameoverscreen.render();
-    //  this.winnerscreen.render();
-
+      if(  gameNs.tutorialScene.player.x > 989 )
+      {
+        this.posX = 989-350;
+      }
+      else {
+        this.posX = gameNs.tutorialScene.player.x - 350;
+      }
 
     }
+    //else {
+      //  ctx.fillText('Timer '+this.minutes+':'+this.seconds, 516 - 350 , 50);
+  //  }
+    if(gameNs.tutorialScene.player.y > 236 )
+    {
+        if(gameNs.tutorialScene.player.y > 572)
+        {
+            //ctx.fillText('Timer '+this.minutes+':'+this.seconds,516 - 350,572 - 186);
+            this.posY = 572 - 186
+        }
+        else {
+          this.posY = gameNs.tutorialScene.player.y - 186
+
+        }
+    }
+
+    switch (gameNs.tutorialcount) {
+    case 0:
+    if(gameNs.swipe == false)
+    {
+      this.tutorialtext = "Swipe/Arrows to move";
+    }
+    else {
+      gameNs.tutorialcount = 1;
+    }
+        break;
+    case 1:
+//if(this.)
+        if(gameNs.swipe == true && this.flagCapture == false)
+        {
+          this.tutorialtext = "Find the flag!";
+        }
+
+        break;
+    case 2:
+
+        if(this.goalTut == false && gameNs.swipe == true)
+        {
+          this.flagCapture = true;
+          this.tutorialtext = "Bring flag to goal";
+        }
+        break;
+    case 3:
+        if(this.breakwalltut == false&& this.flagCapture == true)
+        {
+          this.goalTut = true;
+          this.tutorialtext = "Walk through weak walls";
+        }
+        break;
+    case 4:
+
+        if(this.movewalltut == false && this.goalTut==true)
+        {
+
+          this.breakwalltut = true;
+          this.tutorialtext = "Crates can be moved"
+        }
+        break;
+    case 5:
+        if(this.breakwalltut == true & this.tutorialover == false)
+        {
+          this.movewalltut = true;
+          this.tutorialtext = "Press back to return to menu"
+        }
+    }
+    ctx.strokeStyle="	#000000";
+    ctx.fillStyle ='yellow';
+    ctx.font = '50px Adventure Regular';
+    ctx.fillText(this.tutorialtext, gameNs.tutorialScene.player.x - 60, gameNs.tutorialScene.player.y - 30);
+
+
 
     this.ctx.restore();
   }
@@ -135,7 +211,7 @@ class PlayScene
    var ctx = mycanvas.getContext("2d");
    document.body.style.background = "#ffffff";
 
-    ctx.fillText(this.title, 10, 50);
+
 
 
 

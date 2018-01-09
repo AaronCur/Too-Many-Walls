@@ -16,7 +16,7 @@ class MenuScene
 
     this.createDiv("Play");
     this.createDiv("Options");
-    this.createDiv("Exit");
+    this.createDiv("Tutorial");
 
     this.soundManager = new SoundManager()
     this.soundManager.init()
@@ -47,9 +47,9 @@ class MenuScene
         div.style.left = (this.width/ 2) - 135 +"px";
         div.style.top = (this.height/ 8) * 3 + 40 +'px';
       }
-      else if(div.id === "Exit")
+      else if(div.id === "Tutorial")
       {
-        div.innerHTML = "<img src=\'img/exitbutton.png\'>";
+        div.innerHTML = "<img src=\'img/tutorialbutton.png\'>";
         this.div = div;
 
         div.style.position = "absolute";
@@ -107,8 +107,11 @@ class MenuScene
 
 
          }
-         else if (filename === "exitbutton.png" )
+         else if (filename === "tutorialbutton.png" )
          {
+           gameNs.sceneManager.goToScene(gameNs.tutorialScene.title);
+           gameNs.timerStart = true;
+           gameNs.start = Date.now();
            //throw new Error("Something went badly wrong!");
           // div.style.background = "Teal";
            //gameNs.soundManager.Stop();
@@ -123,7 +126,7 @@ class MenuScene
          el.parentNode.removeChild( el );
          var el = document.getElementById( 'Options' );
          el.parentNode.removeChild( el );
-         var el = document.getElementById( 'Exit' );
+         var el = document.getElementById( 'Tutorial' );
          el.parentNode.removeChild( el );
        }
 

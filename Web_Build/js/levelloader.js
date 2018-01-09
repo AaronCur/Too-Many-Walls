@@ -14,14 +14,14 @@ class LevelLoader
     this.MaxRows = 12;
     this.MaxCols = 12;
     this.map = [];
-    this.mazeSquares = [];
-    this.request = new XMLHttpRequest();
+     this.mazeSquares = [];
+     this.request = new XMLHttpRequest();
 
      var that = this;
      this.request.addEventListener("load", function requestListener(){
     //TADA! Now I have the class data.
      this.levelloader = JSON.parse(this.responseText);
-     this.map= this.levelloader.Map2;
+     this.map= this.levelloader.Map;
      console.log("MapData :" +that.map[10] );
 
      for (this.row = 0; this.row < 14; this.row++)
@@ -59,7 +59,7 @@ class LevelLoader
      }
 
 });
-this.request.open("GET", "http://149.153.106.134:8000/level2.json");
+this.request.open("GET", "js/level.json");
 this.request.send();
   }
   update()
