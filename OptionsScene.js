@@ -1,3 +1,9 @@
+/**
+ * @fileoverview
+ * @author Jack Dalton
+ */
+//
+
 var gameNs={}
 
 class OptionsScene

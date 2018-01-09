@@ -1,4 +1,9 @@
 /**
+ * @fileoverview
+ * @author Jack Dalton
+ */
+//
+/**
  * MenuScene class inherits Scene
  *
  */

@@ -1,3 +1,9 @@
+/**
+ * @fileoverview
+ * @author Jack Dalton
+ */
+//
+
 gameNs = {}
 class Timer
 {
@@ -14,6 +20,9 @@ class Timer
     this.posY=236 - 186;
   }
 
+  /**
+  *Function controls how the timer increments
+    */
     timer()
     {
 
@@ -21,6 +30,7 @@ class Timer
         this.diff = this.duration + (((Date.now() - gameNs.start) / 1000) | 0);
 
         // does the same job as parseInt truncates the float
+        //when seconds reach 60 increment minutes by one and return seconds to 0
         this.minutes = (this.diff / 60) | 0;
         this.seconds = (this.diff % 60) | 0;
 
@@ -28,7 +38,7 @@ class Timer
         this.seconds = this.seconds < 10 ? "0" + this.seconds : this.seconds;
 
         gameNs.score = (this.minutes+":"+this.seconds);
-
+        //wait one second before running function again
             setInterval(this.timer, 1000);
       }
 
@@ -40,6 +50,7 @@ class Timer
           var ctx = mycanvas.getContext("2d");
           ctx.fillStyle ='blue';
           ctx.font = '50px Adventure Regular';
+          //starts timer
           if(gameNs.timerStart==true)
           {
               this.timer();

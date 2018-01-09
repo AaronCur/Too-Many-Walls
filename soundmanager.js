@@ -1,3 +1,9 @@
+/**
+ * @fileoverview
+ * @author Jack Dalton
+ */
+//
+
 class SoundManager
 {
 constructor()

@@ -1,7 +1,14 @@
+/**
+ * @fileoverview
+ * @author Jack Dalton
+ */
+//
 gameNs={}
 class Goal
 {
-
+/**
+*Constructor that creates new goal
+*/
   constructor()
   {
     var alive = true;
@@ -21,6 +28,10 @@ class Goal
     this.respawn()
   }
 
+  /**
+  *function used to respawn the flag's position everytime the game is started
+  *Or when the players brings the flag to the goal.
+  */
   respawn()
   {
     this.i= (Math.floor(Math.random()*5));
@@ -52,6 +63,11 @@ class Goal
 
   }
 
+/**
+*Function that checks for collision between the goal and the flag
+*Fucntion then calls the respawn function for both the flag and goal
+@param {event}e is used as a reference for the flag position.
+*/
   checkCollision(e)
   {
 
@@ -78,7 +94,9 @@ class Goal
 
     }
 
-
+/**
+*update function loads image used for goal and checks for gameOver
+*/
   update()
   {
     if(this.alive === true)

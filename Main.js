@@ -18,8 +18,6 @@ function main()
   game.draw();
   this.pressedLR = false;
   this.pressedUD = false;
-  //document.addEventListener("click", clickHandler.bind(null, sceneManager));
-
 }
 function keyDownHandler(e)
 {

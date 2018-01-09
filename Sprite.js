@@ -1,3 +1,10 @@
+/**
+ * @fileoverview
+ * @author Jack Dalton
+ * @author Aaron Curry
+ */
+//
+
 class Sprite
 {
   /**

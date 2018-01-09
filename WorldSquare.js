@@ -1,3 +1,9 @@
+/**
+ * @fileoverview
+ * @author Aaron Curry
+ */
+//
+
 class WorldSquare
 {
   /**
@@ -30,6 +36,9 @@ class WorldSquare
 
 
   }
+  /**
+  *Checks collision between player and map
+  */
   checkCollisionMap(player)
   {
     console.log(map.x);

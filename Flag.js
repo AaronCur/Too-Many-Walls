@@ -1,5 +1,12 @@
 class Flag
 {
+  /**
+  *Constructor function that accepts key pressed events and initiates code
+  moves square based on which button that's pressed
+  @param {number}context
+  @param {Image}imageOptions used for height, width and the image
+  @param {number}fps frames per second
+  */
   constructor(context, imageOptions,fps)
   {
 
@@ -19,6 +26,11 @@ class Flag
 
   }
 
+
+/**
+*function used to respawn the flag's position everytime the game is started
+*Or when the players brings the flag to the goal.
+*/
   respawn()
   {
     this.i= (Math.floor(Math.random()*5));
@@ -53,7 +65,10 @@ class Flag
       this.y = 246
     }
   }
-
+/**
+*Update funtion that works with flags animation
+@param {Time}deltaTime time variable used in the flag animation
+*/
   update(deltaTime)
   {
 
@@ -66,8 +81,11 @@ class Flag
 
     var image = this.img;
 
+
+    //loads flags image
     ctx.drawImage(image, this.index* 158 , 312 ,158, 312 ,this.x,this.y, 40 * 0.8,120 * 0.8);
 
+    //flag animation
     if(this.ticksPerFrame < this.time)
     {
       this.index = this.index +1;
