@@ -199,7 +199,7 @@ class OptionsScene
           el.parentNode.removeChild( el );
           gameNs.menuScene.createDiv("Play");
           gameNs.menuScene.createDiv("Options");
-          gameNs.menuScene.createDiv("Exit");
+          gameNs.menuScene.createDiv("Tutorial");
 
         }
      }
