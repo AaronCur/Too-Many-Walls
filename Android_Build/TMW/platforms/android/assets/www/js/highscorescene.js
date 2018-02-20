@@ -24,59 +24,19 @@ class HighScoreScene
     this.score = 0;
     this.count = 0;
 
- /*ordered = reverse(ordered);
 
-/*
-    this.leaderboard
-
-    this.highscorestable = {};
-
-
-
-    this.request = new XMLHttpRequest();
-
-    var that = this;
-    this.request.addEventListener("load", function requestListener(){
-   //TADA! Now I have the class data.
-   this.highscores = {};
-   this.highscorestable = {};
-    this.leaderboard = JSON.parse(this.responseText);
-    this.highscores= this.leaderboard.leaderboard;
-    //this.highscores.push({"score":100,"name":"steven"});
-  //  console.log("Highscores :", that.highscores);
-    //for (var i, var j in this.highscores) {
-      //this.highscorestable[i] = j;
-    console.log("HighScoretable :",this.highscores);
- this.playername = prompt("Please enter your name","Aaron");
-        this.highscores[this.playername] = 100;
-
-console.log("HighScoretable :",this.highscores);
-
-localStorage.setItem('Leaderboard', JSON.stringify(this.highscores));
-this.highscores2 = {};
-this.highscores2 = JSON.parse(localStorage.getItem('Leaderboard'));
-console.log('Table 2:',this.highscores2);
-
-
-});
-this.request.open("GET", "http://192.168.1.12:8000/leaderboard.json");
-this.request.send();
-*/
   }
   getScoreTable()
   {
 
-    //to reset the local storage
+    //To create a leaderboard file if there isnt one already made
+    if((localStorage.getItem('Leaderboard') === null))
+    {
+      localStorage.setItem('Leaderboard', JSON.stringify(this.leaderboard));
+    }
 
-
-//if((localStorage.getItem('Leaderboard') == null)
-//{
-  //localStorage.setItem('Leaderboard', JSON.stringify(this.leaderboard));
-//}
-  //  localStorage.setItem('Leaderboard', JSON.stringify(this.leaderboard));
     this.leaderboard = JSON.parse(localStorage.getItem('Leaderboard'));
 
-  //  this.playername = prompt("Please enter your name","Aaron");
   if(this.count < 1)
   {
     while(this.playername==null)

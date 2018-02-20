@@ -8,12 +8,22 @@ class Game
   constructor()
   {
     console.log("game constructed");
+
   }
   /**
   *helper funtion that records the time when the application is loaded
   */
   initWorld() //prints out “Initialising game world”
   {
+    var message = {}
+     this.ws = new WebSocket("ws://149.153.106.133:8080/wstest");
+     gameNs.ws = this.ws
+     gameNs.ws.onopen = function() {
+     message.type = "test";
+     message.data = "hello";
+     gameNs.ws.send(JSON.stringify(message));
+     };
+
     //this.touchTest = new TouchTest();
     gameNs.sceneManager = new SceneManager();
     this.scene = new Scene('Scene');

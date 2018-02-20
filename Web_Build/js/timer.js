@@ -9,11 +9,16 @@ class Timer
     this.seconds;
     this.duration=0;
     gameNs.timerStart = false;
-    gameNs.score = "";
+    gameNs.score = "00:00";
     this.posX=516-350;
     this.posY=236 - 186;
   }
+  updateFromNet(time, start)
+  {
+    gameNs.timerStart = time;
+    gameNs.start = start;
 
+  }
     timer()
     {
 
@@ -46,7 +51,7 @@ class Timer
           {
               this.timer();
           }
-          console.log("Playerposx "+gameNs.playScene.player.x)
+          //console.log("Playerposx "+gameNs.playScene.player.x)
 
         //ctx.fillText('Timer '+this.minutes+':'+this.seconds, gameNs.playScene.player.x  , gameNs.playScene.player.y);
         if(gameNs.playScene.player.x > 516 )

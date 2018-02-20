@@ -15,17 +15,38 @@ class Goal
     this.posX = 516 + 50;
     this.posY = 50;
 
-    this.soundManager = new SoundManager()
-    this.soundManager.init()
-    this.soundManager.loadSoundFile("Goal", "img/audio/goal.mp3")
-    this.respawn()
+    this.x = -100;
+    this.y = -100;
   }
+  checkCollision(e)
+{
 
+
+  if((this.x< e.x + e.collisionWidth - 20)&&
+    (this.x+this.squareSize>e.x)&&
+    (this.y+this.squareSize>e.y + 130)&&
+    (this.y<e.y + 130) )
+    {
+      e.respawn()
+      this.respawn()
+
+      if(gameNs.collides===true)
+      {
+        gameNs.soundManager.playSound("Goal",false,gameNs.volume)
+        gameNs.collides=false
+        gameNs.tutorialcount = 3;
+      }
+      //console.log("Collided");
+      this.score = this.score + 20;
+
+    }
+
+  }
   respawn()
   {
     this.i= (Math.floor(Math.random()*5));
     if(this.i === 0)
-    {
+      {
       this.x = 1*60
       this.y = 9*60
     }
@@ -50,38 +71,25 @@ class Goal
       this.y = 7*60
     }
 
-  }
+    var message = {};
+    message.type = "updateState";
+    message.goal = {x:this.x, y:this.y};
 
-  checkCollision(e)
-  {
-
-
-    if((this.x< e.x + e.collisionWidth - 20)&&
-      (this.x+this.squareSize>e.x)&&
-      (this.y+this.squareSize>e.y + 130)&&
-      (this.y<e.y + 130) )
-      {
-        e.respawn()
-        this.respawn()
-
-        if(gameNs.collides===true)
-        {
-          this.soundManager.playSound("Goal",false,gameNs.volume)
-          gameNs.collides=false
-          gameNs.tutorialcount = 3;
-        }
-
-
-        //console.log("Collided");
-        this.score = this.score + 20;
-
-      }
-
+    if(gameNs.game.ws.readyState === gameNs.game.ws.OPEN)
+    {
+      gameNs.ws.send(JSON.stringify(message));
     }
 
+  }
+  updateFromNet(x,y)
+  {
+    this.x = x;
+    this.y = y;
+  }
 
   update()
   {
+
     if(this.alive === true)
     {
       var canvas = document.getElementById('mycanvas');

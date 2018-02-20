@@ -18,7 +18,7 @@ class OptionsScene
     gameNs.widthVol = 0;
     this.heightVol = 200;
     this.x = 300;
-    this.y=600;
+    this.y=400;
     this.img=new Image();
     this.img.src="img/music.png";
     this.imgSize = 400;
@@ -29,9 +29,6 @@ class OptionsScene
  {
    var canvas = document.getElementById('mycanvas');
    var ctx = canvas.getContext('2d');
-   ctx.scale(0.15,0.15);
-
-
  }
 
   createDiv(divId)
@@ -75,7 +72,7 @@ class OptionsScene
 
      div.style.visibility = "visible";
      div.style.position = "absolute";
-     div.style.left = (this.width/ 2) + 200 +"px";
+     div.style.left = (this.width/ 2) + 300 +"px";
      div.style.top = (this.height/8) * 3 + 80 +'px';
      if(gameNs.volume<1)
         gameNs.volume+=0.35
@@ -88,8 +85,8 @@ class OptionsScene
 
      div.style.visibility = "visible";
      div.style.position = "absolute";
-     div.style.left = (this.width/ 2) - 500 +"px";
-     div.style.top = (this.height/8) - 200 +'px';
+     div.style.left = (this.width/ 2) - 450 +"px";
+     div.style.top = (this.height/8) - 100 +'px';
    }
   // ctx.drawImage(image, 0 , this.height,100, this.heightVol ,this.x,this.y, this.widthVol,this.heightVol);
    div.addEventListener("touchstart", this.onTouchStart,{passive:false});
@@ -137,8 +134,10 @@ class OptionsScene
 
         else if (filename === "volumedown.png" )
         {
+          console.log("button Pressed")
           if(gameNs.widthVol == 233)
           {
+
             gameNs.widthVol = 0;
             gameNs.imgSize = 0;
           }
@@ -160,7 +159,7 @@ class OptionsScene
 
 
         }
-        else if (filename === "volumeUp.png" )
+        else if (filename === "volumeup.png" )
         {
           if(gameNs.widthVol==0)
           {
@@ -202,10 +201,7 @@ class OptionsScene
           gameNs.menuScene.createDiv("Options");
           gameNs.menuScene.createDiv("Tutorial");
 
-
         }
-
-
      }
    }
 }
@@ -218,7 +214,6 @@ class OptionsScene
   {
     var canvas = document.getElementById('mycanvas');
     var ctx = canvas.getContext('2d');
-    ctx.scale(0.5,0.5);
     ctx.clearRect(0, 0, mycanvas.width, mycanvas.height);
 
     document.body.style.background = "#FFFACD";
