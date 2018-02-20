@@ -6,8 +6,9 @@ class TutorialScene
    */
   constructor(title)
   {
+    this.start;
     this.tutorialtext = "";
-    this.swipe = true;
+    gameNs.swipe = false;
     this.flagCapture = false;
     this.goalTut = false;
     this.breakwalltut = false;
@@ -140,17 +141,28 @@ class TutorialScene
 
         }
     }
+
     switch (gameNs.tutorialcount) {
     case 0:
-        this.tutorialtext = "Swipe to move";
+    if(gameNs.swipe == false)
+    {
+      this.tutorialtext = "Swipe/Arrows to move";
+    }
+    else {
+      gameNs.tutorialcount = 1;
+    }
         break;
     case 1:
 //if(this.)
-        this.tutorialtext = "Find the flag!";
+        if(gameNs.swipe == true && this.flagCapture == false)
+        {
+          this.tutorialtext = "Find the flag!";
+        }
+
         break;
     case 2:
 
-        if(this.goalTut == false)
+        if(this.goalTut == false && gameNs.swipe == true)
         {
           this.flagCapture = true;
           this.tutorialtext = "Bring flag to goal";

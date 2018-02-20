@@ -40,6 +40,8 @@ class Player
   this.moved =false
   gameNs.collides = false;
 
+  this.ps = new ParticleSystem(this.xFeet, this.yFeet)
+  this.rps = new RockParticleSystem(this.xFeet, this.yFeet)
   this.soundManager = new SoundManager()
   this.soundManager.init()
   this.soundManager.loadSoundFile("flagPlayer", "img/audio/swoosh.mp3")
@@ -56,6 +58,9 @@ class Player
  update(deltaTime, level)
  { if(gameNs.playScene.gameover == false)
    {
+     this.rps.update(  level.mazeSquares[this.i+1].x, level.mazeSquares[this.i+1].y)
+     level.mazeSquares[this.i+1].x
+      this.ps.update(this.xFeet, this.yFeet)
      if(this.moveX == false && this.x> 0 /*&& this.checkCollisionMap(level.mazeSquares[this.i -1])==false*/)
       {
         this.x -= 5;
@@ -77,10 +82,6 @@ class Player
        this.y+=5;
        this.direction = 3;
       }
-
-
-
-
 
    }
    else {
@@ -123,6 +124,7 @@ class Player
      {
 
        ctx.drawImage(image, 78 , 324,78, 108 ,this.x,this.y, this.width,this.height);
+
      }
      else if(this.direction == 2)
      {
@@ -163,6 +165,7 @@ class Player
 
    this.checkCollisionMap(level);
   //ctx.fillText('Timer '+gameNs.score, gameNs.playScene.player.x , gameNs.playScene.player.y);
+
 
  }
 
@@ -393,6 +396,8 @@ class Player
           level.mazeSquares[this.i+1].containsWall = false;
           this.soundManager.playSound("breakWall",false,gameNs.volume)
           gameNs.tutorialcount = 4;
+          level.mazeSquares[this.i +1].collide = true
+
         }
 
       }
@@ -408,7 +413,10 @@ class Player
           level.mazeSquares[this.i-1].containsWall = false;
           this.soundManager.playSound("breakWall",false,gameNs.volume)
           gameNs.tutorialcount = 4;
-        }
+          level.mazeSquares[this.i - 1].collide = true
+
+         }
+
 
       }
 
@@ -423,7 +431,8 @@ class Player
           level.mazeSquares[this.i - this.maxCols].containsWall = false;
           this.soundManager.playSound("breakWall",false,gameNs.volume)
           gameNs.tutorialcount = 4;
-        }
+          level.mazeSquares[this.i - this.maxCols].collide=true
+         }
 
       }
 
@@ -438,7 +447,10 @@ class Player
        level.mazeSquares[this.i +  this.maxCols ].containsWall = false;
        this.soundManager.playSound("breakWall",false,gameNs.volume)
        gameNs.tutorialcount = 4;
+       level.mazeSquares[this.i + this.maxCols].collide=true
+
      }
+
     }
 
   }

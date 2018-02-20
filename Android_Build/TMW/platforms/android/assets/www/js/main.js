@@ -26,30 +26,45 @@ function keyDownHandler(e)
 	if(e.keyCode === 37  )
 	{
 		gameNs.playScene.player.moveX = false;
+    gameNs.tutorialScene.player.moveX = false;
+    gameNs.swipe = true;
 
 	}
   else if(e.keyCode === 39 )
 	{
 		gameNs.playScene.player.moveX = true;
+    gameNs.tutorialScene.player.moveX = true;
+    gameNs.swipe = true;
 	}
   else
   {
     gameNs.playScene.player.moveX = null;
+    gameNs.tutorialScene.player.moveX = null;
+    gameNs.swipe = true;
   }
 
 //code triggered when UP arrow is pressed
 	if(e.keyCode === 38)
 	{
 		gameNs.playScene.player.moveY = false;
+    gameNs.tutorialScene.player.moveY = false;
+    gameNs.swipe = true;
 	}
   else if(e.keyCode === 40)
 	{
 		gameNs.playScene.player.moveY = true;
+    gameNs.tutorialScene.player.moveY = true;
+    gameNs.swipe = true;
+
 	}
   else
   {
     gameNs.playScene.player.moveY = null;
+    gameNs.tutorialScene.player.moveY = null;
+    gameNs.swipe = true;
+
   }
+
 
 }
 
@@ -157,6 +172,7 @@ function keyDownHandler(e)
          console.log("AngleRight");
          gameNs.playScene.player.moveX = true;
          gameNs.tutorialScene.player.moveX = true;
+         gameNs.swipe = true;
 
 
 
@@ -166,23 +182,27 @@ function keyDownHandler(e)
        console.log("AngleLeft");
        gameNs.playScene.player.moveX = false;
        gameNs.tutorialScene.player.moveX = false;
+       gameNs.swipe = true;
      }
      else
      {
        gameNs.playScene.player.moveX = null;
        gameNs.tutorialScene.player.moveX = null;
+       gameNs.swipe = true;
      }
       if(angle(a,b) < (90 + 45) && angle(a,b) > 45)
      {
        console.log("AngleUp");
        gameNs.playScene.player.moveY = false;
        gameNs.tutorialScene.player.moveY = false;
+       gameNs.swipe = true;
      }
      else if (angle(a,b) > ( -90 - 45) && angle(a,b) < ( -90 + 45) )
      {
        console.log("AngleDown");
        gameNs.playScene.player.moveY = true;
        gameNs.tutorialScene.player.moveY = true;
+       gameNs.swipe = true;
      }
      else
      {
@@ -198,6 +218,7 @@ function keyDownHandler(e)
       gameNs.tutorialScene.player.moveY = null;
       gameNs.playScene.player.moveX = null;
       gameNs.tutorialScene.player.moveX = null;
+
       console.log("Tap")
 
     }
