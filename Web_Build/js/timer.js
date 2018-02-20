@@ -10,8 +10,8 @@ class Timer
     this.duration=0;
     gameNs.timerStart = false;
     gameNs.score = "00:00";
-    this.posX=516-350;
-    this.posY=236 - 186;
+    this.posX=405;
+    this.posY=50;
   }
   updateFromNet(time, start)
   {
@@ -54,14 +54,14 @@ class Timer
           //console.log("Playerposx "+gameNs.playScene.player.x)
 
         //ctx.fillText('Timer '+this.minutes+':'+this.seconds, gameNs.playScene.player.x  , gameNs.playScene.player.y);
-        if(gameNs.playScene.player.x > 516 )
+        if(gameNs.playScene.player.x > 475 )
         {
-          if(  gameNs.playScene.player.x > 989 )
+          if(  gameNs.playScene.player.x > 948 )
           {
-            this.posX = 989-350;
+            this.posX = 948 - 70;
           }
           else {
-            this.posX = gameNs.playScene.player.x - 350;
+            this.posX = gameNs.playScene.player.x - 70 ;
           }
 
         }
@@ -80,8 +80,8 @@ class Timer
 
             }
         }
-          ctx.fillText('Timer '+gameNs.score,this.posX,this.posY);
-          ctx.strokeText('Timer '+gameNs.score,this.posX,this.posY);
+          ctx.fillText(gameNs.score,this.posX,this.posY);
+          ctx.strokeText(gameNs.score,this.posX,this.posY);
 
         }
   }

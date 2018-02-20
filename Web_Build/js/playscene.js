@@ -66,8 +66,8 @@ class PlayScene
     console.log("Initialising game world");
       var joinButton = document.getElementById("join");
       joinButton.addEventListener("click", this.join);
-      var gameOverButton = document.getElementById("GameOver");
-      //gameOverButton.addEventListener("click", this.gameover);
+      var gameOverButton = document.getElementById("gameover");
+      gameOverButton.addEventListener("click", this.gameOver);
       gameNs.ws.addEventListener('message', this.handleMessage);
 
   }
@@ -80,7 +80,6 @@ class PlayScene
       {
          gameNs.playScene.otherPlayer.updateFromNet(msg.player.x,msg.player.y, msg.player.moveX, msg.player.moveY, msg.player.direction)
       }
-
 
        if (msg.maze !== undefined)
        {
@@ -96,19 +95,28 @@ class PlayScene
          gameNs.playScene.timer.updateFromNet(msg.time.time,msg.time.start)
        }
 
+       if(msg.goal!== undefined)
+       {
+          gameNs.playScene.goal.updateFromNet(msg.goal.x,msg.goal.y)
+       }
+       if(msg.flag!== undefined)
+       {
+         gameNs.playScene.flag.updateFromNet(msg.flag.x,msg.flag.y);
+       }
 
+       if(msg.score!== undefined)
+       {
+         gameNs.playScene.goal.updateFromNetScore(msg.score.otherScore);
+       }
     }
 //    else if(msg.type === "updateState")
   //  {
-      if(msg.goal!== undefined)
-      {
-         gameNs.playScene.goal.updateFromNet(msg.goal.x,msg.goal.y)
-      }
-      if(msg.flag!== undefined)
-      {
-        gameNs.playScene.flag.updateFromNet(msg.flag.x,msg.flag.y);
-      }
+
   //  }
+  else if(msg.type === "EndGame")
+  {
+    alert("You Lose! Press gameover and join to try again")
+  }
     else if(msg.type === "error")
     {
       alert(msg.data)
@@ -155,7 +163,7 @@ class PlayScene
     console.log(message);
 
   }
-  gameover()
+  gameOver()
   {
     var message={}
     message.type = "GameOver"
@@ -234,9 +242,15 @@ class PlayScene
 
     if(this.gameover == true)
     {
+      var message = {};
+      message.type = "EndGame";
+      {
+        gameNs.ws.send(JSON.stringify(message));
+      }
       ctx.translate(0, 0);
       this.gameoverscreen.getScoreTable();
       this.gameoverscreen.render();
+
     }
 
     this.ctx.restore();

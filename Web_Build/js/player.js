@@ -46,8 +46,8 @@ class Player
   }
   setPosition()
   {
-    this.x = 70;
-    this.y = 720;
+    this.x = 800;
+    this.y = 100;
   }
   updateFromNet(x, y, moveX, moveY, direction)
   {

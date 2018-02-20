@@ -10,10 +10,13 @@ class Goal
     this.img.src = "img/goal.png";
     this.squareSize = 60;
     this.score = 0;
+    this.otherScore = 0;
     this.goalScore = 120;
     this.winner=false;
-    this.posX = 516 + 50;
+    this.posX = 55;
     this.posY = 50;
+    this.posOtherX = 725;
+    this.posOtherY = 50;
 
     this.x = -100;
     this.y = -100;
@@ -38,6 +41,14 @@ class Goal
       }
       //console.log("Collided");
       this.score = this.score + 20;
+      var message = {};
+      message.type = "updateState";
+      message.score = {otherScore:this.score};
+
+      if(gameNs.game.ws.readyState === gameNs.game.ws.OPEN)
+      {
+        gameNs.ws.send(JSON.stringify(message));
+      }
 
     }
 
@@ -86,6 +97,10 @@ class Goal
     this.x = x;
     this.y = y;
   }
+  updateFromNetScore(otherScore)
+  {
+    this.otherScore = otherScore;
+  }
 
   update()
   {
@@ -113,20 +128,20 @@ class Goal
       }
         var image = this.img;
         ctx.drawImage(image, 0 , 0,this.squareSize, this.squareSize ,this.x,this.y, this.squareSize,this.squareSize);
-        ctx.fillStyle ='white';
+        ctx.fillStyle ='blue';
         ctx.font = '55px Adventure Regular';
         ctx.strokeStyle = 'black';
 
         if(gameNs.sceneManager.currentScene.title == 'Play')
         {
-          if(gameNs.playScene.player.x > 516 )
+          if(gameNs.playScene.player.x > 475 )
           {
-            if(  gameNs.playScene.player.x > 989 )
+            if(  gameNs.playScene.player.x > 948 )
             {
-              this.posX = 989 + 50;
+              this.posX = 948-420;
             }
             else {
-              this.posX = gameNs.playScene.player.x  + 50;
+              this.posX = gameNs.playScene.player.x - 420;
             }
 
           }
@@ -145,8 +160,43 @@ class Goal
 
               }
           }
-              ctx.fillText('Score: '+this.score+' /120', this.posX,this.posY);
-              ctx.strokeText('Score: '+this.score+' /120', this.posX,this.posY);
+          //  ctx.fillText(gameNs.score,this.posX,this.posY);
+            //ctx.strokeText(gameNs.score,this.posX,this.posY);
+            ctx.fillText(this.score+' /120', this.posX,this.posY);
+            ctx.strokeText(this.score+' /120', this.posX,this.posY);
+
+          ///////////////////////
+          ctx.fillStyle ='red';
+          ctx.font = '55px Adventure Regular';
+          ctx.strokeStyle = 'black';
+          if(gameNs.playScene.player.x > 475 )
+          {
+            if(  gameNs.playScene.player.x > 948 )
+            {
+              this.posOtherX = 948 + 250;
+            }
+            else {
+              this.posOtherX = gameNs.playScene.player.x  + 250;
+            }
+
+          }
+          //else {
+            //  ctx.fillText('Timer '+this.minutes+':'+this.seconds, 516 - 350 , 50);
+        //  }
+          if(gameNs.playScene.player.y > 236 )
+          {
+              if(gameNs.playScene.player.y > 572)
+              {
+                  //ctx.fillText('Timer '+this.minutes+':'+this.seconds,516 - 350,572 - 186);
+                  this.posOtherY = 572 - 186
+              }
+              else {
+                this.posOtherY = gameNs.playScene.player.y - 186
+
+              }
+          }
+              ctx.fillText(this.otherScore+' /120', this.posOtherX,this.posOtherY);
+              ctx.strokeText(this.otherScore+' /120', this.posOtherX,this.posOtherY);
           }
 
 

@@ -25,6 +25,8 @@ class WSHandler(tornado.websocket.WebSocketHandler):
         msg = json.loads(message)
         if(msg["type"]=="updateState"):
             self.send_to_other_player(json.dumps(msg))
+        if(msg["type"]=="EndGame"):
+            self.send_to_other_player(json.dumps(msg))
         if(msg["type"]=="updateState2"):
             self.send_to_other_player(json.dumps(msg))
             self.write_message(json.dumps(msg))
