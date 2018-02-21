@@ -41,7 +41,6 @@ class Player
   gameNs.collides = false;
 
   this.ps = new ParticleSystem(this.xFeet, this.yFeet)
-  this.rps = new RockParticleSystem(this.xFeet, this.yFeet)
   this.soundManager = new SoundManager()
   this.soundManager.init()
   this.soundManager.loadSoundFile("flagPlayer", "img/audio/swoosh.mp3")
@@ -58,7 +57,6 @@ class Player
  update(deltaTime, level)
  { if(gameNs.playScene.gameover == false)
    {
-     this.rps.update(  level.mazeSquares[this.i+1].x, level.mazeSquares[this.i+1].y)
      level.mazeSquares[this.i+1].x
       this.ps.update(this.xFeet, this.yFeet)
      if(this.moveX == false && this.x> 0 /*&& this.checkCollisionMap(level.mazeSquares[this.i -1])==false*/)
@@ -396,7 +394,7 @@ class Player
           level.mazeSquares[this.i+1].containsWall = false;
           this.soundManager.playSound("breakWall",false,gameNs.volume)
           gameNs.tutorialcount = 4;
-          level.mazeSquares[this.i +1].collide = true
+
 
         }
 
@@ -413,7 +411,8 @@ class Player
           level.mazeSquares[this.i-1].containsWall = false;
           this.soundManager.playSound("breakWall",false,gameNs.volume)
           gameNs.tutorialcount = 4;
-          level.mazeSquares[this.i - 1].collide = true
+
+
 
          }
 
@@ -431,7 +430,7 @@ class Player
           level.mazeSquares[this.i - this.maxCols].containsWall = false;
           this.soundManager.playSound("breakWall",false,gameNs.volume)
           gameNs.tutorialcount = 4;
-          level.mazeSquares[this.i - this.maxCols].collide=true
+
          }
 
       }
@@ -447,7 +446,8 @@ class Player
        level.mazeSquares[this.i +  this.maxCols ].containsWall = false;
        this.soundManager.playSound("breakWall",false,gameNs.volume)
        gameNs.tutorialcount = 4;
-       level.mazeSquares[this.i + this.maxCols].collide=true
+
+
 
      }
 

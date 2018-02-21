@@ -15,9 +15,14 @@ class RockParticleSystem
     var ctx = canvas.getContext('2d')
 
 
-    if(gameNs.particles.length<20)
+    if(gameNs.particles.length<20 && this.createPart == true)
     {
         gameNs.particles.push(new RockParticle(x-10, y+50))
+        if(gameNs.particles.length>=20)
+        {
+          this.createPart = false
+        }
+
     }
 
     for(var i =0; i < gameNs.particles.length; i++)

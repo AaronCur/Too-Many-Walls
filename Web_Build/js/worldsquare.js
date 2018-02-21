@@ -22,8 +22,6 @@ class WorldSquare
     this.col = col;
     this.y = this.col;
     this.squareSize = 75 * 0.8;
-    this.collide = false
-    this.rps= new RockParticleSystem(row,col)
 
 
   }
@@ -63,8 +61,7 @@ class WorldSquare
     }
     else if(this.containsWall == false)
     {
-
-
+      var image = this.imgNotWall
       ctx.drawImage(image, 0 , 0,this.squareSize, this.squareSize ,this.row,this.col, this.squareSize,this.squareSize);
     }
 
@@ -80,11 +77,6 @@ class WorldSquare
 
     }
 
-    if(this.collide == true)
-    {
-      this.rps.update(this.row,this.col)
-      this.collide=false
-    }
 
   }
   draw()

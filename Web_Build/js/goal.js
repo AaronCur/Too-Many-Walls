@@ -14,7 +14,7 @@ class Goal
     this.winner=false;
     this.posX = 516 + 50;
     this.posY = 50;
-
+    this.rps = new RockParticleSystem(this.posX, this.posY)
     this.soundManager = new SoundManager()
     this.soundManager.init()
     this.soundManager.loadSoundFile("Goal", "img/audio/goal.mp3")
@@ -67,8 +67,9 @@ class Goal
         if(gameNs.collides===true)
         {
           this.soundManager.playSound("Goal",false,gameNs.volume)
-          gameNs.collides=false
           gameNs.tutorialcount = 3;
+          this.rps.createPart = true
+          gameNs.collides = false
         }
 
 
@@ -82,11 +83,13 @@ class Goal
 
   update()
   {
+
+
     if(this.alive === true)
     {
       var canvas = document.getElementById('mycanvas');
       var ctx = canvas.getContext('2d');
-
+      this.rps.update(this.posX, this.posY)
       if(this.score === this.goalScore)
       {
         this.winner=true;
