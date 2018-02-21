@@ -9,7 +9,7 @@ class Player
   @param {number}height assigns height of square
   @param {number}colour assigns colour of square
   */
-  constructor(context, imageOptions, fps, y)
+  constructor(context, imageOptions, fps, y, x)
   {
 //  this.x=x;
   this.moveX = null;
@@ -22,7 +22,7 @@ class Player
 
   this.img= imageOptions.image;
   this.fps = fps;
-  this.x = 100;
+  this.x = x;
   this.xFeet = this.x + (this.width / 2);
   this.yFeet = this.y + (this.height/2);
   this.y = y;
@@ -34,11 +34,13 @@ class Player
   this.col = 0;
   this.row = 0;
   this.i = 0;
+  this.j = 0;
   this.squareSize = 75 * 0.8;
   this.maxRows=14
   this.maxCols=24
   this.moved =false
   gameNs.collides = false;
+
 
   this.ps = new ParticleSystem(this.xFeet, this.yFeet)
   this.soundManager = new SoundManager()
@@ -47,12 +49,23 @@ class Player
   this.soundManager.loadSoundFile("playerWall", "img/audio/drop.mp3")
   this.soundManager.loadSoundFile("breakWall", "img/audio/rocks.mp3")
   this.soundManager.loadSoundFile("backGround", "img/audio/background.mp3")
+
   this.play=true;
 
   }
-
-
-
+  setPosition()
+  {
+    this.x = 800;
+    this.y = 100;
+  }
+  updateFromNet(x, y, moveX, moveY, direction)
+  {
+    this.x = x;
+    this.y = y;
+    this.moveX = moveX;
+    this.moveY = moveY;
+    this.direction = direction;
+  }
 
  update(deltaTime, level)
  { if(gameNs.playScene.gameover == false)
@@ -80,6 +93,7 @@ class Player
        this.y+=5;
        this.direction = 3;
       }
+
 
    }
    else {
@@ -157,7 +171,7 @@ class Player
 
    if(this.play===true)
    {
-     this.soundManager.playSound("backGround", true, gameNs.volume)
+     gameNs.soundManager.playSound("backGround", true, gameNs.volume)
      this.play=false
    }
 
@@ -205,13 +219,21 @@ class Player
       {
         if(gameNs.collides==false)
         {
-          this.soundManager.playSound("flagPlayer",false,gameNs.volume)
+          gameNs.soundManager.playSound("flagPlayer",false,gameNs.volume)
           gameNs.collides = true;
           gameNs.tutorialcount = 2;
         }
 
         e.x=this.x+20;
         e.y=this.y-70;
+
+        var message = {};
+        message.type = "updateState";
+        message.flag = {x:this.x + 20,y:this.y - 70};
+        if(gameNs.game.ws.readyState === gameNs.game.ws.OPEN)
+        {
+          gameNs.ws.send(JSON.stringify(message));
+        }
 
       }
 
@@ -230,7 +252,7 @@ class Player
           this.moveY = null;
           if(this.moved==false)
           {
-            this.soundManager.playSound("playerWall",false,gameNs.volume)
+            gameNs.soundManager.playSound("playerWall",false,gameNs.volume)
 
             this.moved=true;
           }
@@ -252,7 +274,7 @@ class Player
             this.moveY = null;
             if(this.moved==false)
             {
-              this.soundManager.playSound("playerWall",false,gameNs.volume)
+              gameNs.soundManager.playSound("playerWall",false,gameNs.volume)
               this.moved=true;
             }
           }
@@ -274,12 +296,12 @@ class Player
           this.moveY = null;
           if(this.moved==false)
           {
-            this.soundManager.playSound("playerWall",false,gameNs.volume)
+            gameNs.soundManager.playSound("playerWall",false,gameNs.volume)
             this.moved=true;
           }
           if(this.moved==false)
           {
-            this.soundManager.playSound("playerWall",false,gameNs.volume)
+            gameNs.soundManager.playSound("playerWall",false,gameNs.volume)
             this.moved=true;
           }
         }
@@ -301,7 +323,7 @@ class Player
         this.moveY = null;
         if(this.moved==false)
         {
-          this.soundManager.playSound("playerWall",false,gameNs.volume)
+          gameNs.soundManager.playSound("playerWall",false,gameNs.volume)
           this.moved=true;
         }
       }
@@ -319,6 +341,8 @@ class Player
   }
   moveWall(level)
   {
+
+
     if(this.direction == 2  )
     {
       if(level.mazeSquares[this.i +1].moveWall == true &&level.mazeSquares[this.i +2].containsWall == false)
@@ -327,7 +351,15 @@ class Player
         {
           level.mazeSquares[this.i+1].moveWall = false;
           level.mazeSquares[this.i+2].moveWall = true;
+          var message = {};
+          message.type = "updateState";
+          message.mazeMove = {index1:this.i+1,index2:this.i+2, containsWall:false, breakWall:false, moveWall1:false,moveWall2:true};
+          if(gameNs.game.ws.readyState === gameNs.game.ws.OPEN)
+          {
+            gameNs.ws.send(JSON.stringify(message));
+          }
           gameNs.tutorialcount = 5;
+
         }
 
       }
@@ -341,6 +373,13 @@ class Player
         {
           level.mazeSquares[this.i-1].moveWall = false;
           level.mazeSquares[this.i-2].moveWall = true;
+          var message = {};
+          message.type = "updateState";
+          message.mazeMove = {index1:this.i-1,index2:this.i-2, containsWall:false, breakWall:false, moveWall1:false,moveWall2:true};
+          if(gameNs.game.ws.readyState === gameNs.game.ws.OPEN)
+          {
+            gameNs.ws.send(JSON.stringify(message));
+          }
           gameNs.tutorialcount = 5;
 
         }
@@ -356,6 +395,13 @@ class Player
         {
           level.mazeSquares[this.i - this.maxCols ].moveWall = false;
           level.mazeSquares[this.i - (this.maxCols * 2)].moveWall = true;
+          var message = {};
+          message.type = "updateState";
+          message.mazeMove = {index1:this.i - this.maxCols,index2:this.i - (this.maxCols * 2), containsWall:false, breakWall:false, moveWall1:false,moveWall2:true};
+          if(gameNs.game.ws.readyState === gameNs.game.ws.OPEN)
+          {
+            gameNs.ws.send(JSON.stringify(message));
+          }
           gameNs.tutorialcount = 5;
 
         }
@@ -371,6 +417,14 @@ class Player
       {
         level.mazeSquares[this.i + this.maxCols ].moveWall = false;
         level.mazeSquares[this.i + (this.maxCols * 2)].moveWall = true;
+        var message = {};
+        message.type = "updateState";
+        message.mazeMove = {index1:this.i + this.maxCols,index2:this.i + (this.maxCols * 2), containsWall:false, breakWall:false, moveWall1:false,moveWall2:true};
+        if(gameNs.game.ws.readyState === gameNs.game.ws.OPEN)
+        {
+          gameNs.ws.send(JSON.stringify(message));
+        }
+
         gameNs.tutorialcount = 5;
       }
 
@@ -392,7 +446,14 @@ class Player
         {
           level.mazeSquares[this.i+1].breakWall = false;
           level.mazeSquares[this.i+1].containsWall = false;
-          this.soundManager.playSound("breakWall",false,gameNs.volume)
+          var message = {};
+          message.type = "updateState";
+          message.maze = {index:this.i+1, containsWall:false, breakWall:false, moveWall:false};
+          if(gameNs.game.ws.readyState === gameNs.game.ws.OPEN)
+          {
+            gameNs.ws.send(JSON.stringify(message));
+          }
+          gameNs.soundManager.playSound("breakWall",false,gameNs.volume)
           gameNs.tutorialcount = 4;
 
 
@@ -409,7 +470,15 @@ class Player
         {
           level.mazeSquares[this.i-1].breakWall = false;
           level.mazeSquares[this.i-1].containsWall = false;
-          this.soundManager.playSound("breakWall",false,gameNs.volume)
+          var message = {};
+          message.type = "updateState";
+          message.maze = {index:this.i-1, containsWall:false, breakWall:false,moveWall:false};
+          if(gameNs.game.ws.readyState === gameNs.game.ws.OPEN)
+          {
+            gameNs.ws.send(JSON.stringify(message));
+          }
+
+          gameNs.soundManager.playSound("breakWall",false,gameNs.volume)
           gameNs.tutorialcount = 4;
 
 
@@ -428,7 +497,14 @@ class Player
         {
           level.mazeSquares[this.i - this.maxCols].breakWall = false;
           level.mazeSquares[this.i - this.maxCols].containsWall = false;
-          this.soundManager.playSound("breakWall",false,gameNs.volume)
+          var message = {};
+          message.type = "updateState";
+          message.maze = {index:this.i - this.maxCols, containsWall:false, breakWall:false, moveWall:false};
+          if(gameNs.game.ws.readyState === gameNs.game.ws.OPEN)
+          {
+            gameNs.ws.send(JSON.stringify(message));
+          }
+          gameNs.soundManager.playSound("breakWall",false,gameNs.volume)
           gameNs.tutorialcount = 4;
 
          }
@@ -444,7 +520,14 @@ class Player
       {
        level.mazeSquares[this.i  +  this.maxCols].breakWall = false;
        level.mazeSquares[this.i +  this.maxCols ].containsWall = false;
-       this.soundManager.playSound("breakWall",false,gameNs.volume)
+       var message = {};
+       message.type = "updateState";
+       message.maze = {index:this.i + this.maxCols, containsWall:false, breakWall:false, moveWall:false};
+       if(gameNs.game.ws.readyState === gameNs.game.ws.OPEN)
+       {
+         gameNs.ws.send(JSON.stringify(message));
+       }
+       gameNs.soundManager.playSound("breakWall",false,gameNs.volume)
        gameNs.tutorialcount = 4;
 
 

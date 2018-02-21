@@ -14,11 +14,15 @@ class Flag
     this.height = imageOptions.height;
     this.ticksPerFrame = 1000/this.fps;
 
-    this.i= (Math.floor(Math.random()*5));
-    this.respawn()
+    this.x = -100;
+    this.y = -100;
 
   }
-
+  updateFromNet(x,y)
+  {
+    this.x = x;
+    this.y = y;
+  }
   respawn()
   {
     this.i= (Math.floor(Math.random()*5));
@@ -52,8 +56,16 @@ class Flag
       this.x = 618
       this.y = 246
     }
-  }
 
+    var message = {};
+    message.type = "updateState";
+    message.flag = {x:this.x,y:this.y};
+    if(gameNs.game.ws.readyState === gameNs.game.ws.OPEN)
+    {
+      gameNs.ws.send(JSON.stringify(message));
+    }
+
+  }
   update(deltaTime)
   {
 

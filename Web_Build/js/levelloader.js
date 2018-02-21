@@ -62,6 +62,7 @@ class LevelLoader
 this.request.open("GET", "js/level.json");
 this.request.send();
   }
+
   update()
   {
 
@@ -69,26 +70,23 @@ this.request.send();
     {
             this.mazeSquares[this.i].update();
     }
-    /*
-    this.request = new XMLHttpRequest();
-   request.addEventListener("load", function requestListener(){
-   //TADA! Now I have the class data.
-    this.levelloader = JSON.parse(this.responseText);
-    this.map= this.levelloader.map1;
-    console.log("MapData:" +this.map );
-});
-request.open("GET", "http://127.0.0.1:8000/Level.json");
-request.send();
- */
+
+
+  }
+  updateFromNet(index,containsWall,breakWall,moveWall)
+  {
+    this.mazeSquares[index].containsWall = containsWall;
+    this.mazeSquares[index].breakWall = breakWall;
+    this.mazeSquares[index].moveWall = moveWall;
+
+  }
+  updateFromNetMove(index1 ,index2,containsWall,breakWall,moveWall1,moveWall2)
+  {
+    this.mazeSquares[index1].containsWall = containsWall;
+    this.mazeSquares[index1].breakWall = breakWall;
+    this.mazeSquares[index1].moveWall = moveWall1;
+    this.mazeSquares[index2].moveWall = moveWall2;
 
   }
 
-  /**
-  *Helper function that detects whether a touch device is present
-  *
-  */
-  //is_touch_device()
-  //{
-    //return 'ontouchstart' in window;
-  //}
 }

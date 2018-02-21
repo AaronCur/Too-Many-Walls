@@ -92,8 +92,7 @@ class MenuScene
          {
 
            gameNs.sceneManager.goToScene(gameNs.playScene.title);
-           gameNs.timerStart = true;
-           gameNs.start = Date.now();
+           gameNs.playScene.join();
 
          }
          else if (filename === "optionsbutton.png" )
