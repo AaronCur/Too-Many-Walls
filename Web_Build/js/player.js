@@ -70,7 +70,6 @@ class Player
  update(deltaTime, level)
  { if(gameNs.playScene.gameover == false)
    {
-     level.mazeSquares[this.i+1].x
       this.ps.update(this.xFeet, this.yFeet)
      if(this.moveX == false && this.x> 0 /*&& this.checkCollisionMap(level.mazeSquares[this.i -1])==false*/)
       {

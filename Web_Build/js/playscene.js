@@ -116,7 +116,7 @@ class PlayScene
   else if(msg.type === "EndGame")
   {
     alert("You Lose! Press gameover and join to try again")
-    break;
+  //  break;
   }
     else if(msg.type === "error")
     {
