@@ -18,7 +18,7 @@ class Game
     var message = {}
      //this.ws = new WebSocket("ws://149.153.106.133:8080/wstest");
 
-     this.ws = new WebSocket("ws://127.0.0.1:8080/wstest");
+     this.ws = new WebSocket("ws://149.153.106.133:8080/wstest");
      gameNs.ws = this.ws
      gameNs.ws.onopen = function() {
      message.type = "test";

@@ -116,6 +116,7 @@ class PlayScene
   else if(msg.type === "EndGame")
   {
     alert("You Lose! Press gameover and join to try again")
+    break;
   }
     else if(msg.type === "error")
     {
@@ -172,6 +173,11 @@ class PlayScene
       gameNs.ws.send(JSON.stringify(message));
     }
     console.log(message);
+    this.level = new LevelLoader();
+    this.flag.respawn()
+    this.goal.respawn()
+    this.player.score = 0;
+    this.player.otherScore = 0
 
   }
   update()
